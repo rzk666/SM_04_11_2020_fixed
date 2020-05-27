@@ -1,9 +1,12 @@
-export const INITIAL_STATE = {
+const INITIAL_STATE = {
   auth: {
     isLoading: false,
     hasError: false,
     error: '',
     isLoggedIn: false,
-    token: '',
+    userToken: '',
+    adminToken: '',
   },
 };
+
+export default INITIAL_STATE;

@@ -2,7 +2,8 @@
 import { INITIAL_STATE } from '../../../common/app-const';
 // Action Types
 import {
-  AUTHLOGIN,
+  AUTH_LOGIN,
+  AUTH_ADMIN,
   AUTH_HAS_ERROR,
   AUTH_IS_LOADING,
   REFRESH_AUTH,
@@ -17,14 +18,26 @@ const auth = (state = INITIAL_STATE.auth, action) => {
         ...data,
       };
     }
-    case AUTHLOGIN: {
+    // Regular user
+    case AUTH_LOGIN: {
       const { data } = action.data;
-      const { customToken } = data;
+      const { userToken } = data;
       return {
         ...state,
-        token: customToken,
+        token: userToken,
         isLoading: false,
-        isLoggedIn: !!customToken,
+        isLoggedIn: !!userToken,
+      };
+    }
+    // Admin user
+    case AUTH_ADMIN: {
+      const { data } = action.data;
+      const { adminToken } = data;
+      return {
+        ...state,
+        adminToken,
+        hasAccess: !!adminToken,
+        isLoading: false,
       };
     }
     case SIGNOUT: {

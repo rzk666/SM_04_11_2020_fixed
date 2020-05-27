@@ -4,7 +4,8 @@ import {
   AUTH_IS_LOADING,
   REFRESH_AUTH,
   AUTH_HAS_ERROR,
-  AUTHLOGIN,
+  AUTH_LOGIN,
+  AUTH_ADMIN,
   SIGNOUT,
 } from './authTypes';
 // API
@@ -26,8 +27,15 @@ export const authHasError = (error) => ({
   error,
 });
 
+// Regular User
 export const authLogin = (data) => ({
-  type: AUTHLOGIN,
+  type: AUTH_LOGIN,
+  data,
+});
+
+// System Access
+export const authAdmin = (data) => ({
+  type: AUTH_ADMIN,
   data,
 });
 
@@ -36,7 +44,24 @@ export const refreshAuth = (data) => ({
   data,
 });
 
+// User login
 export const login = (data) => (({
+  type: API,
+  payload: {
+    url: {
+      base: config.api.url,
+      endpoint: '/auth/loginUser',
+    },
+    method: 'post',
+    data,
+    success: (data) => authLogin(data),
+    failure: (data) => authHasError(data),
+    loader: (data) => authIsLoading(data),
+  },
+}));
+
+// Admin Login
+export const adminLogin = (data) => (({
   type: API,
   payload: {
     url: {
