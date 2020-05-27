@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 // import RavenMiddleware from 'redux-raven-middleware';
 import NodeService from '../../util/node-service';
-import { INITIAL_STATE } from '../../common/app-const';
+import INITIAL_STATE from '../../common/app-const';
 import rootReducer from '../root-reducer';
 import api from '../middlewares/api';
 
@@ -24,7 +24,6 @@ if (!NodeService.isProduction()) {
 }
 
 // noinspection JSCheckFunctionSignatures
-console.log(INITIAL_STATE);
 const store = (initialState = INITIAL_STATE) => (
   createStore(
     rootReducer,

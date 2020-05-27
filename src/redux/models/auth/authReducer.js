@@ -1,5 +1,5 @@
 // Initial State
-import { INITIAL_STATE } from '../../../common/app-const';
+import INITIAL_STATE from '../../../common/app-const';
 // Action Types
 import {
   AUTH_LOGIN,
