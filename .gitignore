@@ -9,6 +9,17 @@ node_modules
 # testing
 /coverage
 
+# ENV
+.env
+.env.staging
+
+# Docker
+dockerfile
+dockerfile.staging.web
+
+# Deployment
+deploy.staging.sh
+
 # production
 /build
 
