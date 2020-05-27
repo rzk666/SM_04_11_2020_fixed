@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // Redux Actions
 import {
   login,
+  adminLogin,
   signOut,
   refreshAuth,
 } from '../redux/models/auth/authActions';
@@ -13,28 +14,28 @@ const enforceAuth = (controllerProps) => {
   const {
     auth, history, location, signOut, cookies,
   } = controllerProps;
-  const { isLoggedIn } = auth;
+  const { isLoggedIn, adminToken } = auth;
   const { pathname } = location;
   // Handle logout
-  if (!isLoggedIn) {
-    signOut();
-    cookies.set('auth', '');
-    history.push('/login');
-    return;
+  // if (!isLoggedIn) {
+  //   signOut();
+  //   cookies.set('auth', '');
+  //   history.push('/login');
+  //   return;
+  // }
+  if (!adminToken) {
+    history.push('/adminLogIn');
   }
-  const role = (auth.user && auth.user.role);
-  if (role !== 'admin' && pathname.includes('admin')) {
-    history.push('/');
-  }
+  // TODO: Add future screens that must have isLoggedIn
 };
 
 export default (ComposedComponent) => {
   class WithAuth extends React.Component {
     componentDidMount() {
       const { auth, cookies, refreshAuth } = this.props;
-      if (!auth.token) {
+      if (!auth.adminToken) {
         const cookie = cookies.get('auth');
-        const token = cookie && cookie.token;
+        const token = cookie && cookie.adminToken;
         if (token) {
           refreshAuth(cookie);
         } else {
@@ -65,7 +66,6 @@ export default (ComposedComponent) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    login: (data) => dispatch(login(data)),
     signOut: () => dispatch(signOut()),
     refreshAuth: (cookie) => dispatch(refreshAuth(cookie)),
   });

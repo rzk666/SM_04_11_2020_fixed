@@ -39,6 +39,8 @@ export const authAdmin = (data) => ({
   data,
 });
 
+// TODO: Add login for admin & user ?
+// Currently this refreshes admin auth
 export const refreshAuth = (data) => ({
   type: REFRESH_AUTH,
   data,

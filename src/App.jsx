@@ -2,9 +2,8 @@ import React from 'react';
 // React Router
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Pages
-import Login from './pages/Login';
 import Home from './pages/Home';
-import Admin from './pages/Admin';
+import AdminLogin from './pages/AdminLogin';
 // Global Styles
 import './global.scss';
 
@@ -13,8 +12,9 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/admin" exact component={Admin} />
+        {/* <Route path="/login" exact component={Login} />
+        <Route path="/admin" exact component={Admin} /> */}
+        <Route path="/adminLogin/" exact component={AdminLogin} />
       </Switch>
     </Router>
   );
