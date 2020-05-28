@@ -1,11 +1,11 @@
 import React from 'react';
 // Styles
-import styles from './Layout.module.scss';
+import styles from './Splash.module.scss';
 
-const Layout = ({ children }) => (
-  <div className={styles.layout}>
-    {children}
+const Splash = () => (
+  <div className={styles.zld}>
+    I AM SPLASH SCREEN
   </div>
 );
 
-export default Layout;
+export default Splash;

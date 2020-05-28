@@ -72,7 +72,7 @@ export const adminLogin = (data) => (({
     },
     method: 'post',
     data,
-    success: (data) => authLogin(data),
+    success: (data) => authAdmin(data),
     failure: (data) => authHasError(data),
     loader: (data) => authIsLoading(data),
   },

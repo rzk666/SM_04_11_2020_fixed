@@ -20,7 +20,7 @@ const auth = (state = INITIAL_STATE.auth, action) => {
     }
     // Regular user
     case AUTH_LOGIN: {
-      const { data } = action.data;
+      const { data } = action;
       const { userToken } = data;
       return {
         ...state,
@@ -31,7 +31,7 @@ const auth = (state = INITIAL_STATE.auth, action) => {
     }
     // Admin user
     case AUTH_ADMIN: {
-      const { data } = action.data;
+      const { data } = action;
       const { adminToken } = data;
       return {
         ...state,

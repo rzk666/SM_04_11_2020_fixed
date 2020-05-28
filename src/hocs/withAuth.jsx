@@ -3,8 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Redux Actions
 import {
-  login,
-  adminLogin,
   signOut,
   refreshAuth,
 } from '../redux/models/auth/authActions';
@@ -12,10 +10,9 @@ import {
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
   const {
-    auth, history, location, signOut, cookies,
+    auth, history, signOut,
   } = controllerProps;
-  const { isLoggedIn, adminToken } = auth;
-  const { pathname } = location;
+  const { adminToken } = auth;
   // Handle logout
   // if (!isLoggedIn) {
   //   signOut();
@@ -32,7 +29,7 @@ const enforceAuth = (controllerProps) => {
 export default (ComposedComponent) => {
   class WithAuth extends React.Component {
     componentDidMount() {
-      const { auth, cookies, refreshAuth } = this.props;
+      const { auth, cookies } = this.props;
       if (!auth.adminToken) {
         const cookie = cookies.get('auth');
         const token = cookie && cookie.adminToken;
