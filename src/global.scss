@@ -1,6 +1,10 @@
 :root{
     --error-box: #d1435b;
     --card-shadow: 0 0 2rem 0 rgba(0,0,0,.15);
+    #root{
+        height: 100vh;
+        width: 100vw;
+    }
     body,html {
         width:100vw;
         height:100vh;

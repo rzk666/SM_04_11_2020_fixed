@@ -16,7 +16,7 @@ const AdminLoginView = ({
   const { isLoading } = auth;
   return (
     <>
-      {isLoading ? <Splash />
+      {!isLoading ? <Splash />
         : (
           <div className={styles.wrapper}>
             <img

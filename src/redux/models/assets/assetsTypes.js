@@ -1,0 +1,3 @@
+export const GET_ASSET_PATH = 'GET_ASSET_PATH';
+export const ASSET_IS_LOADING = 'ASSET_IS_LOADING';
+export const ASSET_HAS_ERROR = 'ASSET_HAS_ERROR';

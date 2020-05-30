@@ -7,6 +7,12 @@ const INITIAL_STATE = {
     userToken: '',
     adminToken: '',
   },
+  assets: {
+    isLoading: false,
+    hasError: false,
+    error: '',
+  },
+
 };
 
 export default INITIAL_STATE;
