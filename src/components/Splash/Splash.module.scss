@@ -27,13 +27,19 @@
         position: fixed;
         bottom: 0;
         .col {
-            height: 22.5vh;
+            height: 81px;
             width: 11.5vw;
             opacity: 0.5;
             border-top-left-radius: 41px;
             border-top-right-radius: 41px;
             background-image: linear-gradient(to bottom,
             #3ad076, #1d683b);
+        }
+        .col2{
+            height: 25vh;
+        }
+        .col3{
+            height: 27.5vh;
         }
     }
 }
