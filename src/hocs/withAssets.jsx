@@ -6,15 +6,17 @@ import {
   fetchAsset,
 } from '../redux/models/assets/assetsActions';
 
+// Dictioneries
+const STATIC_ASSETS = ['splash'];
+
 export default (ComposedComponent) => {
   class WithAssets extends React.Component {
     componentDidMount() {
       // If we don't have static assets load them
-      const { assets, fetchAssets } = this.props;
-      if (!assets.splash) {
-        fetchAssets('splash');
+      const { assets, fetchAsset } = this.props;
+      if (!assets.splash.length) {
+        STATIC_ASSETS.map((currentAsset) => fetchAsset(currentAsset));
       }
-
       // Then, if we don't have assets for the current page load them
     }
 
@@ -32,7 +34,7 @@ export default (ComposedComponent) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    fetchAssets: (data) => dispatch(fetchAsset(data)),
+    fetchAsset: (data) => dispatch(fetchAsset(data)),
   });
 
   return connect(mapStateToProps, mapDispatchToProps)((WithAssets));

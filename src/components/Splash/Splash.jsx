@@ -1,34 +1,59 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // Styles
 import styles from './Splash.module.scss';
 
-// Consts & Dictioneries
-const splashBg = `${process.env.PUBLIC_URL}/images/splash/splashBg.svg`;
+const AnimatedCols = () => (
+  <div className={styles.animated_cols_wrapper}>
+    <div className={styles.col} />
+    <div className={styles.col} />
+    <div className={styles.col} />
+  </div>
+);
 
-const AnimatedCols = () => {
-  const x = 5;
+const getImage = (asset, imgName) => asset.filter((img) => img.includes(imgName))[0];
+
+const Splash = (props) => {
+  // Get images
+  const { assets } = props;
+  const { splash, isLoading } = assets;
+  let mainSplash;
+  let splashBg;
+  let beatem;
+  if (splash.length) {
+    mainSplash = getImage(splash, 'mainSplash');
+    splashBg = getImage(splash, 'splashBg');
+    beatem = getImage(splash, 'beatem.png');
+  }
+  // eslint-disable-next-line array-callback-return
   return (
-    <div className={styles.animated_cols_wrapper}>
-      ANIMATED COLS
+    <div className={styles.wrapper}>
+      { !isLoading
+      && (
+      <>
+        <img
+          src={splashBg}
+          alt="top background"
+          className={styles.top_background}
+        />
+        <img
+          className={styles.main_image}
+          src={mainSplash}
+          alt="main_splash"
+        />
+        <img
+          className={styles.beatem}
+          src={beatem}
+          alt="beatem_logo_wide"
+        />
+        <AnimatedCols />
+      </>
+      )}
     </div>
   );
 };
 
-const Splash = () => (
-  <div className={styles.wrapper}>
-    <img
-      src={splashBg}
-      alt="top background"
-      className={styles.top_background}
-    />
-    <div className={styles.image}>
-      MAIN IMAGE
-    </div>
-    <div className={styles.beatem}>
-      BEATEM IMG
-    </div>
-    <AnimatedCols />
-  </div>
-);
-
-export default Splash;
+function mapStateToProps(state) {
+  return { assets: state.assets };
+}
+export default connect(mapStateToProps)(Splash);

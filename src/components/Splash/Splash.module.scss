@@ -1,12 +1,39 @@
 .wrapper{
+    width: 100%;
     height:100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    z-index: -1;
+    background-image: linear-gradient(to bottom,  #acacac 29%, #ffffff 52%);
     & .top_background{
         position: fixed;
         top: 0;
         height: 35%;
+    }
+    & .main_image {
+        margin-top: 17vh;
+        width: 50%;
+        z-index: 1;
+    }
+    & .beatem {
+        margin-top: 15px;
+        width: 235px;
+    }
+    .animated_cols_wrapper{
+        display: flex;
+        justify-content: space-between;
+        width: 40vw;
+        position: fixed;
+        bottom: 0;
+        .col {
+            height: 22.5vh;
+            width: 11.5vw;
+            opacity: 0.5;
+            border-top-left-radius: 41px;
+            border-top-right-radius: 41px;
+            background-image: linear-gradient(to bottom,
+            #3ad076, #1d683b);
+        }
     }
 }

@@ -11,6 +11,7 @@ const INITIAL_STATE = {
     isLoading: false,
     hasError: false,
     error: '',
+    splash: [],
   },
 
 };
