@@ -2,7 +2,6 @@ import { compose } from 'redux';
 // Global HOCs
 import { withRouter } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
-import WithAssets from './withAssets';
 // HOCs mapping
 import HOCS_MAP from './hocsMap';
 
@@ -11,7 +10,6 @@ import HOCS_MAP from './hocsMap';
 const globalHocs = compose(
   withCookies,
   withRouter,
-  WithAssets,
 );
 
 const page = (Component, currentPage) => {

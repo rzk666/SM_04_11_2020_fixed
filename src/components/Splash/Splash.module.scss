@@ -22,19 +22,22 @@
     }
     .animated_cols_wrapper{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         width: 40vw;
         position: fixed;
-        bottom: 0;
+        bottom: 150px;
         .col {
-            height: 40px;
-            width: 11.5vw;
+            Box-shadow:0 5px 10px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.19);
+            margin-right: 6px;
+            height: 12px;
+            width: 12px;
             opacity: 0.5;
             border-radius: 50px;
             background-image: linear-gradient(to bottom,
             #3ad076, #1d683b);
         }
         .col2{
+            margin-right: 6px;
             height: 25vh;
         }
         .col3{

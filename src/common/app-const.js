@@ -7,13 +7,6 @@ const INITIAL_STATE = {
     userToken: '',
     adminToken: '',
   },
-  assets: {
-    isLoading: false,
-    hasError: false,
-    error: '',
-    splash: [],
-  },
-
 };
 
 export default INITIAL_STATE;

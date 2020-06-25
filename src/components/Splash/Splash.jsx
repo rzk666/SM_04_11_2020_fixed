@@ -2,7 +2,10 @@
 import React from 'react';
 // Util
 import { motion } from 'framer-motion';
-import { connect } from 'react-redux';
+// Images
+import MainSplash from '../../static/images/splash/mainSplash.svg';
+import SplashBg from '../../static/images/splash/splashBg.svg';
+import Beatem from '../../static/images/splash/beatem.png';
 // Styles
 import styles from './Splash.module.scss';
 
@@ -31,8 +34,6 @@ const AnimatedCols = ({ animateCols }) => {
     </div>
   );
 };
-
-const getImage = (asset, imgName) => asset.filter((img) => img.includes(imgName))[0];
 
 const Splash = (props) => {
   const animateImages = {
@@ -71,7 +72,7 @@ const Splash = (props) => {
       },
       animation: {
         opacity: [0.75, 1, 0.75],
-        y: [-45, -15, -45],
+        y: [-30, -15, -30],
       },
       transition: {
         delay: 2,
@@ -88,7 +89,7 @@ const Splash = (props) => {
       },
       animation: {
         opacity: [0.75, 1, 0.75],
-        y: [-45, -15, -45],
+        y: [-30, -15, -30],
       },
       transition: {
         delay: 2.5,
@@ -105,7 +106,7 @@ const Splash = (props) => {
       },
       animation: {
         opacity: [0.75, 1, 0.75],
-        y: [-45, -15, -45],
+        y: [-30, -15, -30],
       },
       transition: {
         delay: 3,
@@ -117,28 +118,17 @@ const Splash = (props) => {
     },
   };
 
-  // Get images
-  const { assets } = props;
-  const { splash, isLoading } = assets;
-  let mainSplash;
-  let splashBg;
-  let beatem;
-  if (splash.length) {
-    mainSplash = getImage(splash, 'mainSplash');
-    splashBg = getImage(splash, 'splashBg');
-    beatem = getImage(splash, 'beatem.png');
-  }
   // eslint-disable-next-line array-callback-return
   return (
     <div className={styles.wrapper}>
-      { !isLoading
+      { !false
       && (
       <>
         <motion.img
           initial={animateTopBg.initial}
           transition={animateTopBg.transition}
           animate={animateTopBg.animation}
-          src={splashBg}
+          src={SplashBg}
           alt="top background"
           className={styles.top_background}
         />
@@ -147,7 +137,7 @@ const Splash = (props) => {
           transition={animateImages.transition}
           animate={animateImages.animation}
           className={styles.main_image}
-          src={mainSplash}
+          src={MainSplash}
           alt="main_splash"
         />
         <motion.img
@@ -155,7 +145,7 @@ const Splash = (props) => {
           transition={animateImages.transition}
           animate={animateImages.animation}
           className={styles.beatem}
-          src={beatem}
+          src={Beatem}
           alt="beatem_logo_wide"
         />
         <AnimatedCols
@@ -167,7 +157,4 @@ const Splash = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return { assets: state.assets };
-}
-export default connect(mapStateToProps)(Splash);
+export default Splash;
