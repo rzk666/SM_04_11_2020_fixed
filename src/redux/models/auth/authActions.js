@@ -58,7 +58,8 @@ export const login = (data) => (({
     data,
     success: (data) => authLogin(data),
     failure: (data) => authHasError(data),
-    loader: (data) => authIsLoading(data),
+    loader: async (data) => authIsLoading(data),
+
   },
 }));
 

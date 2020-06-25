@@ -9,7 +9,7 @@
     & .top_background{
         position: fixed;
         top: 0;
-        height: 35%;
+        height: 33%;
     }
     & .main_image {
         margin-top: 17vh;
@@ -27,11 +27,10 @@
         position: fixed;
         bottom: 0;
         .col {
-            height: 81px;
+            height: 40px;
             width: 11.5vw;
             opacity: 0.5;
-            border-top-left-radius: 41px;
-            border-top-right-radius: 41px;
+            border-radius: 50px;
             background-image: linear-gradient(to bottom,
             #3ad076, #1d683b);
         }
