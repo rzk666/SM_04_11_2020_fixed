@@ -2,13 +2,6 @@ import React from 'react';
 import { authHasError } from '../redux/models/auth/authActions';
 
 class AdminLoginController extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showSplash: false,
-    };
-  }
-
   componentDidUpdate() {
     const { auth } = this.props;
     const { hasError } = auth;

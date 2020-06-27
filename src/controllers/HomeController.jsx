@@ -1,14 +1,27 @@
 import React from 'react';
 
+// ----- Misc ----- //
+const FAKE_HOME_LOADER = 6500;
+
 class HomeController extends React.Component {
-  adminLogin(data) {
-    const { adminLogin } = this.props;
-    adminLogin(data);
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSplash: true,
+    };
+  }
+  // login(data) {
+  //   const { login } = this.props;
+  //   login(data);
+  // }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ showSplash: false }), FAKE_HOME_LOADER);
   }
 
   callbacks() {
     return {
-      adminLogin: this.adminLogin.bind(this),
+      // login: this.login.bind(this),
     };
   }
 

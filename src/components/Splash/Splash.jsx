@@ -39,7 +39,7 @@ const Splash = (props) => {
   const animateImages = {
     initial: {
       y: 150,
-      opacity: 0.75,
+      opacity: 0,
     },
     animation: {
       opacity: 1,
@@ -53,7 +53,7 @@ const Splash = (props) => {
   const animateTopBg = {
     initial: {
       y: -150,
-      opacity: 0.75,
+      opacity: 0,
     },
     animation: {
       opacity: 1,
@@ -121,8 +121,6 @@ const Splash = (props) => {
   // eslint-disable-next-line array-callback-return
   return (
     <div className={styles.wrapper}>
-      { !false
-      && (
       <>
         <motion.img
           initial={animateTopBg.initial}
@@ -152,7 +150,6 @@ const Splash = (props) => {
           animateCols={animateCols}
         />
       </>
-      )}
     </div>
   );
 };
