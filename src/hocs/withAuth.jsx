@@ -42,13 +42,14 @@ export default (ComposedComponent) => {
     }
 
     componentDidUpdate(prevProps) {
-      const { auth, history } = this.props;
+      const { auth, history, cookies } = this.props;
       const { isLoggedIn, hasAccess } = auth;
       if (isLoggedIn !== prevProps.auth.isLoggedIn) {
         enforceAuth(this.props);
       }
       // Admin login
       if (hasAccess && !prevProps.auth.hasAccess) {
+        cookies.set('auth', auth);
         history.push('/');
       }
     }
