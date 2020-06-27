@@ -7,6 +7,9 @@ import {
   refreshAuth,
 } from '../redux/models/auth/authActions';
 
+// ----- Misc ----- //
+const FAKE_HOME_LOADER_TIME = 6500;
+
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
   const {
@@ -28,6 +31,13 @@ const enforceAuth = (controllerProps) => {
 
 export default (ComposedComponent) => {
   class WithAuth extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        showSplash: false,
+      };
+    }
+
     componentDidMount() {
       const { auth, cookies } = this.props;
       if (!auth.adminToken) {
@@ -50,14 +60,15 @@ export default (ComposedComponent) => {
       // Admin login
       if (hasAccess && !prevProps.auth.hasAccess) {
         cookies.set('auth', auth);
-        history.push('/');
+        this.setState({ showSplash: true });
+        setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
       }
     }
 
     render() {
       return (
         <>
-          <ComposedComponent {...this.props} />
+          <ComposedComponent {...this.props} {...this.state} />
         </>
       );
     }

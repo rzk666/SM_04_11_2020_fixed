@@ -9,19 +9,23 @@ import Messi from '../static/images/FTL/messi.jpg';
 
 const AdminLoginView = ({
   adminLogin,
+  showSplash,
 }) => {
   const x = 5;
   return (
     <>
-      <div className={styles.wrapper}>
-        GOAL GOAL GOAL GOAL GOAL
-        <img
-          src={Messi}
-          style={{ width: '30%', margin: '40px 0' }}
-          alt="GOLGOLGOLGOL"
-        />
-        <AdminLoginForm login={adminLogin} />
-      </div>
+      { showSplash ? <Splash />
+        : (
+          <div className={styles.wrapper}>
+            GOAL GOAL GOAL GOAL GOAL
+            <img
+              src={Messi}
+              style={{ width: '30%', margin: '40px 0' }}
+              alt="GOLGOLGOLGOL"
+            />
+            <AdminLoginForm login={adminLogin} />
+          </div>
+        ) }
     </>
   );
 };

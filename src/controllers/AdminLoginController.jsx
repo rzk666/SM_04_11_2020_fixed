@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { authHasError } from '../redux/models/auth/authActions';
 

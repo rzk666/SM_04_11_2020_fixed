@@ -1,7 +1,5 @@
 import React from 'react';
 
-// ----- Misc ----- //
-const FAKE_HOME_LOADER = 6500;
 
 class HomeController extends React.Component {
   constructor(props) {
@@ -16,7 +14,6 @@ class HomeController extends React.Component {
   // }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ showSplash: false }), FAKE_HOME_LOADER);
   }
 
   callbacks() {
