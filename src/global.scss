@@ -1,6 +1,11 @@
 :root{
+    // Backgrounds
     --error-box: #d1435b;
+    // Typography
+    // Shadows
     --card-shadow: 0 0 2rem 0 rgba(0,0,0,.15);
+    // Consts
+    --header-height: 52px;
     #root{
         height: 100vh;
         width: 100vw;
@@ -8,15 +13,20 @@
         max-height: 100vh;
     }
     body,html {
-        width:100vw;
-        height:100vh;
+        font-family: Roboto;
         margin: 0;
         padding: 0;
         max-width: 100vh;
         max-height: 100vh;
+        min-width: 100vh;
+        min-height: 100vh;
     }
     * {
         box-sizing: border-box;
     }
+    img{
+        object-fit: contain;
+    }
 }
 @import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,bold,700&display=swap');
