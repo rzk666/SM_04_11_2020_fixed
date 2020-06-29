@@ -3,8 +3,21 @@
     height: 52px;
     display: flex;
     padding: 0 21px 0 10px;
-    // TZUKAREL - make sure gradients are ok
-    background-image: linear-gradient(to top, #57bb78, #3d9b5c);
+    &.soccer{
+        background-image: var(--main-green-gradient);
+    }
+    &.hockey{
+        background-image: var(--main-cyan-gradient);
+    }
+    &.basketball{
+        background-image: var(--main-orange-gradient);
+    }
+    &.baseball{
+        background-image: var(--main-grey-gradient);
+    }
+    &.football{
+        background-image: var(--main-blue-gradient);
+    }
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     align-items: center;
     justify-content: space-between;
