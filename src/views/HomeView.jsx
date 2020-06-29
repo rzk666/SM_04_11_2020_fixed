@@ -7,9 +7,11 @@ import styles from './HomeView.module.scss';
 
 const HomeView = ({
   login,
+  currentSport,
+  changeSport,
 }) => (
   <div className={styles.wrapper}>
-    <SportsBar />
+    <SportsBar currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
   </div>
 );
 

@@ -1,7 +1,6 @@
 .wrapper{
     width: 100%;
-    height: calc(100vh - var(--header-height)); // 52px = header
-    margin-top: var(--header-height);
+    height: 100%;
     .tests{
         background-color: red;
     }

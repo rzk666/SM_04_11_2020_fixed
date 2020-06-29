@@ -3,6 +3,8 @@ import React from 'react';
 import Header from '../Header/Header';
 // Styles
 import styles from './Layout.module.scss';
+// Util
+import classnames from 'classnames';
 // Universal
 import pages from '../../universal/pages';
 
@@ -12,9 +14,10 @@ const WITH_HEADER = [HOME];
 
 const Layout = (props) => {
   const { children, page } = props;
+  const showHeader = WITH_HEADER.includes(page);
   return (
-    <div className={styles.layout}>
-      { WITH_HEADER.includes(page) && <Header {...props} />}
+    <div className={classnames(styles.layout, { [styles.with_header]: showHeader })}>
+      { showHeader && <Header {...props} />}
       {children}
     </div>
   );

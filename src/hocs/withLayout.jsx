@@ -1,26 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// Components
 import Layout from '../components/MainLayout/Layout';
 
 export default (ComposedComponent) => {
   class WithLayout extends React.Component {
-    componentDidMount() {
+    constructor(props) {
+      super(props);
+      this.state = {
+        currentSport: 'soccer',
+      };
+    }
+
+    changeSport(sport) {
+      this.setState({ currentSport: sport });
+    }
+
+    callbacks() {
+      return {
+        changeSport: this.changeSport.bind(this),
+      };
     }
 
     render() {
       return (
-        <Layout {...this.props}>
-          <ComposedComponent {...this.props} />
+        <Layout {...this.props} {...this.state}>
+          <ComposedComponent {...this.callbacks()} {...this.props} {...this.state} />
         </Layout>
       );
     }
   }
 
-  const mapStateToProps = (state) => ({
-  });
-
-  const mapDispatchToProps = (dispatch) => ({
-  });
-
-  return connect(mapStateToProps, mapDispatchToProps)(WithLayout);
+  return WithLayout;
 };

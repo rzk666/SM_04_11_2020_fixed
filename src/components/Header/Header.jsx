@@ -1,8 +1,8 @@
 import React from 'react';
 // Images
 import BeatemHomeTitle from '../../static/images/icons/beatemhometitle.png';
-import Home from '../../static/images/icons/home.png';
-import Menu from '../../static/images/icons/menu.png';
+import Home from '../../static/images/icons/home.svg';
+import Menu from '../../static/images/icons/menu.svg';
 // Styles
 import styles from './Header.module.scss';
 
