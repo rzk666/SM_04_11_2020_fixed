@@ -6,6 +6,8 @@ import HomeLeagues from '../components/Home/HomeLeagues';
 import { Input } from 'semantic-ui-react';
 // Images
 import RightArrow from '../static/images/icons/rightarrow.svg';
+// Animations
+import { motion, useAnimation } from 'framer-motion';
 // Util
 import classnames from 'classnames';
 // Styles
@@ -13,6 +15,7 @@ import styles from './HomeView.module.scss';
 
 // ----- App Components ----- //
 const Card = ({ type, onClick }) => {
+  const control = useAnimation();
   const textTitle = type === 'create'
     ? 'Create League'
     : 'Join League';
@@ -20,7 +23,7 @@ const Card = ({ type, onClick }) => {
     ? 'Create your own league and challange your friends'
     : 'Join a friend\'s league and show \'em who\'s the boss';
   return (
-    <div className={styles.card_container}>
+    <motion.div animate={control} onClick={() => control.start({ scale: [0.95, 1], transition: { duration: 0.25, ease: 'linear' } })} className={styles.card_container}>
       <div className={styles.divider} />
       <div className={styles.text_container}>
         <div className={styles.text_title}>{textTitle}</div>
@@ -32,7 +35,7 @@ const Card = ({ type, onClick }) => {
         src={RightArrow}
         alt={`${type}_Right_Arrow`}
       />
-    </div>
+    </motion.div>
   );
 };
 

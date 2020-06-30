@@ -3,6 +3,7 @@ import React from 'react';
 import BeatemHomeTitle from '../../static/images/icons/beatemhometitle.png';
 import Home from '../../static/images/icons/home.svg';
 import Menu from '../../static/images/icons/menu.svg';
+// Animations
 import { motion, useAnimation } from 'framer-motion';
 // Util
 import classnames from 'classnames';
