@@ -6,6 +6,7 @@ class HomeController extends React.Component {
     super(props);
     this.state = {
       showSplash: true,
+      leaguesSearch: '',
     };
   }
   // login(data) {
@@ -13,12 +14,14 @@ class HomeController extends React.Component {
   //   login(data);
   // }
 
-  componentDidMount() {
+  handleSearchChange(leaguesSearch) {
+    this.setState({ leaguesSearch });
   }
 
   callbacks() {
     return {
       // login: this.login.bind(this),
+      handleSearchChange: this.handleSearchChange.bind(this),
     };
   }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 // Components
 import SportsBar from '../components/Home/SportsBar';
+import HomeFooter from '../components/Home/HomeFooter';
+import HomeLeagues from '../components/Home/HomeLeagues';
 import { Input } from 'semantic-ui-react';
 // Images
 import RightArrow from '../static/images/icons/rightarrow.svg';
@@ -36,6 +38,8 @@ const Card = ({ type, onClick }) => {
 
 const HomeView = ({
   login,
+  handleSearchChange,
+  leaguesSearch,
   currentSport,
   changeSport,
 }) => (
@@ -59,7 +63,11 @@ const HomeView = ({
       iconPosition="left"
       placeholder="Search League"
       className={styles.search}
+      onChange={(e, data) => handleSearchChange(data.value)}
+      value={leaguesSearch}
     />
+    <HomeLeagues leaguesSearch={leaguesSearch} />
+    <HomeFooter />
   </div>
 );
 

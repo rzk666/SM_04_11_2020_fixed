@@ -1,5 +1,14 @@
-@import '~bootstrap/scss/bootstrap.scss';
 :root{
+    *::-webkit-scrollbar {
+        width: 0px;
+      }
+      *::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      *::-webkit-scrollbar-thumb {
+        background-color: var(--main-blue);
+        border-radius: 20px;
+      }
     // Backgrounds & Colors
     --main-solid-green: #57bb78;
     --main-solid-orange: #ff9000;
@@ -40,16 +49,18 @@
     --card-shadow: 0 0 2rem 0 rgba(0,0,0,.15);
     // Consts
     --header-height: 52px;
+    --footer-height: 140px;
     #root{
-        width: 100vw;
-        max-width: 100vw;
+        position: fixed;
+        width: 100%!important;
+        min-height: 0px;
     }
     body,html {
         font-family: Roboto;
         margin: 0;
         padding: 0;
-        max-width: 100vw;
-        min-width: 100vw;
+        max-width: 100%!important;
+        min-height: 0px;
     }
     * {
         box-sizing: border-box;
@@ -60,4 +71,3 @@
 }
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,bold,700&display=swap');
-@import 'semantic-ui-css/semantic.min.css'
