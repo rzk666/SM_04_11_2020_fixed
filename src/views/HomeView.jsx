@@ -66,7 +66,7 @@ const HomeView = ({
       onChange={(e, data) => handleSearchChange(data.value)}
       value={leaguesSearch}
     />
-    <HomeLeagues leaguesSearch={leaguesSearch} />
+    <HomeLeagues currentSport={currentSport} leaguesSearch={leaguesSearch} />
     <HomeFooter />
   </div>
 );

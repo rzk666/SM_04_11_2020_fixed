@@ -34,6 +34,17 @@
         text-align: center;
         color: #ffffff;
     }
+    a[class*="white_text_1"]{
+        font-family: Roboto;
+        font-size: 17px;
+        font-weight: 400;
+        font-stretch: condensed;
+        font-style: normal;
+        line-height: 1.35;
+        letter-spacing: 0.6px;
+        text-align: center;
+        color: #ffffff;
+    }
     div[class*="grey_text_1"]{
         font-family: Roboto;
         font-size: 11px;
@@ -44,6 +55,61 @@
         letter-spacing: 0.55px;
         text-align: center;
         color: #919191;
+    }
+    a[class*="grey_text_1"]{
+        font-family: Roboto;
+        font-size: 11px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.36;
+        letter-spacing: 0.55px;
+        text-align: center;
+        color: #919191;
+    }
+    div[class*="white_text_2"]{
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: 0.6px;
+        text-align: center;
+        color: #ffffff;
+    }
+    a[class*="white_text_2"]{
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: 0.6px;
+        text-align: center;
+        color: #ffffff;
+    }
+    div[class*="white_text_3"]{
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        font-family: Roboto;
+        font-size: 8px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+    a[class*="white_text_3"]{
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        font-family: Roboto;
+        font-size: 8px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
     }
     // Shadows
     --card-shadow: 0 0 2rem 0 rgba(0,0,0,.15);

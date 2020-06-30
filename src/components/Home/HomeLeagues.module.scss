@@ -1,5 +1,80 @@
-.leagues_container{
+.leagues_wrapper{
+    margin-top: 20px;
     height: 100%;
-    background-color: var(--main-solid-green);
     min-height: 393.5px;
+    max-height: 393.5px;
+    overflow: auto;
+    .leagues_container{
+        padding: 0 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        .no_leagues{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .league{
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid var(--main-solid-green);
+            background-color: var(--main-solid-green);
+            .league_name{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 10px;
+                margin-top: 2px;
+            }
+            .league_image_container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 73px;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                background-image: linear-gradient(134deg, #d2d2d2 1%, #ffffff 48%);
+                .premier{
+                    width: 79px;
+                }
+                .laliga{
+                    width: 80px;
+                }
+                .bundas{
+                    width: 90px;
+                    height: 70px;
+                }
+                .seriea{
+                    width: 90px;
+                    height:80px;
+                }
+                .ligueone{
+                    width: 58px;
+                    height: 58px;
+                }
+                .bundas{
+                    width: 90px;
+                    height: 70px;
+                }
+                .ered{
+                    width: 60px;
+                    height: 60px;
+                }
+                .ligamx{
+                    width: 60px;
+                    height: 40px;
+                }
+                .champions{
+                    width: 75px;
+                    height: 75px;
+                }
+                .brazil{
+                    width: 90px;
+                    height: 65px;
+                }
+            }
+        }
+    }
 }
