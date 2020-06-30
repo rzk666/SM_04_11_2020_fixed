@@ -13,6 +13,8 @@ import ligamx from '../../static/images/leagues/ligamx.png';
 import champions from '../../static/images/leagues/champions.png';
 // Util
 import classnames from 'classnames';
+// Animations
+import { motion } from 'framer-motion';
 // Universal
 import LEAGUES from '../../universal/leagues';
 
@@ -85,7 +87,9 @@ const HomeLeagues = ({ leaguesSearch, currentSport }) => {
               {filteredLeagues.map((league) => (
                 <div className={styles.league}>
                   <div className={styles.league_image_container}>
-                    <img
+                    <motion.img
+                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0 }}
                       src={getLeagueImage(league)}
                       alt={`${league}_logo`}
                       className={styles[getLeagueName(league)]}
