@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store()}>
       <CookiesProvider>
-        <Container fluid style={{ padding: '0', margin: '0' }}>
+        <Container fluid style={{ height: '100%', padding: '0', margin: '0' }}>
           <App />
         </Container>
       </CookiesProvider>

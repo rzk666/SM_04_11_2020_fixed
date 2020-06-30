@@ -17,17 +17,17 @@
             margin-top: 17px;
         }
         .buttons_container{
-            margin-top: 16px;
-            width: calc(100vw - 54px);
             display: flex;
+            width: calc(100vw - 54px );
             justify-content: space-between;
+            margin-top: 17px;
             .card_container{
                 display: flex;
                 width: 145px;
                 height: 64.5px;
                 border-radius: 10px;
                 background-color: white;
-                padding: 14px 8.5px;
+                padding: 12px 6px;
                 .divider{
                     width: 3.2px;
                     height: 100%;
@@ -36,7 +36,6 @@
                 }
                 .text_container{
                     width: 100px;
-                    padding: 1px 0;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -51,17 +50,24 @@
                     color: #53575a;
                     text-align: left;
                     margin-left: 6.5px;
+                    padding: 2px 0;
+                    .text_body{
+                        width: 120px;
+                        height: 20px;
+                    }
                     .text_title{
                         font-size: 13px;
                     }
                 }
-                .right_arrow{
-                    width: 15px;
-                    font-size: 25px;
-                    font-weight: bold;
-                    color: #6cc98b;
+                img{
+                    margin-left: auto;
+                    width: 11px;
                 }
             }
         }
+    }
+    .compete_text{
+        margin-top: 15px;
+        padding: 0 30px;
     }
 }

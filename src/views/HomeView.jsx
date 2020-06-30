@@ -1,8 +1,9 @@
 import React from 'react';
 // Components
 import SportsBar from '../components/Home/SportsBar';
+import { Input } from 'semantic-ui-react';
 // Images
-// import RightArrow from '../static/images/icons/rightarrow.svg';
+import RightArrow from '../static/images/icons/rightarrow.svg';
 // Util
 import classnames from 'classnames';
 // Styles
@@ -21,9 +22,14 @@ const Card = ({ type, onClick }) => {
       <div className={styles.divider} />
       <div className={styles.text_container}>
         <div className={styles.text_title}>{textTitle}</div>
-        {textBody}
+        <div className={styles.text_body}>
+          {textBody}
+        </div>
       </div>
-      <div className={styles.right_arrow}>{'>'}</div>
+      <img
+        src={RightArrow}
+        alt={`${type}_Right_Arrow`}
+      />
     </div>
   );
 };
@@ -36,14 +42,24 @@ const HomeView = ({
   <div className={styles.wrapper}>
     <SportsBar currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
     <div className={styles.top_banner}>
-      <div className={classnames(styles.banner_title)}>
+      <div className={classnames(styles.banner_title, 'white_text_1')}>
         JOIN OR CREATE YOUR OWN LEAGUES!
-        <div className={styles.buttons_container}>
-          <Card type="create" />
-          <Card type="join" />
-        </div>
+      </div>
+      <div className={styles.buttons_container}>
+        <Card type="create" />
+        <Card type="join" />
       </div>
     </div>
+    <div className={classnames(styles.compete_text, 'grey_text_1')}>
+      COMPETE WITH PLAYERS ALL AROUND THE WORLD!
+      CHOOSE A LEAGUE, PICK YOUR BET AND BEAT'EM ALL
+    </div>
+    <Input
+      icon="search"
+      iconPosition="left"
+      placeholder="Search League"
+      className={styles.search}
+    />
   </div>
 );
 
