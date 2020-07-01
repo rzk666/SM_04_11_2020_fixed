@@ -7,10 +7,15 @@ import Menu from '../../static/images/icons/menu.svg';
 import { motion, useAnimation } from 'framer-motion';
 // Util
 import classnames from 'classnames';
+// Universal
+import pages from '../../universal/pages';
 // Styles
 import styles from './Header.module.scss';
 
-const Header = ({ auth, currentSport }) => {
+// ----- Consts & Dicts ----- //
+const { LOGIN } = pages;
+
+const Header = ({ auth, currentSport, history }) => {
   const { isLoggedIn } = auth;
   const controls = useAnimation();
   controls.start({
@@ -34,7 +39,7 @@ const Header = ({ auth, currentSport }) => {
         className={styles.title_img}
       />
       <div className={styles.menu_container}>
-        <div className={styles.login} onClick={() => alert('login')}>
+        <div className={styles.login} onClick={() => history.push(`/${LOGIN}/`)}>
           Login
         </div>
         <img

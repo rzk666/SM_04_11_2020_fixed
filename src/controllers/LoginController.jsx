@@ -1,54 +1,30 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-// common
-import ROUTES from '../universal/routes';
-// Redux Action
+import { authHasError } from '../redux/models/auth/authActions';
 
-// ----- Dictioneries ----- //
-const { ADMIN_ROUTE, HOME_ROUTE } = ROUTES;
-
-// ----- Help Functions ----- //
-const handleAuthChange = (controllerProps) => {
-  const { auth, history } = controllerProps;
-  const { isLoggedIn } = auth;
-  const { user } = auth;
-  if (isLoggedIn) {
-    const { cookies } = controllerProps;
-    cookies.set('auth', auth, { path: '/' });
-    if (user.role === 'admin') {
-      history.push(ADMIN_ROUTE);
-    } else {
-      history.push(HOME_ROUTE);
-    }
-  }
-};
-
-class LoginController extends React.Component {
-  componentDidMount() {
-    // handle cookies
-    const { cookies, refreshAuth } = this.props;
-    const cookie = cookies.get('auth');
-    if (cookie.token) {
-      refreshAuth(cookie);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
+class AdminLoginController extends React.Component {
+  componentDidUpdate() {
     const { auth } = this.props;
-    const { isLoggedIn } = auth;
-    // Indicates a successfull login
-    if (prevProps.auth.isLoggedIn !== isLoggedIn) {
-      handleAuthChange(this.props);
+    const { hasError } = auth;
+    if (hasError) {
+      alert('ACCESS DEINED');
+      authHasError(false);
     }
   }
 
-  login(data) {
-    const { login } = this.props;
-    login(data);
+  adminLogin(data) {
+    const { adminLogin } = this.props;
+    // Failed details
+    if (!data.email || !data.password) {
+      alert('Fill Details');
+    } else {
+      adminLogin(data);
+    }
   }
 
   callbacks() {
     return {
-      login: this.login.bind(this),
+      adminLogin: this.adminLogin.bind(this),
     };
   }
 
@@ -64,4 +40,4 @@ class LoginController extends React.Component {
   }
 }
 
-export default LoginController;
+export default AdminLoginController;

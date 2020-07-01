@@ -40,7 +40,6 @@ const Card = ({ type, onClick }) => {
 };
 
 const HomeView = ({
-  login,
   handleSearchChange,
   leaguesSearch,
   currentSport,
