@@ -1,11 +1,107 @@
-.wrapper{
-    width: 100%;
-    height: 100%;
+.login_wrapper{
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #ffffff 34%, #c9c9c9);
+    position: relative;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    & .form_container{
-
+    .exit{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+    .content_wrapper{
+        width: 72%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        .ballicon{
+            margin-bottom: 10px;
+        }
+        .login_title{
+            font-size: 25px;
+            font-weight: bold;
+            line-height: 1.2;
+            letter-spacing: 5px;
+            color: var(--main-solid-green);
+        }
+        .divider{
+            margin: 4.5px 0;
+            width: 62%;
+            height: 2px;
+            background-color: var(--main-solid-green);
+        }
+        .login_sec_title{
+            font-size: 9px;
+            font-weight: bold;
+            line-height: 1.22;
+            letter-spacing: 1.8px;
+            color: var(--main-solid-green);
+            margin-bottom: 24px;
+        }
+        .login_input{
+            width: 100%;
+            border-radius: 26px;  
+            background-color: #fefefe;
+            margin-bottom: 15px;
+            height: 40px;
+            input{
+                border-radius: 26px;  
+                box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
+                font-family: Roboto;
+                font-size: 12px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.22;
+                letter-spacing: 0.9px;
+                color: #aaaaaa;
+            }
+        }
+        .forgot_password{
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.17;
+            letter-spacing: 0.6px;
+            color: var(--main-solid-green)          
+        }
+        .mini_divider{
+            margin: 5px 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--main-solid-green);
+        }
+        .login_button{
+            height: 40px;
+            margin-top: 20px;
+            background-color: var(--main-solid-green);
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.17;
+            letter-spacing: 2.4px;
+            text-align: center;
+            color: #ffffff;
+            border-radius: 26px;
+        }
+        .no_account{
+            font-size: 9px;
+            line-height: 1.22;
+            letter-spacing: 0.45px;
+            color: #797676;
+        }
+        .sign_up{
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.21;
+            letter-spacing: 0.7px;
+            color: var(--main-solid-green);
+        }
     }
 }

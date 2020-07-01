@@ -11,9 +11,9 @@ import classnames from 'classnames';
 import pages from '../../universal/pages';
 
 // ----- Consts & Dicts ----- //
-const { HOME, ADMIN_LOGIN } = pages;
+const { HOME, ADMIN_LOGIN, LOGIN } = pages;
 const WITH_HEADER = [HOME];
-const WITH_DISSOLVE = [HOME];
+const WITH_DISSOLVE = [HOME, LOGIN];
 
 const Layout = (props) => {
   const { children, page } = props;

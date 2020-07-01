@@ -1,30 +1,22 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { authHasError } from '../redux/models/auth/authActions';
 
-class AdminLoginController extends React.Component {
-  componentDidUpdate() {
-    const { auth } = this.props;
-    const { hasError } = auth;
-    if (hasError) {
-      alert('ACCESS DEINED');
-      authHasError(false);
-    }
+class LoginController extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      email: '',
+    };
   }
 
-  adminLogin(data) {
-    const { adminLogin } = this.props;
-    // Failed details
-    if (!data.email || !data.password) {
-      alert('Fill Details');
-    } else {
-      adminLogin(data);
-    }
+  handleInputsChange(type, value) {
+    this.setState({ [type]: value });
   }
 
   callbacks() {
     return {
-      adminLogin: this.adminLogin.bind(this),
+      handleInputsChange: this.handleInputsChange.bind(this),
     };
   }
 
@@ -40,4 +32,4 @@ class AdminLoginController extends React.Component {
   }
 }
 
-export default AdminLoginController;
+export default LoginController;

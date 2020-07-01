@@ -72,6 +72,7 @@ const SportsBar = ({ currentSport, changeSport }) => {
       />
       {SPORTS.map((sport, i) => (
         <div
+          key={`${sport}_${i}`}
           className={styles.sports_container}
           onClick={() => changeSport(sport)}
         >

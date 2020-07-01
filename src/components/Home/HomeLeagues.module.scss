@@ -19,9 +19,27 @@
             height: 90px;
             border-radius: 15px;
             margin-bottom: 20px;
-            border: 3px solid var(--main-solid-green);
-            background-color: var(--main-solid-green);
-            .league_name{
+            &.soccer{
+                border: 3px solid var(--main-solid-green);
+                background-color: var(--main-solid-green);
+            }
+            &.football{
+                border: 3px solid var(--main-solid-blue);
+                background-color: var(--main-solid-blue);
+            }
+            &.basketball{
+                border: 3px solid var(--main-solid-orange);
+                background-color: var(--main-solid-orange);
+            }
+            &.baseball{
+                border: 3px solid var(--main-solid-grey);
+                background-color: var(--main-solid-grey);
+            }
+            &.hockey{
+                border: 3px solid var(--main-solid-cyan);
+                background-color: var(--main-solid-cyan);
+            }
+            &.league_name{
                 display: flex;
                 align-items: center;
                 justify-content: center;

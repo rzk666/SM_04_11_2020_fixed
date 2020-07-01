@@ -7,10 +7,8 @@
         margin-top: 8px;
         min-height: 150px;
         width: 100%;
-        border-bottom-left-radius: 32px;
-        border-bottom-right-radius: 32px;
-        background-image: var(--main-green-gradient);
         display: flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
         .banner_title{
@@ -31,8 +29,22 @@
                 .divider{
                     width: 3.2px;
                     height: 100%;
-                    background-color: #6cc98b;
                     border-radius: 20px;
+                    &.soccer{
+                        background-color: var(--alt-solid-green);
+                    }
+                    &.football{
+                        background-color: var(--main-solid-red);
+                    }
+                    &.basketball{
+                        background-color: var(--alt-solid-orange);
+                    }
+                    &.baseball{
+                        background-color: var(--alt-solid-grey);
+                    }
+                    &.hockey{
+                        background-color: var(--alt-solid-cyan);
+                    }
                 }
                 .text_container{
                     width: 100px;
@@ -52,7 +64,7 @@
                     margin-left: 6.5px;
                     padding: 2px 0;
                     .text_body{
-                        max-width: 100px;
+                        width: 105px!important;
                         height: 20px;
                     }
                     .text_title{
@@ -64,6 +76,11 @@
                     width: 11px;
                 }
             }
+        }
+        .top_banner_image{
+            z-index: -1;
+            position: absolute;
+            width: 100%;
         }
     }
     .compete_text{

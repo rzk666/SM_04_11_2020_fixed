@@ -2,9 +2,23 @@
     min-height: var(--footer-height);
     width: 100%;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-    background-image: linear-gradient(181deg, #57bb78 99%, #359254 1%);
     display: flex;
     flex-direction: column;
+    &.soccer{
+        background-image: var(--main-green-gradient);
+    }
+    &.hockey{
+        background-image: var(--main-cyan-gradient);
+    }
+    &.basketball{
+        background-image: var(--main-orange-gradient);
+    }
+    &.baseball{
+        background-image: var(--main-grey-gradient);
+    }
+    &.football{
+        background-image: var(--main-blue-gradient);
+    }
     .links_container{
         width: 100%;
         display: flex;

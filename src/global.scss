@@ -15,13 +15,18 @@
     --main-solid-blue: #2970be; 
     --main-solid-grey: #b2c4c3;
     --main-solid-cyan: #3ddde1;
+    --main-solid-red: #ff4a4a;
+    --alt-solid-green: #6cc98b;
+    --alt-solid-orange: #ffad43;
+    --alt-solid-grey: #6a8f8d;    ;
+    --alt-solid-cyan: #3ddde1;    ;
     --error-box: #d1435b;
     // Gradients
     --main-green-gradient: linear-gradient(to top, #57bb78, #3d9b5c);
-    --main-cyan-gradient: linear-gradient(to top, #3ddce0, #1a91a4);
-    --main-orange-gradient: linear-gradient(to top, #ffad50, #ff9000);
-    --main-grey-gradient: linear-gradient(to top, #b2c4c3, #8b9493);
-    --main-blue-gradient: linear-gradient(to top, #2970be, #013369);
+    --main-cyan-gradient: linear-gradient(to top, #3ddce0, #23a4b3);
+    --main-orange-gradient: linear-gradient(to top, #ffad50, #ff9613);
+    --main-grey-gradient: linear-gradient(to top, #b2c4c3, #95a09f);
+    --main-blue-gradient: linear-gradient(to top, #2970be, #0a427e);
     // Typography
     div[class*="white_text_1"]{
         font-family: Roboto;
