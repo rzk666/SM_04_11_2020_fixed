@@ -12,6 +12,7 @@ import classnames from 'classnames';
 import pages from '../../universal/pages';
 // Styles
 import styles from './Header.module.scss';
+import { signOut } from '../../redux/models/auth/authActions';
 
 // ----- Consts & Dicts ----- //
 const { LOGIN } = pages;
@@ -26,7 +27,18 @@ const Notifications = ({ count }) => {
   );
 };
 
-const Header = ({ auth, currentSport, history }) => {
+const HeaderProfile = ({ signOut }) => {
+  const x = 5;
+  return (
+    <div onClick={() => signOut()} className={styles.header_profile_container}>
+      signout
+    </div>
+  );
+};
+
+const Header = ({
+  auth, currentSport, history, signOut,
+}) => {
   const { isLoggedIn, user, isLoading } = auth;
   const { notifications, name } = user;
   const controls = useAnimation();
@@ -51,9 +63,12 @@ const Header = ({ auth, currentSport, history }) => {
         className={styles.title_img}
       />
       <div className={styles.menu_container}>
-        <div className={styles.login} onClick={() => history.push(`/${LOGIN}/`)}>
-          Login
-        </div>
+        { !isLoggedIn ? (
+          <div className={styles.login} onClick={() => history.push(`/${LOGIN}/`)}>
+            Login
+          </div>
+        )
+          : <HeaderProfile signOut={() => signOut()} />}
         { isLoggedIn && (
           <img
             src={Trophy}

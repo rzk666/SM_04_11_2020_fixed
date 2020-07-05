@@ -59,6 +59,14 @@ export default (ComposedComponent) => {
       const { auth, history, cookies } = this.props;
       const { isLoggedIn, hasAccess } = auth;
       const cookie = cookies.get('auth', '/');
+      // User Signout
+      if (!isLoggedIn && prevProps.auth.isLoggedIn) {
+        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+      }
+      if (isLoggedIn && !cookie.isLoggedIn) {
+        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+      }
+      // User Login
       if (isLoggedIn && !cookie.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
       }
