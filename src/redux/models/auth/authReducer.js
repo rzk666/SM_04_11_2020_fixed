@@ -8,6 +8,7 @@ import {
   AUTH_IS_LOADING,
   REFRESH_AUTH,
   SIGNOUT,
+  RESET_AUTH_ERRORS,
 } from './authTypes';
 
 // ----- Consts & Dicts ----- //
@@ -17,6 +18,8 @@ const USERS = {
     email: 'razi@beatem.uk',
     score: 1000,
     achivments: [],
+    balance: 1450,
+    notifications: 1,
     stats: {
       win: 2,
       lose: 8,
@@ -29,6 +32,8 @@ const USERS = {
     email: 'tal@beatem.uk',
     score: 1000,
     achivments: [],
+    notifications: 3,
+    balance: 980,
     stats: {
       win: 2,
       lose: 8,
@@ -40,6 +45,8 @@ const USERS = {
     name: 'lee',
     email: 'lee@beatem.uk',
     score: 1200,
+    balance: 455,
+    notifications: 4,
     achivments: [],
     stats: {
       win: 3,
@@ -52,6 +59,8 @@ const USERS = {
     name: 'barak',
     email: 'barak@beatem.uk',
     score: 12331,
+    balance: 1270,
+    notifications: 2,
     achivments: [],
     stats: {
       win: 24,
@@ -72,15 +81,22 @@ const auth = (state = INITIAL_STATE.auth, action) => {
         ...data,
       };
     }
+    case RESET_AUTH_ERRORS: {
+      return {
+        ...state,
+        hasError: false,
+      };
+    }
     // Regular user
     case LOGIN: {
       const { data } = action;
       const { email, password } = data;
-      if (EMAILS.includes(email) && password === '123 ') {
+      if (EMAILS.includes(email) && password === '123') {
         return {
           ...state,
           isLoading: false,
           isLoggedIn: true,
+          userToken: 'good',
           user: USERS[email],
         };
       }
@@ -89,6 +105,7 @@ const auth = (state = INITIAL_STATE.auth, action) => {
         isLoading: false,
         isLoggedIn: false,
         user: '',
+        userToken: 'good',
         hasError: true,
       };
     }

@@ -3,6 +3,7 @@ import React from 'react';
 import BeatemHomeTitle from '../../static/images/icons/beatemhometitle.png';
 import Home from '../../static/images/icons/home.svg';
 import Menu from '../../static/images/icons/menu.svg';
+import Trophy from '../../static/images/icons/Trophy.svg';
 // Animations
 import { motion, useAnimation } from 'framer-motion';
 // Util
@@ -15,8 +16,19 @@ import styles from './Header.module.scss';
 // ----- Consts & Dicts ----- //
 const { LOGIN } = pages;
 
+// ----- Help Components ----- //
+const Notifications = ({ count }) => {
+  const x = 5;
+  return (
+    <div className={styles.notifications}>
+      {count}
+    </div>
+  );
+};
+
 const Header = ({ auth, currentSport, history }) => {
-  const { isLoggedIn } = auth;
+  const { isLoggedIn, user, isLoading } = auth;
+  const { notifications, name } = user;
   const controls = useAnimation();
   controls.start({
     opacity: [0, 1],
@@ -42,16 +54,26 @@ const Header = ({ auth, currentSport, history }) => {
         <div className={styles.login} onClick={() => history.push(`/${LOGIN}/`)}>
           Login
         </div>
+        { isLoggedIn && (
+          <img
+            src={Trophy}
+            alt="TROPHY_ICON"
+            className={styles.home}
+          />
+        )}
         <img
           src={Home}
           alt="HOME_ICON"
           className={styles.home}
         />
-        <img
-          src={Menu}
-          alt="HOME_MENU"
-          className={styles.menu}
-        />
+        <div className={styles.menu_icon_container}>
+          { notifications !== 0 && <Notifications count={notifications} />}
+          <img
+            src={Menu}
+            alt="HOME_MENU"
+            className={styles.menu}
+          />
+        </div>
       </div>
     </motion.div>
   );

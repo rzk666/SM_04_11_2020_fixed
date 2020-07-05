@@ -28,6 +28,30 @@
     }
     .menu_container{
         display: flex;
+        align-items: center;
+        .menu_icon_container{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .notifications{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: 6px;
+                margin-bottom: 6px;
+                height: 13px;
+                width: 13px;
+                background-color: var(--alt-solid-red);
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 9px;
+                font-weight: 900;
+            }
+        }
         .login{
             margin-right: 17.5px;
             font-size: 17px;

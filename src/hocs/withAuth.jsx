@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import {
   signOut,
   refreshAuth,
+  resetAuthErrors,
 } from '../redux/models/auth/authActions';
 
 // ----- Misc ----- //
-const FAKE_HOME_LOADER_TIME = 6500;
+const FAKE_HOME_LOADER_TIME = 4500;
+const today = new Date();
+const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
 
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
@@ -39,11 +42,12 @@ export default (ComposedComponent) => {
     }
 
     componentDidMount() {
-      const { auth, cookies } = this.props;
+      const {
+        auth, cookies, page, refreshAuth,
+      } = this.props;
       if (!auth.adminToken) {
-        const cookie = cookies.get('auth');
-        const token = cookie && cookie.adminToken;
-        if (token) {
+        const cookie = cookies.get('auth', '/');
+        if (cookie) {
           refreshAuth(cookie);
         } else {
           enforceAuth(this.props);
@@ -54,12 +58,15 @@ export default (ComposedComponent) => {
     componentDidUpdate(prevProps) {
       const { auth, history, cookies } = this.props;
       const { isLoggedIn, hasAccess } = auth;
-      if (isLoggedIn !== prevProps.auth.isLoggedIn) {
-        enforceAuth(this.props);
+      const cookie = cookies.get('auth', '/');
+      if (isLoggedIn && !cookie.isLoggedIn) {
+        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
       }
       // Admin login
       if (hasAccess && !prevProps.auth.hasAccess) {
-        cookies.set('auth', auth);
+        if (!cookie) {
+          cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        }
         this.setState({ showSplash: true });
         setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
       }
@@ -81,6 +88,7 @@ export default (ComposedComponent) => {
   const mapDispatchToProps = (dispatch) => ({
     signOut: () => dispatch(signOut()),
     refreshAuth: (cookie) => dispatch(refreshAuth(cookie)),
+    resetAuthErrors: () => dispatch(resetAuthErrors()),
   });
 
   return connect(mapStateToProps, mapDispatchToProps)((WithAuth));

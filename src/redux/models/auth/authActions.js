@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 // Types
 import {
+  RESET_AUTH_ERRORS,
   AUTH_IS_LOADING,
   REFRESH_AUTH,
   AUTH_HAS_ERROR,
@@ -27,14 +28,16 @@ export const authHasError = (error) => ({
   error,
 });
 
+export const resetAuthErrors = () => ({
+  type: RESET_AUTH_ERRORS,
+});
+
 // System Access
 export const authAdmin = (data) => ({
   type: AUTH_ADMIN,
   data,
 });
 
-// TODO: Add login for admin & user ?
-// Currently this refreshes admin auth
 export const refreshAuth = (data) => ({
   type: REFRESH_AUTH,
   data,

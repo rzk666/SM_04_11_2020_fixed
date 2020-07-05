@@ -7,11 +7,31 @@ class LoginController extends React.Component {
     this.state = {
       password: '',
       email: '',
+      showErrors: false,
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      history, auth, resetAuthErrors,
+    } = this.props;
+    const { isLoggedIn } = auth;
+    if (isLoggedIn) {
+      history.go(-1);
+    }
+    if (!prevProps.auth.hasError && auth.hasError) {
+      resetAuthErrors();
+      this.setState({ showErrors: true });
+    }
+  }
+
+  login(data) {
+    const { login } = this.props;
+    login(data);
+  }
+
   handleInputsChange(type, value) {
-    this.setState({ [type]: value });
+    this.setState({ [type]: value, showErrors: false });
   }
 
   callbacks() {

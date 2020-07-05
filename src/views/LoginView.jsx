@@ -9,10 +9,14 @@ import ExitIcon from '../static/images/icons/Exit.svg';
 import BeatemBall from '../static/images/icons/BeatemBall.svg';
 
 // ----- Help Components ----- //
-const LoginInput = ({ type, onChange, value }) => {
+const LoginInput = ({
+  hasError, type, onChange, value,
+}) => {
   const isEmailInput = type === 'email';
   return (
     <Input
+      type={!isEmailInput ? 'password' : 'text'}
+      error={hasError}
       icon={isEmailInput ? 'green user circle outline' : 'green key'}
       iconPosition="left"
       placeholder={isEmailInput ? 'Email' : 'Password'}
@@ -33,7 +37,7 @@ const LoginButton = ({ type, login, value }) => {
       loading={loginIsLoading}
       onClick={() => {
         setLoginIsLoading(true);
-        setTimeout(() => alert('test'), 1500);
+        setTimeout(() => { login(); setLoginIsLoading(false); }, 1500);
       }}
     >
       LOGIN
@@ -46,6 +50,8 @@ const LoginView = ({
   handleInputsChange,
   password,
   email,
+  login,
+  showErrors,
 }) => {
   const x = 5;
   return (
@@ -55,7 +61,7 @@ const LoginView = ({
           src={ExitIcon}
           alt="Exit_icon"
           className={styles.exit}
-          onClick={() => history.back()}
+          onClick={() => history.goBack()}
         />
         <div className={styles.content_wrapper}>
           <img
@@ -68,14 +74,15 @@ const LoginView = ({
           </div>
           <div className={styles.divider} />
           <div className={styles.login_sec_title}>Are you ready to beatem?</div>
-          <LoginInput type="email" value={email} onChange={(data) => handleInputsChange('email', data)} />
-          <LoginInput type="password" value={password} onChange={(data) => handleInputsChange('password', data)} />
+          <LoginInput hasError={showErrors} type="email" value={email} onChange={(data) => handleInputsChange('email', data)} />
+          <LoginInput hasError={showErrors} type="password" value={password} onChange={(data) => handleInputsChange('password', data)} />
           <div className={styles.forgot_password}>
             Forgot Password?
           </div>
           <div className={styles.mini_divider} />
-          <LoginButton />
-          <div className={styles.no_account}></div>
+          <LoginButton login={() => login({ email, password })} />
+          <div className={styles.no_account}>Don't have an account yet?</div>
+          <div className={styles.sign_up}>Sign Up</div>
         </div>
       </div>
     </>
