@@ -1,5 +1,10 @@
 // Initial State
 import INITIAL_STATE from '../../../common/app-const';
+// Misc
+import Barak from '../../../static/images/profiles/Barak.png';
+import Lee from '../../../static/images/profiles/Lee.png';
+import Razi from '../../../static/images/profiles/Razi.png';
+import Tal from '../../../static/images/profiles/Tal.png';
 // Action Types
 import {
   LOGIN,
@@ -19,6 +24,7 @@ const USERS = {
     score: 1000,
     achivments: [],
     balance: 1450,
+    profilePicture: Razi,
     notifications: 1,
     stats: {
       win: 2,
@@ -34,6 +40,7 @@ const USERS = {
     achivments: [],
     notifications: 3,
     balance: 980,
+    profilePicture: Tal,
     stats: {
       win: 2,
       lose: 8,
@@ -48,6 +55,7 @@ const USERS = {
     balance: 455,
     notifications: 4,
     achivments: [],
+    profilePicture: Lee,
     stats: {
       win: 3,
       lose: 5,
@@ -58,10 +66,11 @@ const USERS = {
   barak: {
     name: 'barak',
     email: 'barak@beatem.uk',
-    score: 12331,
+    score: 1231,
     balance: 1270,
     notifications: 2,
     achivments: [],
+    profilePicture: Barak,
     stats: {
       win: 24,
       lose: 6,
