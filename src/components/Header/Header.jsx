@@ -6,6 +6,19 @@ import Menu from '../../static/images/icons/menu.svg';
 import Trophy from '../../static/images/icons/Trophy.svg';
 import ActiveStar from '../../static/images/icons/ActiveStar.png';
 import Star from '../../static/images/icons/Star.png';
+import HomeGrey from '../../static/images/icons/HomeGrey.svg';
+import ProfileGrey from '../../static/images/icons/ProfileGrey.svg';
+import TrophyGrey from '../../static/images/icons/TrophyGrey.svg';
+import AchievementsGrey from '../../static/images/icons/AchievementsGrey.svg';
+import CreateGrey from '../../static/images/icons/CreateGrey.svg';
+import JoinGrey from '../../static/images/icons/JoinGrey.svg';
+import SpecialsGrey from '../../static/images/icons/SpecialsGrey.svg';
+import InfoGrey from '../../static/images/icons/InfoGrey.svg';
+import NotificationsGrey from '../../static/images/icons/NotificationsGrey.svg';
+import FriendsGrey from '../../static/images/icons/FriendsGrey.svg';
+import ContactGrey from '../../static/images/icons/ContactGrey.svg';
+import FAQGrey from '../../static/images/icons/FAQGrey.svg';
+import LegalGrey from '../../static/images/icons/LegalGrey.svg';
 // Animations
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 // Util
@@ -23,16 +36,49 @@ const formatter = new Intl.NumberFormat('en-GB', {
 });
 
 // ----- Help Function ----- //
+const getMenuItemIcon = (name) => {
+  switch (name) {
+    case 'Home':
+      return HomeGrey;
+    case 'Profile':
+      return ProfileGrey;
+    case 'My Leagues':
+      return TrophyGrey;
+    case 'Achievements':
+      return AchievementsGrey;
+    case 'Create League':
+      return CreateGrey;
+    case 'Join League':
+      return JoinGrey;
+    case 'Specials':
+      return SpecialsGrey;
+    case 'How It Works?':
+      return InfoGrey;
+    case 'Notifications':
+      return NotificationsGrey;
+    case 'Friends':
+      return FriendsGrey;
+    case 'Contact':
+      return ContactGrey;
+    case 'FAQ':
+      return FAQGrey;
+    case 'Legal':
+      return LegalGrey;
+    default:
+      return 0;
+  }
+};
+
 const getBalance = (balance) => {
   const formattedBalance = formatter.format(balance);
   return formattedBalance.slice(0, formattedBalance.length - 3);
 };
 
 // ----- Help Components ----- //
-const Notifications = ({ count }) => {
+const Notifications = ({ count, onMenu }) => {
   const x = 5;
   return (
-    <div className={styles.notifications}>
+    <div className={classnames(styles.notifications, { [styles.on_menu]: onMenu })}>
       {count}
     </div>
   );
@@ -93,7 +139,7 @@ const Rank = ({ rank }) => {
   );
   return (
     <div className={styles.rank_container}>
-      <span className={styles.rank_name}>{rank}</span>
+      <span className={styles.rank_name}>{rank.toUpperCase()}</span>
       {Stars(activeStars)}
     </div>
   );
@@ -102,16 +148,23 @@ const Rank = ({ rank }) => {
 const MenuItem = ({ name, onClick, notifications }) => {
   const x = 5;
   return (
-    <div className={styles.menu_item_container}>
-      {/* <img src="" alt=""/> */}
+    <motion.div
+      whileTap={{
+        backgroundColor: '#e8e8e8',
+        transition: { duration: 0.3, ease: 'easeInOut' },
+      }}
+      className={styles.menu_item_container}
+      onClick={() => onClick()}
+    >
+      <img src={getMenuItemIcon(name)} alt={`${name}_img`} className={styles.icon} />
       <span className={styles.menu_item_name}>{name}</span>
-      { notifications !== 0 && <Notifications count={notifications} />}
-    </div>
+      { notifications !== 0 && <Notifications onMenu count={notifications} />}
+    </motion.div>
   );
 };
 
 const UserMenu = ({
-  user, history, close, isOpen,
+  user, history, close, isOpen, signOut,
 }) => {
   const {
     name, profilePicture, score, balance, rank,
@@ -134,6 +187,10 @@ const UserMenu = ({
         { isOpen
         && (
         <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 250 }}
+          dragElastic={0}
+          onDragEnd={() => close()}
           animate="opened"
           initial="closed"
           exit="closed"
@@ -143,23 +200,26 @@ const UserMenu = ({
         >
           {/* Top Part */}
           <div className={styles.user_menu_top}>
-            <img src="" alt="USER_AVATAR" className={styles.menu_avatar} />
-            <div className={styles.info_container}>
-              <span className={styles.name}>{name}</span>
-              <div className={styles.stats_container}>
-                <div className={styles.balance}>
-                  {getBalance(balance)}
+            <div className={styles.top_menu_wrapper}>
+              <img src={profilePicture} alt="USER_AVATAR" className={styles.menu_avatar} />
+              <div className={styles.info_container}>
+                <span className={styles.name}>{name}</span>
+                <div className={styles.stats_container}>
+                  <div className={styles.balance}>
+                    {getBalance(balance)}
+                  </div>
+                  <div className={styles.score}>
+                    <p style={{ margin: '0 2px 0 0' }}>{score}</p>
+                    <p style={{ fontSize: '8px' }}>PTS</p>
+                  </div>
                 </div>
-                <div className={styles.score}>
-                  {`${score} PTS`}
-                </div>
+                <Rank rank={rank} />
               </div>
-              <Rank rank={rank} />
             </div>
           </div>
           {/* Bottom Part */}
           <div className={styles.user_menu_bottom}>
-            <MenuItem name="Home" notifications={0} onClick={() => history.push('/')} />
+            <MenuItem name="Home" notifications={0} onClick={() => { history.push('/'); close(); }} />
             <MenuItem name="Profile" notifications={0} onClick={() => history.push('/profile')} />
             <MenuItem name="My Leagues" notifications={0} onClick={() => history.push('/profile')} />
             <MenuItem name="Achievements" notifications={1} onClick={() => history.push('/profile')} />
@@ -172,6 +232,9 @@ const UserMenu = ({
             <MenuItem name="Contact" notifications={0} onClick={() => alert('CONTACT')} />
             <MenuItem name="FAQ" notifications={0} onClick={() => alert('FAQ')} />
             <MenuItem name="Legal" notifications={0} onClick={() => alert('LEGAL')} />
+            <div onClick={() => { signOut(); close(); }} className={styles.sign_out}>
+              SIGN OUT
+            </div>
           </div>
         </motion.div>
         ) }
@@ -185,7 +248,7 @@ const Header = ({
 }) => {
   const [isMenuOpen, toggleMenu] = useState(false);
   const { isLoggedIn, user } = auth;
-  const { notifications, name } = user;
+  const { notifications } = user;
   const controls = useAnimation();
   controls.start({
     opacity: [0, 1],
@@ -193,9 +256,17 @@ const Header = ({
   });
   return (
     <>
-      <UserMenu isOpen={isMenuOpen} close={() => toggleMenu(false)} user={user} />
+      <UserMenu
+        signOut={() => signOut()}
+        isOpen={isMenuOpen}
+        close={() => toggleMenu(false)}
+        user={user}
+        history={history}
+      />
       <motion.div
-        animate={controls}
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        transiton={{ duration: 0.3, ease: 'easeIn' }}
         className={classnames(styles.header_container, {
           [styles.soccer]: currentSport === 'soccer',
           [styles.basketball]: currentSport === 'basketball',
