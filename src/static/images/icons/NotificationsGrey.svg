@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10.14" height="12.169" viewBox="0 0 10.14 12.169">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #53575a;
+      }
+    </style>
+  </defs>
+  <g id="Notifications_icon" data-name="Notifications icon" transform="translate(0 0)">
+    <g id="Group_72" data-name="Group 72" transform="translate(0)">
+      <g id="Group_71" data-name="Group 71" transform="translate(0)">
+        <path id="Path_148" data-name="Path 148" class="cls-1" d="M52.78,10.264l-.871-1.451A4.311,4.311,0,0,1,51.295,6.6V5.324a3.554,3.554,0,0,0-2.535-3.4v-.91a1.014,1.014,0,1,0-2.028,0v.91a3.554,3.554,0,0,0-2.535,3.4V6.6a4.313,4.313,0,0,1-.614,2.217l-.871,1.451a.254.254,0,0,0,.217.384h9.634a.253.253,0,0,0,.218-.384Z" transform="translate(-42.675)"/>
+      </g>
+    </g>
+    <g id="Group_74" data-name="Group 74" transform="translate(3.473 11.155)">
+      <g id="Group_73" data-name="Group 73" transform="translate(0)">
+        <path id="Path_149" data-name="Path 149" class="cls-1" d="M188.815,469.333a1.764,1.764,0,0,0,3.193,0Z" transform="translate(-188.815 -469.333)"/>
+      </g>
+    </g>
+  </g>
+</svg>

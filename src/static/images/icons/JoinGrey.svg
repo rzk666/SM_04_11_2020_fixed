@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11.978" height="11.978" viewBox="0 0 11.978 11.978">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #53575a;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #f7f7f7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Join_group_icon" data-name="Join group icon" transform="translate(0 0)">
+    <circle id="Ellipse_7" data-name="Ellipse 7" class="cls-1" cx="5.989" cy="5.989" r="5.989" transform="translate(0 0)"/>
+    <line id="Line_7" data-name="Line 7" class="cls-2" y2="4.791" transform="translate(5.989 3.593)"/>
+    <line id="Line_8" data-name="Line 8" class="cls-2" x2="4.791" transform="translate(3.593 5.989)"/>
+  </g>
+</svg>

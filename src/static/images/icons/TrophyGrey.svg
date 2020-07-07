@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="12.083" height="12.083" viewBox="0 0 12.083 12.083">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #53575a;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="My_leagues_icon" data-name="My leagues icon" transform="translate(0 0)">
+    <g id="Handles" transform="translate(0 0.755)">
+      <g id="Group_40" data-name="Group 40">
+        <path id="Path_96" data-name="Path 96" class="cls-1" d="M10.573,4a1.443,1.443,0,0,0-1.51,1.51c0,.378,0,.755.378.755s.378-.378.378-.755a.692.692,0,0,1,.755-.755.692.692,0,0,1,.755.755c0,1.888-2.266,3.021-3.4,3.021H4.154C3.021,8.531.755,7.4.755,5.51a.692.692,0,0,1,.755-.755.692.692,0,0,1,.755.755c0,.378,0,.755.378.755s.378-.378.378-.755A1.443,1.443,0,0,0,1.51,4,1.489,1.489,0,0,0,0,5.51C0,7.776,2.643,9.286,4.154,9.286H7.93c1.51,0,4.154-1.51,4.154-3.776A1.489,1.489,0,0,0,10.573,4Z" transform="translate(0 -4)"/>
+      </g>
+    </g>
+    <g id="Cup" transform="translate(2.643)">
+      <g id="Group_41" data-name="Group 41">
+        <path id="Path_97" data-name="Path 97" class="cls-1" d="M20.8.762c0-.381,0-.762-.378-.762H14.378C14,0,14,.381,14,.762c0,6.475,2.643,5.714,2.643,6.475V8c0,.762-1.133.381-1.133,1.143h3.776c0-.762-1.133-.381-1.133-1.143V7.237C18.154,6.475,20.8,7.237,20.8.762Z" transform="translate(-14)"/>
+      </g>
+    </g>
+    <g id="Stand" transform="translate(2.266 9.818)">
+      <g id="Group_42" data-name="Group 42">
+        <path id="Path_98" data-name="Path 98" class="cls-1" d="M19.174,52h-6.8a.378.378,0,0,0-.378.378v1.51a.378.378,0,0,0,.378.378h6.8a.378.378,0,0,0,.378-.378v-1.51A.378.378,0,0,0,19.174,52Z" transform="translate(-12 -52)"/>
+      </g>
+    </g>
+    <g id="Plate" transform="translate(4.154 10.573)">
+      <g id="Group_43" data-name="Group 43">
+        <rect id="Rectangle_58" data-name="Rectangle 58" class="cls-1" width="3.776" height="0.755"/>
+      </g>
+    </g>
+    <g id="Base_1_" transform="translate(3.021 7.174)">
+      <g id="Group_44" data-name="Group 44">
+        <path id="Path_99" data-name="Path 99" class="cls-2" d="M20.909,39.924H17.133s-1.133,0-1.133.77h6.042C22.042,39.924,20.909,39.924,20.909,39.924ZM18.266,38.77h1.51a.385.385,0,0,0,0-.77h-1.51a.385.385,0,0,0,0,.77Z" transform="translate(-16 -38)"/>
+      </g>
+    </g>
+    <g id="_x31_" transform="translate(4.909 1.133)">
+      <g id="Group_45" data-name="Group 45">
+        <path id="Path_100" data-name="Path 100" class="cls-2" d="M27.888,8.642H27.51V6h-.378a.375.375,0,0,0-.327.192l-.7.7a.362.362,0,1,0,.513.513l.135-.135V8.642h-.378a.378.378,0,1,0,0,.755h1.51a.378.378,0,0,0,0-.755Z" transform="translate(-26 -5.999)"/>
+      </g>
+    </g>
+  </g>
+</svg>

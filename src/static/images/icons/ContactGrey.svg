@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12.312" height="9.234" viewBox="0 0 12.312 9.234">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        fill: #53575a;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="12.312" height="9.234"/>
+    </clipPath>
+  </defs>
+  <g id="Contact_icon" data-name="Contact icon" class="cls-2" transform="translate(0 0)">
+    <path id="Contact_icon-2" data-name="Contact icon" class="cls-3" d="M6.156,8.156A1.784,1.784,0,0,1,5.386,7.9L0,5.078v5.386a.772.772,0,0,0,.769.769H11.542a.772.772,0,0,0,.769-.769V5.078L6.925,7.9A1.784,1.784,0,0,1,6.156,8.156ZM11.542,2H.769A.772.772,0,0,0,0,2.769v.583L6.156,6.588l6.156-3.236V2.769A.772.772,0,0,0,11.542,2Z" transform="translate(0 -2)"/>
+  </g>
+</svg>

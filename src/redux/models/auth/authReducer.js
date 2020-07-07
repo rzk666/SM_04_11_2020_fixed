@@ -19,7 +19,8 @@ import {
 // ----- Consts & Dicts ----- //
 const USERS = {
   razi: {
-    name: 'razi',
+    name: 'Razi Elbaz',
+    rank: 'pro',
     email: 'razi@beatem.uk',
     score: 1000,
     achivments: [],
@@ -34,8 +35,9 @@ const USERS = {
     },
   },
   tal: {
-    name: 'tal',
+    name: 'Tal Hakim',
     email: 'tal@beatem.uk',
+    rank: 'legend',
     score: 1000,
     achivments: [],
     notifications: 3,
@@ -49,7 +51,8 @@ const USERS = {
     },
   },
   lee: {
-    name: 'lee',
+    name: 'Lee Lavy',
+    rank: 'amateur',
     email: 'lee@beatem.uk',
     score: 1200,
     balance: 455,
@@ -64,7 +67,8 @@ const USERS = {
     },
   },
   barak: {
-    name: 'barak',
+    rank: 'pro',
+    name: 'Barak Bouaniche',
     email: 'barak@beatem.uk',
     score: 1231,
     balance: 1270,

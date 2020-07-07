@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="11.978" height="11.978" viewBox="0 0 11.978 11.978">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        fill: #53575a;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        font-size: 9px;
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="11.978" height="11.978"/>
+    </clipPath>
+  </defs>
+  <g id="Specials_icon" data-name="Specials icon" class="cls-2" transform="translate(0 0)">
+    <circle id="Ellipse_49" data-name="Ellipse 49" class="cls-3" cx="5.989" cy="5.989" r="5.989"/>
+    <text id="S" class="cls-4" transform="translate(6 9.496)"><tspan x="-2.766" y="0">S</tspan></text>
+  </g>
+</svg>

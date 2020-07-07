@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11.273" height="11.978" viewBox="0 0 11.273 11.978">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #53575a;
+      }
+    </style>
+  </defs>
+  <g id="Profile_icon" data-name="Profile icon" transform="translate(0 0)">
+    <circle id="Ellipse_48" data-name="Ellipse 48" class="cls-1" cx="2.818" cy="2.818" r="2.818" transform="translate(2.818 0)"/>
+    <path id="Path_139" data-name="Path 139" class="cls-1" d="M15.273,17.228v.7a.7.7,0,0,1-.7.7H4.7a.7.7,0,0,1-.7-.7v-.7A4.228,4.228,0,0,1,8.228,13h2.818A4.228,4.228,0,0,1,15.273,17.228Z" transform="translate(-4 -6.659)"/>
+  </g>
+</svg>
