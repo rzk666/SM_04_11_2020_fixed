@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 // Styles
 import styles from './HomeLeagues.module.scss';
@@ -14,7 +15,7 @@ import champions from '../../static/images/leagues/champions.png';
 // Util
 import classnames from 'classnames';
 // Animations
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 // Universal
 import LEAGUES from '../../universal/leagues';
 
@@ -77,19 +78,27 @@ const EmptyLeagues = () => (
 );
 
 const HomeLeagues = ({ leaguesSearch, currentSport }) => {
-  const filteredLeagues = leaguesSearch ? LEAGUES[currentSport].filter((league) => league.includes(leaguesSearch)) : LEAGUES[currentSport];
+  const filteredLeagues = leaguesSearch
+    ? LEAGUES[currentSport].filter((league) => league.includes(leaguesSearch))
+    : LEAGUES[currentSport];
+  const controls = useAnimation();
+  controls.start({
+    opacity: [0, 1],
+    transiton: { duration: 0.05, ease: 'easeIn' },
+  });
   return (
     <div className={styles.leagues_wrapper}>
       <div className={styles.leagues_container}>
         {!filteredLeagues.length ? <EmptyLeagues />
           : (
             <>
-              {filteredLeagues.map((league) => (
-                <div className={styles.league}>
+              {filteredLeagues.map((league, i) => (
+                <motion.div whileTap={{ scale: 0.9 }} animate={controls} key={`${league}_${i}`} className={classnames(styles.league, styles[currentSport])}>
                   <div className={styles.league_image_container}>
                     <motion.img
                       animate={{ opacity: 1 }}
                       initial={{ opacity: 0 }}
+                      transiton={{ duration: 0.05, ease: 'easeIn' }}
                       src={getLeagueImage(league)}
                       alt={`${league}_logo`}
                       className={styles[getLeagueName(league)]}
@@ -98,7 +107,7 @@ const HomeLeagues = ({ leaguesSearch, currentSport }) => {
                   <div className={classnames(styles.league_name, 'white_text_3')}>
                     {league}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </>
           )}

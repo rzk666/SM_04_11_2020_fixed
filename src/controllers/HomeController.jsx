@@ -1,5 +1,6 @@
 import React from 'react';
-
+// Util
+import _LoadImages from '../util/LoadImages';
 
 class HomeController extends React.Component {
   constructor(props) {
@@ -9,10 +10,10 @@ class HomeController extends React.Component {
       leaguesSearch: '',
     };
   }
-  // login(data) {
-  //   const { login } = this.props;
-  //   login(data);
-  // }
+
+  componentDidMount() {
+    _LoadImages('home');
+  }
 
   handleSearchChange(leaguesSearch) {
     this.setState({ leaguesSearch });

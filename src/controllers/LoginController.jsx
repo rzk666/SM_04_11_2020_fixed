@@ -1,43 +1,27 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-// common
-import ROUTES from '../universal/routes';
-// Redux Action
-
-// ----- Dictioneries ----- //
-const { ADMIN_ROUTE, HOME_ROUTE } = ROUTES;
-
-// ----- Help Functions ----- //
-const handleAuthChange = (controllerProps) => {
-  const { auth, history } = controllerProps;
-  const { isLoggedIn } = auth;
-  const { user } = auth;
-  if (isLoggedIn) {
-    const { cookies } = controllerProps;
-    cookies.set('auth', auth, { path: '/' });
-    if (user.role === 'admin') {
-      history.push(ADMIN_ROUTE);
-    } else {
-      history.push(HOME_ROUTE);
-    }
-  }
-};
 
 class LoginController extends React.Component {
-  componentDidMount() {
-    // handle cookies
-    const { cookies, refreshAuth } = this.props;
-    const cookie = cookies.get('auth');
-    if (cookie.token) {
-      refreshAuth(cookie);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      email: '',
+      showErrors: false,
+    };
   }
 
   componentDidUpdate(prevProps) {
-    const { auth } = this.props;
+    const {
+      history, auth, resetAuthErrors,
+    } = this.props;
     const { isLoggedIn } = auth;
-    // Indicates a successfull login
-    if (prevProps.auth.isLoggedIn !== isLoggedIn) {
-      handleAuthChange(this.props);
+    if (isLoggedIn) {
+      history.go(-1);
+    }
+    if (!prevProps.auth.hasError && auth.hasError) {
+      resetAuthErrors();
+      this.setState({ showErrors: true });
     }
   }
 
@@ -46,9 +30,13 @@ class LoginController extends React.Component {
     login(data);
   }
 
+  handleInputsChange(type, value) {
+    this.setState({ [type]: value, showErrors: false });
+  }
+
   callbacks() {
     return {
-      login: this.login.bind(this),
+      handleInputsChange: this.handleInputsChange.bind(this),
     };
   }
 

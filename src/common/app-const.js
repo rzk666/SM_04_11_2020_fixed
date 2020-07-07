@@ -6,6 +6,20 @@ const INITIAL_STATE = {
     isLoggedIn: false,
     userToken: '',
     adminToken: '',
+    user: {
+      name: '',
+      email: '',
+      score: 0,
+      balance: 0,
+      achivments: [],
+      notifications: 0,
+      stats: {
+        win: 0,
+        lose: 0,
+        totalWins: 0,
+        leaguesPlayed: 0,
+      },
+    },
   },
 };
 
