@@ -1,12 +1,13 @@
 /* eslint-disable no-shadow */
 // Types
 import {
+  RESET_AUTH_ERRORS,
   AUTH_IS_LOADING,
   REFRESH_AUTH,
   AUTH_HAS_ERROR,
-  AUTH_LOGIN,
   AUTH_ADMIN,
   SIGNOUT,
+  LOGIN,
 } from './authTypes';
 // API
 import { API } from '../../api';
@@ -27,10 +28,8 @@ export const authHasError = (error) => ({
   error,
 });
 
-// Regular User
-export const authLogin = (data) => ({
-  type: AUTH_LOGIN,
-  data,
+export const resetAuthErrors = () => ({
+  type: RESET_AUTH_ERRORS,
 });
 
 // System Access
@@ -39,29 +38,16 @@ export const authAdmin = (data) => ({
   data,
 });
 
-// TODO: Add login for admin & user ?
-// Currently this refreshes admin auth
 export const refreshAuth = (data) => ({
   type: REFRESH_AUTH,
   data,
 });
 
 // User login
-export const login = (data) => (({
-  type: API,
-  payload: {
-    url: {
-      base: config.api.url,
-      endpoint: '/auth/loginUser',
-    },
-    method: 'post',
-    data,
-    success: (data) => authLogin(data),
-    failure: (data) => authHasError(data),
-    loader: async (data) => authIsLoading(data),
-
-  },
-}));
+export const login = (data) => ({
+  type: LOGIN,
+  data,
+});
 
 // Admin Login
 export const adminLogin = (data) => (({

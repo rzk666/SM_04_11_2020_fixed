@@ -1,24 +1,28 @@
 import React from 'react';
-
+// Util
+import _LoadImages from '../util/LoadImages';
 
 class HomeController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showSplash: true,
+      leaguesSearch: '',
     };
   }
-  // login(data) {
-  //   const { login } = this.props;
-  //   login(data);
-  // }
 
   componentDidMount() {
+    _LoadImages('home');
+  }
+
+  handleSearchChange(leaguesSearch) {
+    this.setState({ leaguesSearch });
   }
 
   callbacks() {
     return {
       // login: this.login.bind(this),
+      handleSearchChange: this.handleSearchChange.bind(this),
     };
   }
 

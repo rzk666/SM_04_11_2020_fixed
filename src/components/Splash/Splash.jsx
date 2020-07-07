@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import React from 'react';
-// Util
+// Animations
 import { motion } from 'framer-motion';
 // Images
 import MainSplash from '../../static/images/splash/mainSplash.svg';
