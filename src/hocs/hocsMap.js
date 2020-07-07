@@ -6,6 +6,7 @@ const HOCS_MAP = {
   home: [withAuth, withLayout],
   adminLogin: [withAuth, withLayout],
   login: [withAuth, withLayout],
+  profile: [withAuth, withLayout],
 };
 
 

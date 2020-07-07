@@ -56,7 +56,9 @@ export default (ComposedComponent) => {
     }
 
     componentDidUpdate(prevProps) {
-      const { auth, history, cookies } = this.props;
+      const {
+        auth, history, cookies, page,
+      } = this.props;
       const { isLoggedIn, hasAccess } = auth;
       const cookie = cookies.get('auth', '/');
       // User Signout
@@ -76,7 +78,7 @@ export default (ComposedComponent) => {
           cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
         }
         this.setState({ showSplash: true });
-        setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
+        setTimeout(() => history.push(`/${page === 'adminLogin' ? '' : page}`), FAKE_HOME_LOADER_TIME);
       }
     }
 

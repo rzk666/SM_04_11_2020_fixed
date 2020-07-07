@@ -220,7 +220,7 @@ const UserMenu = ({
           {/* Bottom Part */}
           <div className={styles.user_menu_bottom}>
             <MenuItem name="Home" notifications={0} onClick={() => { history.push('/'); close(); }} />
-            <MenuItem name="Profile" notifications={0} onClick={() => history.push('/profile')} />
+            <MenuItem name="Profile" notifications={0} onClick={() => { history.push('/profile'); close(); }} />
             <MenuItem name="My Leagues" notifications={0} onClick={() => history.push('/profile')} />
             <MenuItem name="Achievements" notifications={1} onClick={() => history.push('/profile')} />
             <MenuItem name="Create League" notifications={0} onClick={() => history.push('/profile')} />
