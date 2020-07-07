@@ -1,7 +1,7 @@
 const pages = {
-  LOGIN: 'login',
   HOME: 'home',
-  ADMIN: 'admin',
+  ADMIN_LOGIN: 'adminLogin',
+  LOGIN: 'login',
 };
 
 export default pages;

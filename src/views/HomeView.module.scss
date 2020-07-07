@@ -1,0 +1,95 @@
+.wrapper{
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    .top_banner{
+        margin-top: 8px;
+        min-height: 150px;
+        width: 100%;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        .banner_title{
+            margin-top: 17px;
+        }
+        .buttons_container{
+            display: flex;
+            width: calc(100vw - 54px );
+            justify-content: space-between;
+            margin-top: 17px;
+            .card_container{
+                display: flex;
+                width: 145px;
+                height: 64.5px;
+                border-radius: 10px;
+                background-color: white;
+                padding: 12px 6px;
+                .divider{
+                    width: 3.2px;
+                    height: 100%;
+                    border-radius: 20px;
+                    &.soccer{
+                        background-color: var(--alt-solid-green);
+                    }
+                    &.football{
+                        background-color: var(--main-solid-red);
+                    }
+                    &.basketball{
+                        background-color: var(--alt-solid-orange);
+                    }
+                    &.baseball{
+                        background-color: var(--alt-solid-grey);
+                    }
+                    &.hockey{
+                        background-color: var(--alt-solid-cyan);
+                    }
+                }
+                .text_container{
+                    width: 100px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    font-family: Arial;
+                    font-size: 8px;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.15;
+                    letter-spacing: normal;
+                    text-align: center;
+                    color: #53575a;
+                    text-align: left;
+                    margin-left: 6.5px;
+                    padding: 2px 0;
+                    .text_body{
+                        width: 105px!important;
+                        height: 20px;
+                    }
+                    .text_title{
+                        font-size: 13px;
+                    }
+                }
+                img{
+                    margin-left: auto;
+                    width: 11px;
+                }
+            }
+        }
+        .top_banner_image{
+            z-index: -1;
+            position: absolute;
+            width: 100%;
+        }
+    }
+    .compete_text{
+        margin-top: 15px;
+        margin-bottom: 23.5px;
+        padding: 0 30px;
+    }
+    .search{
+        width: calc(100% - 54px);
+        margin: 0 auto;
+    }
+}

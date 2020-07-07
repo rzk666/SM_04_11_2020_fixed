@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11.063" height="18.831" viewBox="0 0 11.063 18.831">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #6a8f8d;
+      }
+    </style>
+  </defs>
+  <path id="Forward_Icon" data-name="Forward Icon" class="cls-1" d="M112.241,8.681,103.861.3A1.032,1.032,0,0,0,102.4.3l-.617.617a1.031,1.031,0,0,0,0,1.457l7.037,7.037-7.045,7.045a1.033,1.033,0,0,0,0,1.457l.617.617a1.032,1.032,0,0,0,1.457,0l8.388-8.387a1.04,1.04,0,0,0,0-1.462Z" transform="translate(-101.478)"/>
+</svg>

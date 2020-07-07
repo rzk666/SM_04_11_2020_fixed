@@ -1,14 +1,14 @@
 const FORMS = {
-  // LOGIN_FIELDS: {
-  //   customerId: {
-  //     placeholder: 'מספר לקוח',
-  //     type: 'number',
-  //   },
-  //   password: {
-  //     placeholder: 'סיסמא',
-  //     type: 'password',
-  //   },
-  // },
+  ADMIN_LOGIN_FIELDS: {
+    email: {
+      placeholder: 'email',
+      type: 'string',
+    },
+    password: {
+      placeholder: 'password',
+      type: 'password',
+    },
+  },
 };
 
 export default FORMS;

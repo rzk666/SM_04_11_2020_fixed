@@ -1,11 +1,13 @@
 /* eslint-disable no-shadow */
 // Types
 import {
+  RESET_AUTH_ERRORS,
   AUTH_IS_LOADING,
   REFRESH_AUTH,
   AUTH_HAS_ERROR,
-  AUTHLOGIN,
+  AUTH_ADMIN,
   SIGNOUT,
+  LOGIN,
 } from './authTypes';
 // API
 import { API } from '../../api';
@@ -26,8 +28,13 @@ export const authHasError = (error) => ({
   error,
 });
 
-export const authLogin = (data) => ({
-  type: AUTHLOGIN,
+export const resetAuthErrors = () => ({
+  type: RESET_AUTH_ERRORS,
+});
+
+// System Access
+export const authAdmin = (data) => ({
+  type: AUTH_ADMIN,
   data,
 });
 
@@ -36,7 +43,14 @@ export const refreshAuth = (data) => ({
   data,
 });
 
-export const login = (data) => (({
+// User login
+export const login = (data) => ({
+  type: LOGIN,
+  data,
+});
+
+// Admin Login
+export const adminLogin = (data) => (({
   type: API,
   payload: {
     url: {
@@ -45,7 +59,7 @@ export const login = (data) => (({
     },
     method: 'post',
     data,
-    success: (data) => authLogin(data),
+    success: (data) => authAdmin(data),
     failure: (data) => authHasError(data),
     loader: (data) => authIsLoading(data),
   },

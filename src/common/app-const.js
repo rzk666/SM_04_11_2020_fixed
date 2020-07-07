@@ -1,9 +1,26 @@
-export const INITIAL_STATE = {
+const INITIAL_STATE = {
   auth: {
     isLoading: false,
     hasError: false,
     error: '',
     isLoggedIn: false,
-    token: '',
+    userToken: '',
+    adminToken: '',
+    user: {
+      name: '',
+      email: '',
+      score: 0,
+      balance: 0,
+      achivments: [],
+      notifications: 0,
+      stats: {
+        win: 0,
+        lose: 0,
+        totalWins: 0,
+        leaguesPlayed: 0,
+      },
+    },
   },
 };
+
+export default INITIAL_STATE;

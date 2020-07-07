@@ -1,4 +1,8 @@
 .layout{
     width:100%;
-    height:100%;
+    height: 100%;
+    overflow: auto;
+    &.with_header{
+        margin-top: var(--header-height);
+    }
 }

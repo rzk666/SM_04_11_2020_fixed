@@ -2,19 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Container } from 'react-bootstrap';
 import { CookiesProvider } from 'react-cookie';
 import store from './redux/store/configure-store';
 import App from './App';
+import 'semantic-ui-css/semantic.min.css';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store()}>
       <CookiesProvider>
-        <Container fluid style={{ height: '100%' }}>
-          <App />
-        </Container>
+        <App />
       </CookiesProvider>
     </Provider>
   </React.StrictMode>,

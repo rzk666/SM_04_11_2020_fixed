@@ -1,0 +1,130 @@
+.user_menu_wrapper{
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0, 0.72);
+    position: fixed;
+    top: 0;
+    &.closed{
+        background-color: rgba(0,0,0, 0);
+        z-index: 0;
+    }
+}
+
+.user_menu_container{
+    position: fixed;
+    right: 0;
+    top:0;
+    z-index: 3!important;
+    height: 100vh;
+    width: 250px;
+    background-color: red;
+    opacity: 1;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_container{
+    width:100%;
+    height: 52px;
+    display: flex;
+    padding: 0 21px 0 10px;
+    &.soccer{
+        background-image: var(--main-green-gradient);
+    }
+    &.hockey{
+        background-image: var(--main-cyan-gradient);
+    }
+    &.basketball{
+        background-image: var(--main-orange-gradient);
+    }
+    &.baseball{
+        background-image: var(--main-grey-gradient);
+    }
+    &.football{
+        background-image: var(--main-blue-gradient);
+    }
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    .title_img{
+        height: 34.5px;
+    }
+    .menu_container{
+        display: flex;
+        align-items: center;
+        .header_profile_container{
+            display: flex;
+            align-items: center;
+            width: 78px;
+            margin-right: 25px;
+            .stats_container{
+                margin-right: 5px;
+                display: flex;
+                flex-direction: column;
+                width: 44px;
+                font-family: Roboto;
+                align-items: center;
+                justify-content: center;
+                .balance{
+                    font-size: 14px;
+                    font-weight: 900;
+                    color: var(--main-solid-yellow);
+                }
+                .score{
+                    color: white;
+                    font-size: 7px;
+                    line-height: 1.29;
+                    letter-spacing: 0.35px;
+                    font-weight: bold;
+                }
+            }
+            .avatar{
+                width: 34px;
+                height: 34px;
+            }
+        }
+        .menu_icon_container{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .notifications{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 2;
+                margin-left: 6px;
+                margin-bottom: 6px;
+                height: 13px;
+                width: 13px;
+                background-color: var(--alt-solid-red);
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 9px;
+                font-weight: 900;
+            }
+        }
+        .login{
+            margin-right: 17.5px;
+            font-size: 17px;
+            color: #ffffff;
+            line-height: 1.18;
+            letter-spacing: 0.85px;
+            font-weight: bold;
+        }
+        .home{
+            margin-right: 17.5px;
+            width: 18.7px;
+        }
+        .menu{
+            width: 24.9px;
+        }
+    }
+}
