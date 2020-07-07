@@ -73,12 +73,10 @@ export default (ComposedComponent) => {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
       }
       // Admin login
-      if (hasAccess && !prevProps.auth.hasAccess) {
-        if (!cookie) {
-          cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
-        }
+      if (hasAccess && !prevProps.auth.hasAccess && !cookie) {
+        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
         this.setState({ showSplash: true });
-        setTimeout(() => history.push(`/${page === 'adminLogin' ? '' : page}`), FAKE_HOME_LOADER_TIME);
+        setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
       }
     }
 

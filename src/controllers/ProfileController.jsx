@@ -6,6 +6,7 @@ class ProfileController extends React.Component {
     super(props);
     this.state = {
       currentView: 'STATS',
+      friendsSearch: '',
     };
   }
 
@@ -13,9 +14,14 @@ class ProfileController extends React.Component {
     this.setState({ currentView });
   }
 
+  handleSearchChange(value) {
+    this.setState({ friendsSearch: value });
+  }
+
   callbacks() {
     return {
       updateView: this.updateView.bind(this),
+      handleSearchChange: this.handleSearchChange.bind(this),
     };
   }
 

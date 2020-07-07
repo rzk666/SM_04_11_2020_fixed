@@ -17,13 +17,14 @@ import {
 } from './authTypes';
 
 // ----- Consts & Dicts ----- //
-const USERS = {
+export const USERS = {
   razi: {
     name: 'Razi Elbaz',
     rank: 'pro',
     email: 'razi@beatem.uk',
     score: 1000,
-    achivments: [],
+    achievements: [],
+    friends: ['tal', 'barak', 'lee'],
     balance: 1450,
     profilePicture: Razi,
     notifications: 1,
@@ -44,10 +45,11 @@ const USERS = {
     email: 'tal@beatem.uk',
     rank: 'legend',
     score: 1000,
-    achivments: [],
+    achievements: [],
     notifications: 3,
     balance: 980,
     profilePicture: Tal,
+    friends: ['lee', 'barak', 'razi'],
     stats: {
       score: 1000,
       accuracyRate: 76.5,
@@ -67,8 +69,9 @@ const USERS = {
     score: 1200,
     balance: 455,
     notifications: 4,
-    achivments: [],
+    achievements: [],
     profilePicture: Lee,
+    friends: ['tal', 'barak', 'razi'],
     stats: {
       score: 1200,
       accuracyRate: 76.5,
@@ -88,8 +91,9 @@ const USERS = {
     score: 1231,
     balance: 1270,
     notifications: 2,
-    achivments: [],
+    achievements: [],
     profilePicture: Barak,
+    friends: ['tal', 'lee', 'razi'],
     stats: {
       accuracyRate: 76.5,
       friendsPlaying: 65,
