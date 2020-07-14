@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 // Animations
 import { motion } from 'framer-motion';
 // Components
@@ -7,6 +7,7 @@ import { Input } from 'semantic-ui-react';
 import styles from './ProfileView.module.scss';
 // Images
 import Trophy from '../static/images/profile/ProfileTrophy.svg';
+import ProfileBackground from '../static/images/profile/ProfileBackground.png';
 import Stars from '../static/images/profile/ProfileStars.svg';
 import RightArrow from '../static/images/icons/RightArrowWhite.svg';
 import Messenger from '../static/images/icons/social/Messenger.svg';
@@ -97,6 +98,11 @@ const ProfileTop = ({ user }) => {
   } = user;
   return (
     <div className={styles.profile_top_container}>
+      <img
+        src={ProfileBackground}
+        alt="ProfileBackground"
+        className={styles.profile_background_image}
+      />
       <img
         src={profilePicture}
         alt={`${name}_profile_img`}
@@ -247,6 +253,7 @@ const Friend = ({ name, img }) => (
       <img
         src={img}
         alt={`${name}_avatar`}
+        style={{ width: '24px' }}
       />
       <span className={styles.name}>
         {name}
@@ -261,33 +268,58 @@ const Friend = ({ name, img }) => (
   </>
 );
 
-const FriendsView = ({ user, handleSearchChange, friendsSearch }) => {
-  const { friends } = user;
-  const filteredFriends = friends.filter((friend) => friend.includes(friendsSearch));
-  return (
-    <div className={styles.friends_view_container}>
-      <div className={styles.search_section}>
-        <Input
-          icon="search"
-          iconPosition="left"
-          placeholder="Search Friends"
-          className={styles.search}
-          onChange={(e, data) => handleSearchChange(data.value)}
-          value={friendsSearch}
-        />
-      </div>
-      <div className={styles.divider} />
-      <div className={styles.friends_section}>
-        {filteredFriends.length ? filteredFriends.map((friend) => (
-          <Friend
-            img={USERS[friend].profilePicture}
-            name={USERS[friend].name}
+class FriendsView extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      searchFocused: false,
+    }
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.searchFocused);
+  }
+
+  componentDidMount() {
+    console.log(this.inputRef);
+      const input = this.inputRef.current.inputRef.current;
+      input.onfocus = () => this.setState({ searchFocused: true});
+      input.onblur = () => this.setState({ searchFocused: false});;
+      console.log(input);
+  }
+
+  inputRef = createRef();
+
+  render() {
+    const { user, friendsSearch, handleSearchChange } = this.props;
+    const { friends } = user;
+    const filteredFriends = friends.filter((friend) => friend.includes(friendsSearch));
+    return (
+      <div className={styles.friends_view_container}>
+        <div className={styles.search_section}>
+          <Input
+            ref={this.inputRef}
+            icon="search"
+            iconPosition="left"
+            placeholder="Search Friends"
+            className={styles.search}
+            onChange={(e, data) => handleSearchChange(data.value)}
+            value={friendsSearch}
           />
-        )) : <span className={styles.no_friends}>NO FRIENDS TO DISPLAY</span>}
+        </div>
+        <div className={styles.divider} />
+        <div className={styles.friends_section}>
+          {filteredFriends.length ? filteredFriends.map((friend) => (
+            <Friend
+              img={USERS[friend].profilePicture}
+              name={USERS[friend].name}
+            />
+          )) : <span className={styles.no_friends}>NO FRIENDS TO DISPLAY</span>}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const getCurrentView = (currentView, user, handleSearchChange, friendsSearch) => {
   switch (currentView) {
