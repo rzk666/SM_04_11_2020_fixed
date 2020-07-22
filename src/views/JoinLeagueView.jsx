@@ -9,7 +9,7 @@ const JoinLeagueView = ({
   const x = 5;
   return (
     <>
-      <div className={styles.test}>
+      <div className={styles.wrapper}>
         JOIN LEAGUE
       </div>
     </>
