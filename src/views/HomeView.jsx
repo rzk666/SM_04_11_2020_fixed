@@ -21,8 +21,13 @@ import {
 } from 'framer-motion';
 // Util
 import classnames from 'classnames';
+// Universal
+import pages from '../universal/pages';
 // Styles
 import styles from './HomeView.module.scss';
+
+// ----- Consts & Dicts ----- //
+const { JOIN_LEAGUE } = pages;
 
 // ----- Help Functions ----- //
 const getTopBanner = (sport) => {
@@ -67,7 +72,11 @@ const Card = ({ type, currentSport, onClick }) => {
     ? 'Create your own league and challange your friends'
     : 'Join a friend\'s league and show \'em who\'s the boss';
   return (
-    <motion.div whileTap={{ scale: 0.9 }} className={styles.card_container}>
+    <motion.div
+      whileTap={{ scale: 0.9 }}
+      className={styles.card_container}
+      onClick={() => onClick()}
+    >
       <div className={classnames(styles.divider, styles[currentSport])} />
       <div className={styles.text_container}>
         <div className={styles.text_title}>{textTitle}</div>
@@ -88,6 +97,7 @@ const HomeView = ({
   leaguesSearch,
   currentSport,
   changeSport,
+  history,
 }) => {
   const controls = useAnimation();
   controls.start({
@@ -115,8 +125,8 @@ const HomeView = ({
             JOIN OR CREATE YOUR OWN LEAGUES!
           </div>
           <div className={styles.buttons_container}>
-            <Card currentSport={currentSport} type="create" />
-            <Card currentSport={currentSport} type="join" />
+            <Card onClick={() => alert('Create')} currentSport={currentSport} type="create" />
+            <Card onClick={() => history.push(JOIN_LEAGUE)} currentSport={currentSport} type="join" />
           </div>
         </div>
       </AnimatePresence>

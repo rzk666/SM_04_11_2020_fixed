@@ -7,8 +7,12 @@ import {
   refreshAuth,
   resetAuthErrors,
 } from '../redux/models/auth/authActions';
+// Misc
+import pages from '../universal/pages';
 
 // ----- Misc ----- //
+const { PROFILE } = pages;
+const LOCKED_PAGES = [PROFILE];
 const FAKE_HOME_LOADER_TIME = 4500;
 const today = new Date();
 const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
@@ -19,13 +23,15 @@ const enforceAuth = (controllerProps) => {
     auth, history, signOut, location,
   } = controllerProps;
   const { adminToken, isLoggedIn } = auth;
-  console.log(location);
+  alert(location);
   // NEXT => HANDLE SIGN OUT
   // When a user signs out check if the page requires 'isLoggedIn' and
   // if so simply send the user to '/' (homepage), if there are problems with
   // enforceAuth make enforceUserAuth function
   if (!adminToken) {
     history.push('/adminLogIn');
+  } else if (!isLoggedIn) {
+    console.log('test');
   }
 };
 
@@ -71,8 +77,10 @@ export default (ComposedComponent) => {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
       }
       // Admin login
-      if (hasAccess && !prevProps.auth.hasAccess && !cookie) {
-        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+      if (hasAccess && !prevProps.auth.hasAccess) {
+        if (!cookie) {
+          cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        }
         this.setState({ showSplash: true });
         setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
       }

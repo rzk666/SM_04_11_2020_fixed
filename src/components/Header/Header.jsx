@@ -164,7 +164,7 @@ const MenuItem = ({ name, onClick, notifications }) => {
 };
 
 const UserMenu = ({
-  user, history, close, isOpen, signOut,
+  user, history, close, isOpen, signOut, isLoggedIn,
 }) => {
   const {
     name, profilePicture, score, balance, rank,
@@ -177,6 +177,11 @@ const UserMenu = ({
       x: 0,
     },
   };
+  if (isOpen && !isLoggedIn) {
+    close();
+    history.push('/login');
+    return <> </>;
+  }
   return (
     <>
       <div
@@ -257,6 +262,7 @@ const Header = ({
   return (
     <>
       <UserMenu
+        isLoggedIn={isLoggedIn}
         signOut={() => signOut()}
         isOpen={isMenuOpen}
         close={() => toggleMenu(false)}
