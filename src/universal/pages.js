@@ -3,6 +3,7 @@ const pages = {
   ADMIN_LOGIN: 'adminLogin',
   LOGIN: 'login',
   PROFILE: 'profile',
+  JOIN_LEAGUE: 'joinLeague',
 };
 
 export default pages;

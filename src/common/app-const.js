@@ -21,6 +21,12 @@ const INITIAL_STATE = {
       },
     },
   },
+  activeLeague: {
+    currentLeague: 'Premier League',
+    currentLeagueTable: {
+
+    },
+  },
 };
 
 export default INITIAL_STATE;

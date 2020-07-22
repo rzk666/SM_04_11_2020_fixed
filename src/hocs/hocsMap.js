@@ -7,6 +7,7 @@ const HOCS_MAP = {
   adminLogin: [withAuth, withLayout],
   login: [withAuth, withLayout],
   profile: [withAuth, withLayout],
+  joinLeague: [withAuth, withLayout],
 };
 
 

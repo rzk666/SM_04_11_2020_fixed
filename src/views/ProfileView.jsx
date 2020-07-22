@@ -1,10 +1,12 @@
 import React, { createRef } from 'react';
 // Animations
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 // Components
 import { Input } from 'semantic-ui-react';
 // Styles
 import styles from './ProfileView.module.scss';
+// Util
+import classnames from 'classnames';
 // Images
 import Trophy from '../static/images/profile/ProfileTrophy.svg';
 import ProfileBackground from '../static/images/profile/ProfileBackground.png';
@@ -92,22 +94,33 @@ const StatsHightlight = ({ balance, score, stats }) => {
   );
 };
 
-const ProfileTop = ({ user }) => {
+const ProfileTop = ({ user, searchFocused }) => {
   const {
     name, stats, profilePicture, balance, score,
   } = user;
+  {
   return (
-    <div className={styles.profile_top_container}>
-      <img
+    <div className={classnames(styles.profile_top_container, {[styles.blur_top]: searchFocused})}>
+      <motion.img
+        animate={{ opacity: 1}}
+        initial={{ opacity: 0}}
         src={ProfileBackground}
         alt="ProfileBackground"
         className={styles.profile_background_image}
       />
-      <img
+      <AnimatePresence>
+      {
+        !searchFocused && 
+        <motion.img
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        exit={{ opacity: 0}}
         src={profilePicture}
         alt={`${name}_profile_img`}
         className={styles.profile_image}
       />
+      }
+      </AnimatePresence>
       <span className={styles.user_name}>{name}</span>
       {/* <img
         src="background"
@@ -116,7 +129,7 @@ const ProfileTop = ({ user }) => {
       /> */}
       <StatsHightlight balance={balance} score={score} stats={stats} />
     </div>
-  );
+  )};
 };
 
 const DataViewBar = ({ currentView, updateView }) => {
@@ -271,21 +284,13 @@ const Friend = ({ name, img }) => (
 class FriendsView extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      searchFocused: false,
-    }
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.searchFocused);
   }
 
   componentDidMount() {
-    console.log(this.inputRef);
+      const { onSearchFocus, onSearchBlur } = this.props;
       const input = this.inputRef.current.inputRef.current;
-      input.onfocus = () => this.setState({ searchFocused: true});
-      input.onblur = () => this.setState({ searchFocused: false});;
-      console.log(input);
+      input.onfocus = () => onSearchFocus();
+      input.onblur = () => onSearchBlur();
   }
 
   inputRef = createRef();
@@ -321,7 +326,13 @@ class FriendsView extends React.Component {
   }
 }
 
-const getCurrentView = (currentView, user, handleSearchChange, friendsSearch) => {
+const getCurrentView = (currentView,
+   user,
+    handleSearchChange,
+     friendsSearch,
+      handleSearchBlur,
+       handleSearchFocus,
+       ) => {
   switch (currentView) {
     case 'STATS':
       return <StatsView user={user} />;
@@ -330,6 +341,8 @@ const getCurrentView = (currentView, user, handleSearchChange, friendsSearch) =>
     case 'FRIENDS':
       return (
         <FriendsView
+          onSearchFocus={() => handleSearchFocus()}
+          onSearchBlur={() => handleSearchBlur()}
           handleSearchChange={(value) => handleSearchChange(value)}
           user={user}
           friendsSearch={friendsSearch}
@@ -341,30 +354,48 @@ const getCurrentView = (currentView, user, handleSearchChange, friendsSearch) =>
 };
 
 const DataView = ({
-  friendsSearch, handleSearchChange, user, currentView, updateView,
-}) => (
+  friendsSearch, 
+  handleSearchChange,
+  user,
+  currentView,
+  updateView,
+  handleSearchFocus,
+  handleSearchBlur,
+}) => { console.log(user)
+   return (
   <div className={styles.data_view_container}>
     <DataViewBar
       updateView={(view) => updateView(view)}
       currentView={currentView}
     />
-    {getCurrentView(currentView, user, handleSearchChange, friendsSearch)}
+    {getCurrentView(currentView,
+       user,
+        handleSearchChange,
+         friendsSearch,
+          handleSearchBlur,
+           handleSearchFocus
+           )}
   </div>
-);
+)};
 const ProfileView = ({
   auth,
   currentView,
   updateView,
   handleSearchChange,
   friendsSearch,
+  handleSearchFocus,
+  handleSearchBlur,
+  searchFocused,
 }) => {
   const { user } = auth;
   return (
     <>
       <div className={styles.wrapper}>
-        <ProfileTop user={user} />
-        <div className={styles.bottom_bg}>
+        <ProfileTop searchFocused={searchFocused} user={user} />
+        <div className={classnames(styles.bottom_bg, {[styles.full]: searchFocused})}>
           <DataView
+            handleSearchBlur={() => handleSearchBlur()}
+            handleSearchFocus={() => handleSearchFocus()}
             user={user}
             currentView={currentView}
             updateView={(view) => updateView(view)}

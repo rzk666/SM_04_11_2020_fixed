@@ -300,6 +300,7 @@ const Header = ({
             src={Home}
             alt="HOME_ICON"
             className={styles.home}
+            onClick={() => history.push('/')}
           />
           <div className={styles.menu_icon_container}>
             { notifications !== 0 && <Notifications count={notifications} />}

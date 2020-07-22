@@ -16,20 +16,17 @@ const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.g
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
   const {
-    auth, history, signOut,
+    auth, history, signOut, location,
   } = controllerProps;
-  const { adminToken } = auth;
-  // Handle logout
-  // if (!isLoggedIn) {
-  //   signOut();
-  //   cookies.set('auth', '');
-  //   history.push('/login');
-  //   return;
-  // }
+  const { adminToken, isLoggedIn } = auth;
+  console.log(location);
+  // NEXT => HANDLE SIGN OUT
+  // When a user signs out check if the page requires 'isLoggedIn' and
+  // if so simply send the user to '/' (homepage), if there are problems with
+  // enforceAuth make enforceUserAuth function
   if (!adminToken) {
     history.push('/adminLogIn');
   }
-  // TODO: Add future screens that must have isLoggedIn
 };
 
 export default (ComposedComponent) => {
@@ -64,6 +61,7 @@ export default (ComposedComponent) => {
       // User Signout
       if (!isLoggedIn && prevProps.auth.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        enforceAuth(this.props);
       }
       if (isLoggedIn && !cookie.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
