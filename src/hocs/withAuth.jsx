@@ -20,18 +20,20 @@ const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.g
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
   const {
-    auth, history, signOut, location,
+    auth, history,
   } = controllerProps;
+  const { location } = history;
+  const { pathname } = location;
   const { adminToken, isLoggedIn } = auth;
-  alert(location);
+  const path = pathname.slice(1, pathname.length);
   // NEXT => HANDLE SIGN OUT
   // When a user signs out check if the page requires 'isLoggedIn' and
   // if so simply send the user to '/' (homepage), if there are problems with
   // enforceAuth make enforceUserAuth function
   if (!adminToken) {
-    history.push('/adminLogIn');
-  } else if (!isLoggedIn) {
-    console.log('test');
+    history.push('/adminLogin');
+  } else if (!isLoggedIn && LOCKED_PAGES.includes(path)) {
+    history.push('/');
   }
 };
 
@@ -63,7 +65,10 @@ export default (ComposedComponent) => {
         auth, history, cookies, page,
       } = this.props;
       const { isLoggedIn, hasAccess } = auth;
+      const { location } = history;
+      const { pathname } = location;
       const cookie = cookies.get('auth', '/');
+      console.log(history.location);
       // User Signout
       if (!isLoggedIn && prevProps.auth.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
@@ -81,8 +86,10 @@ export default (ComposedComponent) => {
         if (!cookie) {
           cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
         }
-        this.setState({ showSplash: true });
-        setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
+        if (pathname === '/adminLogin') {
+          this.setState({ showSplash: true });
+          setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
+        }
       }
     }
 

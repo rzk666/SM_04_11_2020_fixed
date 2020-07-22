@@ -158,7 +158,12 @@ const auth = (state = INITIAL_STATE.auth, action) => {
       };
     }
     case SIGNOUT: {
-      return { ...INITIAL_STATE.auth };
+      const { user } = INITIAL_STATE.auth;
+      return {
+        ...state,
+        isLoggedIn: false,
+        user,
+      };
     }
     case AUTH_IS_LOADING: {
       const { isLoading } = action;

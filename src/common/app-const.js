@@ -4,7 +4,6 @@ const INITIAL_STATE = {
     hasError: false,
     error: '',
     isLoggedIn: false,
-    userToken: '',
     adminToken: '',
     user: {
       name: '',
