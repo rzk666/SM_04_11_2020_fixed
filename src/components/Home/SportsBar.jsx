@@ -18,7 +18,7 @@ import BaseballColored from '../../static/images/icons/baseballcolored.svg';
 // ----- Dicts & Consts ----- //
 const SPORTS = ['soccer', 'basketball', 'football', 'baseball', 'hockey'];
 
-// ----- Help Function ----- //
+// ----- Help Functions ----- //
 const getUnderbarX = (sportIndex) => {
   const underbarWidth = window.innerWidth / 5;
   return sportIndex * underbarWidth;

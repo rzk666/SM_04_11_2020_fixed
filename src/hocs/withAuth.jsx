@@ -7,8 +7,12 @@ import {
   refreshAuth,
   resetAuthErrors,
 } from '../redux/models/auth/authActions';
+// Misc
+import pages from '../universal/pages';
 
 // ----- Misc ----- //
+const { PROFILE } = pages;
+const LOCKED_PAGES = [PROFILE];
 const FAKE_HOME_LOADER_TIME = 4500;
 const today = new Date();
 const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
@@ -16,20 +20,21 @@ const COOKIES_EXP_DATE = new Date(today.getFullYear(), today.getMonth(), today.g
 // ----- Help Functions ----- //
 const enforceAuth = (controllerProps) => {
   const {
-    auth, history, signOut,
+    auth, history,
   } = controllerProps;
-  const { adminToken } = auth;
-  // Handle logout
-  // if (!isLoggedIn) {
-  //   signOut();
-  //   cookies.set('auth', '');
-  //   history.push('/login');
-  //   return;
-  // }
+  const { location } = history;
+  const { pathname } = location;
+  const { adminToken, isLoggedIn } = auth;
+  const path = pathname.slice(1, pathname.length);
+  // NEXT => HANDLE SIGN OUT
+  // When a user signs out check if the page requires 'isLoggedIn' and
+  // if so simply send the user to '/' (homepage), if there are problems with
+  // enforceAuth make enforceUserAuth function
   if (!adminToken) {
-    history.push('/adminLogIn');
+    history.push('/adminLogin');
+  } else if (!isLoggedIn && LOCKED_PAGES.includes(path)) {
+    history.push('/');
   }
-  // TODO: Add future screens that must have isLoggedIn
 };
 
 export default (ComposedComponent) => {
@@ -56,12 +61,27 @@ export default (ComposedComponent) => {
     }
 
     componentDidUpdate(prevProps) {
-      const { auth, history, cookies } = this.props;
+      const {
+        auth, history, cookies, page,
+      } = this.props;
       const { isLoggedIn, hasAccess } = auth;
+      const { location } = history;
+      const { pathname } = location;
       const cookie = cookies.get('auth', '/');
+      // Admin login
+      if (hasAccess && !prevProps.auth.hasAccess) {
+        if (!cookie) {
+          cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        }
+        if (pathname === '/adminLogin' || pathname === 'adminLogIn') {
+          this.setState({ showSplash: true });
+          setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
+        }
+      }
       // User Signout
       if (!isLoggedIn && prevProps.auth.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        enforceAuth(this.props);
       }
       if (isLoggedIn && !cookie.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
@@ -69,14 +89,6 @@ export default (ComposedComponent) => {
       // User Login
       if (isLoggedIn && !cookie.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
-      }
-      // Admin login
-      if (hasAccess && !prevProps.auth.hasAccess) {
-        if (!cookie) {
-          cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
-        }
-        this.setState({ showSplash: true });
-        setTimeout(() => history.push('/'), FAKE_HOME_LOADER_TIME);
       }
     }
 

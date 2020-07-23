@@ -164,7 +164,7 @@ const MenuItem = ({ name, onClick, notifications }) => {
 };
 
 const UserMenu = ({
-  user, history, close, isOpen, signOut,
+  user, history, close, isOpen, signOut, isLoggedIn,
 }) => {
   const {
     name, profilePicture, score, balance, rank,
@@ -177,6 +177,11 @@ const UserMenu = ({
       x: 0,
     },
   };
+  if (isOpen && !isLoggedIn) {
+    close();
+    history.push('/login');
+    return <> </>;
+  }
   return (
     <>
       <div
@@ -220,7 +225,7 @@ const UserMenu = ({
           {/* Bottom Part */}
           <div className={styles.user_menu_bottom}>
             <MenuItem name="Home" notifications={0} onClick={() => { history.push('/'); close(); }} />
-            <MenuItem name="Profile" notifications={0} onClick={() => history.push('/profile')} />
+            <MenuItem name="Profile" notifications={0} onClick={() => { history.push('/profile'); close(); }} />
             <MenuItem name="My Leagues" notifications={0} onClick={() => history.push('/profile')} />
             <MenuItem name="Achievements" notifications={1} onClick={() => history.push('/profile')} />
             <MenuItem name="Create League" notifications={0} onClick={() => history.push('/profile')} />
@@ -257,6 +262,7 @@ const Header = ({
   return (
     <>
       <UserMenu
+        isLoggedIn={isLoggedIn}
         signOut={() => signOut()}
         isOpen={isMenuOpen}
         close={() => toggleMenu(false)}
@@ -300,6 +306,7 @@ const Header = ({
             src={Home}
             alt="HOME_ICON"
             className={styles.home}
+            onClick={() => history.push('/')}
           />
           <div className={styles.menu_icon_container}>
             { notifications !== 0 && <Notifications count={notifications} />}

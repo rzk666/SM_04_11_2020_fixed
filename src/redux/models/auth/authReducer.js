@@ -17,21 +17,27 @@ import {
 } from './authTypes';
 
 // ----- Consts & Dicts ----- //
-const USERS = {
+export const USERS = {
   razi: {
     name: 'Razi Elbaz',
     rank: 'pro',
     email: 'razi@beatem.uk',
     score: 1000,
-    achivments: [],
+    achievements: [],
+    friends: ['tal', 'barak', 'lee'],
     balance: 1450,
     profilePicture: Razi,
     notifications: 1,
     stats: {
-      win: 2,
-      lose: 8,
-      totalWins: 1240,
-      leaguesPlayed: 5,
+      score: 1000,
+      accuracyRate: 76.5,
+      friendsPlaying: 65,
+      totalWins: 26,
+      leaguesPlayed: 34,
+      privateLeagues: 3,
+      firstPlace: 15,
+      secondPlace: 7,
+      thirdPlace: 4,
     },
   },
   tal: {
@@ -39,15 +45,21 @@ const USERS = {
     email: 'tal@beatem.uk',
     rank: 'legend',
     score: 1000,
-    achivments: [],
+    achievements: [],
     notifications: 3,
     balance: 980,
     profilePicture: Tal,
+    friends: ['lee', 'barak', 'razi'],
     stats: {
-      win: 2,
-      lose: 8,
-      totalWins: 1240,
-      leaguesPlayed: 5,
+      score: 1000,
+      accuracyRate: 76.5,
+      friendsPlaying: 65,
+      totalWins: 26,
+      leaguesPlayed: 34,
+      privateLeagues: 3,
+      firstPlace: 15,
+      secondPlace: 7,
+      thirdPlace: 4,
     },
   },
   lee: {
@@ -57,13 +69,19 @@ const USERS = {
     score: 1200,
     balance: 455,
     notifications: 4,
-    achivments: [],
+    achievements: [],
     profilePicture: Lee,
+    friends: ['tal', 'barak', 'razi'],
     stats: {
-      win: 3,
-      lose: 5,
-      totalWins: 1540,
-      leaguesPlayed: 5,
+      score: 1200,
+      accuracyRate: 76.5,
+      friendsPlaying: 65,
+      totalWins: 26,
+      leaguesPlayed: 34,
+      privateLeagues: 3,
+      firstPlace: 15,
+      secondPlace: 7,
+      thirdPlace: 4,
     },
   },
   barak: {
@@ -73,13 +91,19 @@ const USERS = {
     score: 1231,
     balance: 1270,
     notifications: 2,
-    achivments: [],
+    achievements: [],
     profilePicture: Barak,
+    friends: ['tal', 'lee', 'razi'],
     stats: {
-      win: 24,
-      lose: 6,
-      totalWins: 3666,
-      leaguesPlayed: 2,
+      accuracyRate: 76.5,
+      friendsPlaying: 65,
+      score: 1231,
+      totalWins: 26,
+      leaguesPlayed: 34,
+      privateLeagues: 3,
+      firstPlace: 15,
+      secondPlace: 7,
+      thirdPlace: 4,
     },
   },
 };
@@ -134,7 +158,12 @@ const auth = (state = INITIAL_STATE.auth, action) => {
       };
     }
     case SIGNOUT: {
-      return { ...INITIAL_STATE.auth };
+      const { user } = INITIAL_STATE.auth;
+      return {
+        ...state,
+        isLoggedIn: false,
+        user,
+      };
     }
     case AUTH_IS_LOADING: {
       const { isLoading } = action;

@@ -1,0 +1,90 @@
+.container{
+    background-image: linear-gradient(to Top, #f6f6f6, #ffffff);
+    height: 13.5vh;
+    width: 43vw;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 0px 0px #49ad6a;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .flash{
+        position: absolute;
+        top: 50%;
+        line-height: 7vh;
+        border-radius: 255px;
+        z-index: 2;
+        height: 20%;
+    }
+    .top_bar_container{
+        box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: white;
+        font-family: Roboto;
+        font-weight: Bold;
+        font-size: 7px;
+        letter-spacing: 0.97px;
+        width: 100%;
+        min-height: 24.5px;
+        display: flex;
+        align-items: center;
+        color: var(--main-solid-green);
+    }
+    .middle_container{
+        width: 100%;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4.5px;
+        .max_prize_container{
+            height: 29px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Roboto;
+            font-weight: bold;
+            p{
+                white-space: nowrap;
+                color: var(--main-solid-dark-grey);
+                font-size: 7px;
+                letter-spacing: 0.35px;
+                margin: 0;
+            }
+            .max_prize{
+                color: var(--alt-solid-yellow);
+                font-size: 17px;
+                letter-spacing: 1.2px;
+            }
+        }
+        .btn_container{
+            display: flex;
+            background-image: var(--main-green-gradient);
+            align-items: center;
+            justify-content: center;
+            width: 63px;
+            height: 22px;
+            border-radius: 10px;
+            color: white;
+            font-family: Roboto;
+            font-weight: bold;
+            font-size: 9px;
+            letter-spacing: 0.9px;
+        }
+    }
+    .footer_container{
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        width: 100%;
+        height: 18.5px;
+        background-color: var(--main-solid-green);
+        color: white;
+        font-size: 7px;
+        font-family: Roboto-Light;
+        display: flex;
+        align-items: center;
+        padding-left: 9.5px;
+    }
+}

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.438" height="33.438" viewBox="0 0 31.438 33.438">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        fill: #e3e3e3;
+        opacity: 0.4;
+      }
+
+      .cls-4 {
+        fill: #f4d03f;
+      }
+
+      .cls-5 {
+        filter: url(#Ellipse_15);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="31.438" height="33.438"/>
+    </clipPath>
+    <filter id="Ellipse_15" x="0" y="0" width="31.438" height="33.438" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur result="blur"/>
+      <feFlood flood-opacity="0.361"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Points_icon" data-name="Points icon" class="cls-2" transform="translate(0 0)">
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <ellipse id="Ellipse_15-2" data-name="Ellipse 15" class="cls-3" cx="15.719" cy="15.719" rx="15.719" ry="15.719" transform="translate(0 0)"/>
+    </g>
+    <path id="Star_icon" data-name="Star icon" class="cls-4" d="M795.139,421.054l1.516,3.24,3.549.441-2.613,2.442.678,3.512-3.13-1.73-3.13,1.73.677-3.512-2.613-2.442,3.549-.441Z" transform="translate(-785.212 -407.299)"/>
+    <path id="Star_icon-2" data-name="Star icon" class="cls-4" d="M795.139,421.054l1.516,3.24,3.549.441-2.613,2.442.678,3.512-3.13-1.73-3.13,1.73.677-3.512-2.613-2.442,3.549-.441Z" transform="translate(-779.421 -415.021)"/>
+    <path id="Star_icon-3" data-name="Star icon" class="cls-4" d="M795.139,421.054l1.516,3.24,3.549.441-2.613,2.442.678,3.512-3.13-1.73-3.13,1.73.677-3.512-2.613-2.442,3.549-.441Z" transform="translate(-773.63 -407.299)"/>
+  </g>
+</svg>

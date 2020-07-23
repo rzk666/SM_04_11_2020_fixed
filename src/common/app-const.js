@@ -4,7 +4,6 @@ const INITIAL_STATE = {
     hasError: false,
     error: '',
     isLoggedIn: false,
-    userToken: '',
     adminToken: '',
     user: {
       name: '',
@@ -19,6 +18,12 @@ const INITIAL_STATE = {
         totalWins: 0,
         leaguesPlayed: 0,
       },
+    },
+  },
+  activeLeague: {
+    currentLeague: 'Premier League',
+    currentLeagueTable: {
+
     },
   },
 };
