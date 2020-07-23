@@ -2,6 +2,7 @@ import React from 'react';
 // Components
 import JoinCard from '../components/JoinLeague/JoinCard';
 import PriceBar from '../components/JoinLeague/PriceBar';
+import JoinFooter from '../components/JoinLeague/JoinFooter';
 // Styles
 import styles from './JoinLeagueView.module.scss';
 // Misc
@@ -28,6 +29,7 @@ const JoinLeagueView = ({
             />
           ))}
         </div>
+        <JoinFooter />
       </div>
     </>
   );
