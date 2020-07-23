@@ -4,13 +4,17 @@ class JoinLeagueController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: 1,
+      currentPrice: '3',
     };
+  }
+
+  handlePriceChange(price) {
+    this.setState({ currentPrice: price });
   }
 
   callbacks() {
     return {
-      // handleSearchChange: this.handleSearchChange.bind(this),
+      handlePriceChange: this.handlePriceChange.bind(this),
     };
   }
 
