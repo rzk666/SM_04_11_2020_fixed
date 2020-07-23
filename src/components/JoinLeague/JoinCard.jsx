@@ -56,7 +56,10 @@ const Footer = ({ createdBy }) => (
   <div className={styles.footer_container}>
     <p>
       Created by
-      <b>{createdBy}</b>
+      <b>
+        {' '}
+        {createdBy}
+      </b>
     </p>
   </div>
 );
@@ -65,6 +68,11 @@ const JoinCard = ({ players, matches, currentPrice }) => {
   const x = 5;
   return (
     <motion.div whileTap={{ scale: 0.9 }} className={styles.container}>
+      <motion.div
+        transition={{ delay: 0.55, duration: 1, ease: 'linear' }}
+        animate={{ x: 160, boxShadow: ['0px 0px 25px 25px rgba(255,255,255,0)', '0px 0px 25px 25px rgba(255,255,255,0.65)', '0px 0px 25px 25px rgba(255,255,255,0)'] }}
+        className={styles.flash}
+      />
       <TopBar players={players} matches={matches} />
       <Middle maxPrice={players * currentPrice} />
       <Footer createdBy={'Beat\'em'} />

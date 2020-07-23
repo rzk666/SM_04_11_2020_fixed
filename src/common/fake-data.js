@@ -3,31 +3,31 @@ export const FAKE_TABLES = [{
   matches: 10,
 },
 {
-  players: 3,
+  players: 5,
   matches: 10,
 },
 {
-  players: 3,
+  players: 7,
   matches: 10,
 },
 {
-  players: 3,
+  players: 10,
   matches: 10,
 },
 {
-  players: 3,
+  players: 15,
   matches: 10,
 },
 {
-  players: 3,
+  players: 20,
   matches: 10,
 },
 {
-  players: 3,
+  players: 30,
   matches: 10,
 },
 {
-  players: 3,
+  players: 50,
   matches: 10,
 }];
 

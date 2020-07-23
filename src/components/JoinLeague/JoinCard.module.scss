@@ -1,12 +1,21 @@
 .container{
     background-image: linear-gradient(to Top, #f6f6f6, #ffffff);
-    height: 88px;
+    height: 13.5vh;
     width: 43vw;
     margin-bottom: 15px;
     border-radius: 10px;
     box-shadow: 0px 5px 0px 0px #49ad6a;
     display: flex;
     flex-direction: column;
+    position: relative;
+    .flash{
+        position: absolute;
+        top: 50%;
+        line-height: 7vh;
+        border-radius: 255px;
+        z-index: 2;
+        height: 20%;
+    }
     .top_bar_container{
         box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
         border-top-left-radius: 10px;
@@ -17,20 +26,19 @@
         font-size: 7px;
         letter-spacing: 0.97px;
         width: 100%;
-        height: 24.5px;
+        min-height: 24.5px;
         display: flex;
         align-items: center;
         color: var(--main-solid-green);
     }
     .middle_container{
         width: 100%;
-        height: 100%;
         display: flex;
+        flex: 1;
         align-items: center;
-        padding: 0 7.5px;
+        justify-content: space-between;
+        padding: 0 4.5px;
         .max_prize_container{
-            margin-right: 7.5px;
-            margin-left: 13.5px;
             height: 29px;
             display: flex;
             flex-direction: column;
@@ -47,7 +55,7 @@
             }
             .max_prize{
                 color: var(--alt-solid-yellow);
-                font-size: 19px;
+                font-size: 17px;
                 letter-spacing: 1.2px;
             }
         }
