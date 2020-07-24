@@ -5,6 +5,9 @@ class JoinLeagueController extends React.Component {
     super(props);
     this.state = {
       currentPrice: '3',
+      isModalOpen: false,
+      currentLeaguePlayers: 0,
+      currentLeagueMatches: 0,
     };
   }
 
@@ -12,9 +15,19 @@ class JoinLeagueController extends React.Component {
     this.setState({ currentPrice: price });
   }
 
+  toggleModal(players, matches) {
+    const { isModalOpen } = this.state;
+    this.setState({
+      isModalOpen: !isModalOpen,
+      currentLeaguePlayers: players,
+      currentLeagueMatches: matches,
+    });
+  }
+
   callbacks() {
     return {
       handlePriceChange: this.handlePriceChange.bind(this),
+      toggleModal: this.toggleModal.bind(this),
     };
   }
 
