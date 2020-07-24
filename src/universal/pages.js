@@ -4,6 +4,7 @@ const pages = {
   LOGIN: 'login',
   PROFILE: 'profile',
   JOIN_LEAGUE: 'joinLeague',
+  WEEKLY_MATCHES: 'weeklyMatches',
 };
 
 export default pages;

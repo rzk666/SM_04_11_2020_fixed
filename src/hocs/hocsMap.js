@@ -8,6 +8,7 @@ const HOCS_MAP = {
   login: [withAuth, withLayout],
   profile: [withAuth, withLayout],
   joinLeague: [withAuth, withLayout],
+  weeklyMatches: [],
 };
 
 

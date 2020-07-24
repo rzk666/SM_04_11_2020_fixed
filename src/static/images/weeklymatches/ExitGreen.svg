@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.941" height="19.056" viewBox="0 0 18.941 19.056">
+    <defs>
+        <clipPath id="prefix__clip-path">
+            <path fill="none" d="M0 0H18.941V19.055H0z"/>
+        </clipPath>
+    </defs>
+    <g id="prefix__Exit_icon" clip-path="url(#prefix__clip-path)" data-name="Exit icon">
+        <path id="prefix__Exit_icon-2" fill="#3f9a5c" stroke="#3f9a5c" stroke-width="3px" d="M.225 1.319a.787.787 0 0 1 0-1.1.787.787 0 0 1 1.1 0L7.9 6.814 14.493.223a.772.772 0 0 1 1.086 1.1L9 7.9l6.58 6.591a.772.772 0 0 1-1.086 1.1L7.9 9l-6.58 6.591a.787.787 0 0 1-1.1 0 .787.787 0 0 1 0-1.1L6.8 7.9z" data-name="Exit icon" opacity="0.52" transform="translate(1.632 1.625)"/>
+    </g>
+</svg>
