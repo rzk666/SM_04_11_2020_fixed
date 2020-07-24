@@ -64,13 +64,13 @@ const Footer = ({ createdBy }) => (
   </div>
 );
 
-const JoinCard = ({ players, matches, currentPrice }) => {
+const JoinCard = ({ onClick, players, matches, currentPrice }) => {
   const x = 5;
   return (
     <motion.div
       whileTap={{ scale: 0.9 }}
       className={styles.container}
-      onClick={() => alert('open container')}
+      onClick={() => onClick()}
     >
       <motion.div
         transition={{ delay: 0.55, duration: 1, ease: 'linear' }}
