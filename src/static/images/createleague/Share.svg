@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.833" height="15.568" viewBox="0 0 15.833 15.568">
+    <defs>
+        <clipPath id="clip-path">
+            <path fill="none" d="M0 0H15.833V15.568H0z"/>
+        </clipPath>
+    </defs>
+    <g id="Share_icon" clip-path="url(#clip-path)" data-name="Share icon">
+        <path id="Share_icon-2" fill="#60d587" d="M20.789 18.221a2.7 2.7 0 0 0-1.963.845l-5.77-2.826a2.468 2.468 0 0 0 0-.8l5.762-2.794a2.708 2.708 0 1 0-.741-1.859 2.73 2.73 0 0 0 .032.4l-5.762 2.794a2.711 2.711 0 1 0-.007 3.726l5.771 2.825a2.71 2.71 0 1 0 2.678-2.306z" data-name="Share icon" transform="translate(-7.667 -8.075)"/>
+    </g>
+</svg>

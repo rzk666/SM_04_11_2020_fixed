@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="177.338" height="177.337" viewBox="0 0 177.338 177.337">
+    <defs>
+        <clipPath id="prefix__clip-path">
+            <path d="M0 0H177.338V177.337H0z" class="prefix__cls-1"/>
+        </clipPath>
+        <clipPath id="prefix__clip-path-2">
+            <path d="M0 0H71.702V71.702H0z" class="prefix__cls-1"/>
+        </clipPath>
+        <clipPath id="prefix__clip-path-3">
+            <path d="M0 0H54.009V54.009H0z" class="prefix__cls-1"/>
+        </clipPath>
+        <linearGradient id="prefix__linear-gradient" x1=".5" x2=".5" y1=".078" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="1" stop-color="#e9e9e9"/>
+        </linearGradient>
+        <filter id="prefix__Ellipse_13" width="177.338" height="177.337" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <style>
+            .prefix__cls-1,.prefix__cls-10{fill:none}.prefix__cls-10{stroke:#fff}.prefix__cls-6,.prefix__cls-7{fill:#c9c9c9}.prefix__cls-7{fill-rule:evenodd}.prefix__cls-10{stroke-linecap:round;stroke-linejoin:round;stroke-width:4px}
+        </style>
+    </defs>
+    <g id="prefix__League_Picture" clip-path="url(#prefix__clip-path)" data-name="League Picture">
+        <g filter="url(#prefix__Ellipse_13)">
+            <g id="prefix__Ellipse_13-2" fill="#fff" stroke="#fff" stroke-width="6px" data-name="Ellipse 13" transform="translate(15 12)">
+                <circle cx="73.669" cy="73.669" r="73.669" stroke="none"/>
+                <circle cx="73.669" cy="73.669" r="76.669" class="prefix__cls-1"/>
+            </g>
+        </g>
+        <circle id="prefix__Ellipse_14" cx="73.669" cy="73.669" r="73.669" fill="url(#prefix__linear-gradient)" data-name="Ellipse 14" transform="translate(15 12)"/>
+        <g id="prefix__Throphy_icon" clip-path="url(#prefix__clip-path-2)" data-name="Throphy icon" transform="translate(53.241 49.898)">
+            <g id="prefix__Handles" transform="translate(0 4.481)">
+                <g id="prefix__Group_40" data-name="Group 40">
+                    <path id="prefix__Path_96" d="M62.739 4c-7.842 0-8.963 6.722-8.963 8.963s0 4.481 2.241 4.481 2.241-2.241 2.241-4.481 1.12-4.481 4.481-4.481 4.481 2.241 4.481 4.481c0 11.2-13.444 17.926-20.166 17.926H24.648c-6.722 0-20.166-6.722-20.166-17.926 0-2.241 1.12-4.481 4.481-4.481s4.481 2.241 4.481 4.481 0 4.481 2.241 4.481 2.241-2.241 2.241-4.481S16.805 4 8.963 4A8.837 8.837 0 0 0 0 12.963C0 26.407 15.685 35.37 24.648 35.37h22.406c8.963 0 24.648-8.963 24.648-22.407A8.837 8.837 0 0 0 62.739 4z" class="prefix__cls-6" data-name="Path 96" transform="translate(0 -4)"/>
+                </g>
+            </g>
+            <g id="prefix__Cup" transform="translate(15.685)">
+                <g id="prefix__Group_41" data-name="Group 41">
+                    <path id="prefix__Path_97" d="M54.332 4.481c0-2.242 0-4.481-2.241-4.481h-35.85C14 0 14 2.24 14 4.481c0 38.092 15.685 33.61 15.685 38.092v4.481c0 4.481-6.722 2.241-6.722 6.722H45.37c0-4.481-6.722-2.241-6.722-6.722v-4.481c0-4.481 15.684 0 15.684-38.092z" class="prefix__cls-6" data-name="Path 97" transform="translate(-14)"/>
+                </g>
+            </g>
+            <g id="prefix__Stand" transform="translate(13.444 58.258)">
+                <g id="prefix__Group_42" data-name="Group 42">
+                    <path id="prefix__Path_98" d="M54.573 52H14.241A2.241 2.241 0 0 0 12 54.241V63.2a2.242 2.242 0 0 0 2.241 2.241h40.332a2.242 2.242 0 0 0 2.241-2.241v-8.959A2.241 2.241 0 0 0 54.573 52z" class="prefix__cls-6" data-name="Path 98" transform="translate(-12 -52)"/>
+                </g>
+            </g>
+            <g id="prefix__Plate" transform="translate(24.648 62.739)">
+                <g id="prefix__Group_43" data-name="Group 43">
+                    <path id="prefix__Rectangle_58" d="M0 0H22.407V4.481H0z" class="prefix__cls-6" data-name="Rectangle 58"/>
+                </g>
+            </g>
+            <g id="prefix__Base_1_" transform="translate(17.926 42.573)">
+                <g id="prefix__Group_44" data-name="Group 44">
+                    <path id="prefix__Path_99" d="M45.129 49.2H22.722S16 49.2 16 53.685h35.851c0-4.485-6.722-4.485-6.722-4.485zm-15.685-6.719h8.963a2.241 2.241 0 0 0 0-4.481h-8.963a2.241 2.241 0 0 0 0 4.481z" class="prefix__cls-7" data-name="Path 99" transform="translate(-16 -38)"/>
+                </g>
+            </g>
+            <g id="prefix___x31_" transform="translate(29.129 6.721)">
+                <g id="prefix__Group_45" data-name="Group 45">
+                    <path id="prefix__Path_100" d="M37.2 21.684h-2.237V6h-2.241a2.227 2.227 0 0 0-1.938 1.137l-4.145 4.146a2.151 2.151 0 0 0 3.042 3.042l.8-.8v8.162h-2.24a2.241 2.241 0 0 0 0 4.481H37.2a2.241 2.241 0 0 0 0-4.481z" class="prefix__cls-7" data-name="Path 100" transform="translate(-26 -5.999)"/>
+                </g>
+            </g>
+        </g>
+        <g id="prefix__Plus_icon" clip-path="url(#prefix__clip-path-3)" data-name="Plus icon" transform="translate(109.694 10.411)">
+            <circle id="prefix__Ellipse_7" cx="25.505" cy="25.505" r="25.505" fill="#4fb16f" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3px" data-name="Ellipse 7" transform="translate(1.5 1.5)"/>
+            <path id="prefix__Line_7" d="M0 0L0 20.404" class="prefix__cls-10" data-name="Line 7" transform="translate(27.005 16.803)"/>
+            <path id="prefix__Line_8" d="M0 0L20.404 0" class="prefix__cls-10" data-name="Line 8" transform="translate(16.803 27.005)"/>
+        </g>
+    </g>
+</svg>

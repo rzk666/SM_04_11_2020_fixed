@@ -121,6 +121,19 @@
         text-align: center;
         color: #ffffff;
     }
+    // ----- Inputs ----- //
+    div[class*="input_type_one"]{
+        input{
+            color: white!important;
+            &::placeholder{
+                color: white;
+                &:focus{
+                    color: white;
+                }
+            }
+        }
+    }
+
     // ----- Modals ----- //
 
     // Join League Modal

@@ -8,6 +8,7 @@ class HomeController extends React.Component {
     this.state = {
       showSplash: true,
       leaguesSearch: '',
+      creatingLeague: false,
     };
   }
 
@@ -19,10 +20,16 @@ class HomeController extends React.Component {
     this.setState({ leaguesSearch });
   }
 
+  toggleLeagueCreation() {
+    const { creatingLeague } = this.state;
+    this.setState({ creatingLeague: !creatingLeague });
+  }
+
   callbacks() {
     return {
       // login: this.login.bind(this),
       handleSearchChange: this.handleSearchChange.bind(this),
+      toggleLeagueCreation: this.toggleLeagueCreation.bind(this),
     };
   }
 
