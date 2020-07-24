@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8.232" height="7.829" viewBox="0 0 8.232 7.829">
+    <defs>
+        <clipPath id="clip-path">
+            <path fill="none" d="M0 0H8.232V7.829H0z"/>
+        </clipPath>
+    </defs>
+    <g id="Star_icon" clip-path="url(#clip-path)" data-name="Star icon">
+        <path id="Star_icon-2" fill="#95ecb2" d="M794.189 421.054l1.232 2.633 2.884.358-2.123 1.984.551 2.854-2.544-1.406-2.544 1.406.551-2.854-2.123-1.984 2.884-.358z" data-name="Star icon" transform="translate(-790.073 -421.054)"/>
+    </g>
+</svg>

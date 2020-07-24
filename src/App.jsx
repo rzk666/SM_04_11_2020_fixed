@@ -7,13 +7,14 @@ import AdminLogin from './pages/AdminLogin';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import JoinLeague from './pages/JoinLeague';
+import WeeklyMatches from './pages/WeeklyMatches';
 // Universal
 import pages from './universal/pages';
 // Global Styles
 import './global.scss';
 
 const {
-  HOME, ADMIN_LOGIN, LOGIN, PROFILE, JOIN_LEAGUE,
+  HOME, ADMIN_LOGIN, LOGIN, PROFILE, JOIN_LEAGUE, WEEKLY_MATCHES,
 } = pages;
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path={`/${ADMIN_LOGIN}/`} exact render={(props) => (<AdminLogin {...props} page={ADMIN_LOGIN} />)} />
         <Route path={`/${PROFILE}/`} exact render={(props) => (<Profile {...props} page={PROFILE} />)} />
         <Route path={`/${JOIN_LEAGUE}/`} exact render={(props) => (<JoinLeague {...props} page={JOIN_LEAGUE} />)} />
+        <Route path={`/${WEEKLY_MATCHES}/`} exact render={(props) => (<WeeklyMatches {...props} page={WEEKLY_MATCHES} />)} />
       </Switch>
     </Router>
   );
