@@ -2,19 +2,20 @@
 import React from 'react';
 
 class TableController extends React.Component {
-  adminLogin(data) {
-    const { adminLogin } = this.props;
-    // Failed details
-    if (!data.email || !data.password) {
-      alert('Fill Details');
-    } else {
-      adminLogin(data);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentView: 'LEADERBOARD',
+    };
+  }
+
+  changeView(view) {
+    this.setState({ currentView: view });
   }
 
   callbacks() {
     return {
-      adminLogin: this.adminLogin.bind(this),
+      changeView: this.changeView.bind(this),
     };
   }
 

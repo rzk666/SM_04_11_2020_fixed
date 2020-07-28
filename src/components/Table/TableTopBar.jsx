@@ -1,22 +1,22 @@
 import React from 'react';
 // Styles
-import styles from './PriceBar.module.scss';
+import styles from './TableTopBar.module.scss';
 // Animations
 import { motion } from 'framer-motion';
 // Utils
 import classnames from 'classnames';
 
 // ----- Dicts & Consts ----- //
-const PRICES = ['3', '5', '10', '15', '20', '30', '50', '100'];
+const PRICES = ['LEADERBOARD', 'MY BETS', 'LIVE STATUS', 'REAL TABLE'];
 
 // ----- Help Functions ----- //
 const getUnderbarX = (priceIndex) => {
-  const underbarWidth = window.innerWidth / 5;
+  const underbarWidth = window.innerWidth / 4;
   return priceIndex * underbarWidth;
 };
 
-const PriceBar = ({ currentPrice, changePrice }) => {
-  const priceIndex = PRICES.indexOf(currentPrice);
+const PriceBar = ({ currentView, changeView }) => {
+  const priceIndex = PRICES.indexOf(currentView);
   const animateUnderbar = {
     x: getUnderbarX(priceIndex),
     backgroundColor: '#57bb78',
@@ -31,8 +31,8 @@ const PriceBar = ({ currentPrice, changePrice }) => {
       {PRICES.map((price, i) => (
         <div
           key={`${price}_${i}`}
-          className={classnames(styles.price_container, { [styles.active]: price === currentPrice })}
-          onClick={() => changePrice(price)}
+          className={classnames(styles.price_container, { [styles.active]: price === currentView })}
+          onClick={() => changeView(price)}
         >
           {`${price}€`}
         </div>

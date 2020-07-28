@@ -1,17 +1,21 @@
 import React from 'react';
 // Components
+import TableTopBar from '../components/Table/TableTopBar';
 // Styles
-import styles from './Table.module.scss';
+import styles from './TableView.module.scss';
 // Images
 
 const TableView = ({
-  adminLogin,
-  showSplash,
+  currentView,
+  changeView,
 }) => {
   const x = 5;
   return (
-    <div>
-      TABLE
+    <div className={styles.table_container}>
+      <TableTopBar
+        currentView={currentView}
+        changeView={(view) => changeView(view)}
+      />
     </div>
   );
 };

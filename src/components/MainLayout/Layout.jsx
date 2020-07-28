@@ -12,10 +12,10 @@ import pages from '../../universal/pages';
 
 // ----- Consts & Dicts ----- //
 const {
-  HOME, ADMIN_LOGIN, LOGIN, PROFILE, JOIN_LEAGUE,
+  HOME, ADMIN_LOGIN, LOGIN, PROFILE, JOIN_LEAGUE, TABLE,
 } = pages;
-const WITH_HEADER = [HOME, PROFILE, JOIN_LEAGUE];
-const WITH_DISSOLVE = [HOME, LOGIN, PROFILE, JOIN_LEAGUE];
+const WITH_HEADER = [HOME, PROFILE, JOIN_LEAGUE, TABLE];
+const WITH_DISSOLVE = [HOME, LOGIN, PROFILE, JOIN_LEAGUE, TABLE];
 
 const Layout = (props) => {
   const { children, page } = props;
