@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import {
   login,
 } from '../redux/models/auth/authActions';
+import {
+  updateActiveTable,
+} from '../redux/models/activeTable/activeTableActions';
 // Hocs
 import page from '../hocs/page';
 // Controller & View
@@ -19,10 +22,13 @@ const Home = (props) => <HomeController {...props} View={HomeView} />;
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  activeTable: state.activeTable,
+  availableMatches: state.availableMatches,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login: (data) => dispatch(login(data)),
+  updateActiveTable: (data, user) => dispatch(updateActiveTable(data, user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((Home), pages.HOME));

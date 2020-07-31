@@ -25,6 +25,18 @@ import styles from './CreateLeague.module.scss';
 // Utils
 import classnames from 'classnames';
 import { useHistory } from 'react-router-dom';
+
+// Help Functions
+const getLeaguesArray = (matches) => {
+  const leagues = [];
+  matches.map((match) => {
+    const { league } = match;
+    if (!leagues.includes(league)) {
+      leagues.push(league);
+    }
+  });
+};
+
 // Misc
 const FAKE_USERS = [{
   name: 'Lionel Messi',
@@ -157,7 +169,7 @@ const FriendRow = ({ invited, user }) => {
   );
 };
 
-const StageFour = () => {
+const StageFour = ({ handleTableCreation }) => {
   const history = useHistory();
   return (
     <div className={styles.stage_four_container}>
@@ -192,7 +204,12 @@ const StageFour = () => {
         <FriendRow invited={false} user={FAKE_USERS[2]} />
         <FriendRow invited={false} user={FAKE_USERS[3]} />
       </div>
-      <motion.div whileTap={{ scale: 0.9 }} onClick={() => history.push('/table')} style={{ marginTop: 'auto', marginBottom: '15px' }} className={styles.next_btn}>
+      <motion.div
+        whileTap={{ scale: 0.9 }}
+        onClick={() => handleTableCreation()}
+        style={{ marginTop: 'auto', marginBottom: '15px' }}
+        className={styles.next_btn}
+      >
         CREATE LEAGUE
         <img src={Soccer} alt="Go to table" style={{ width: '20px' }} />
       </motion.div>
@@ -219,7 +236,39 @@ class CreateLeague extends Component {
       stage: 1,
       leagueName: '',
       leagueDescription: '',
+      tableType: 'a',
+      selectedMatches: [],
+      betSize: 0,
+      players: 0,
     };
+  }
+
+  handleTableCreation() {
+    const {
+      leagueName,
+      leagueDescription,
+      tableType,
+      selectedMatches,
+      betSize,
+      players,
+    } = this.state;
+    const {
+      auth, updateActiveTable, history, availableMatches,
+    } = this.props;
+    const { matches } = availableMatches;
+    const { user } = auth;
+    const leagues = getLeaguesArray(matches);
+    updateActiveTable({
+      players,
+      leagues,
+      prizePool: betSize * players,
+      name: leagueName,
+      description: leagueDescription,
+      type: tableType,
+      matches: selectedMatches,
+
+    }, user);
+    history.push('/table');
   }
 
   changeLeagueName(leagueName) {
@@ -249,7 +298,7 @@ class CreateLeague extends Component {
         currentStage = <StageThree updateStage={(stage) => this.updateStage(stage)} />;
         break;
       case 4:
-        currentStage = <StageFour />;
+        currentStage = <StageFour {...this.state} />;
         break;
       default:
         break;

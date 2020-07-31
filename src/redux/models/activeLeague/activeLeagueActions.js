@@ -8,7 +8,7 @@ import {
   AUTH_ADMIN,
   SIGNOUT,
   LOGIN,
-} from './authTypes';
+} from '../auth/authTypes';
 // API
 import { API } from '../../api';
 // Additional Imports
