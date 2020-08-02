@@ -6,11 +6,28 @@ import { motion } from 'framer-motion';
 // Utils
 import classnames from 'classnames';
 
-const Leaderboard = ({ props }) => {
-  const x = 5;
+const Leaderboard = ({ activeTable }) => {
+  // const {
+  //   name,
+  //   description,
+  //   players,
+  //   prizePool,
+  //   leagues,
+  //   type,
+  //   matches,
+  //   users,
+  // } = activeTable;
+  console.log(activeTable);
   return (
     <div className={styles.container}>
-      LEADER
+      {/* {name}
+      {description}
+      {players}
+      {prizePool}
+      {leagues.map((league) => league)}
+      {type}
+      {matches}
+      {users.map((user) => user.name)} */}
     </div>
   );
 };

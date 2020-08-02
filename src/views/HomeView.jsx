@@ -103,9 +103,10 @@ const HomeView = ({
   history,
   auth,
   availableMatches,
+  updateActiveTable,
 }) => {
   const controls = useAnimation();
-  const { user } = auth;
+  const { user, isLoggedIn } = auth;
   if (!creatingLeague) {
     controls.start({
       opacity: [0, 1],
@@ -115,7 +116,14 @@ const HomeView = ({
   return (
     <div className={styles.wrapper}>
       <SportsBar currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
-      { creatingLeague ? <CreateLeague availableMatches={availableMatches} user={user} />
+      { creatingLeague ? (
+        <CreateLeague
+          updateActiveTable={(data) => updateActiveTable(data, user)}
+          history={history}
+          availableMatches={availableMatches}
+          user={user}
+        />
+      )
         : (
           <>
             <AnimatePresence initial={false}>
@@ -136,7 +144,7 @@ const HomeView = ({
                   JOIN OR CREATE YOUR OWN LEAGUES!
                 </div>
                 <div className={styles.buttons_container}>
-                  <Card onClick={() => toggleLeagueCreation()} currentSport={currentSport} type="create" />
+                  <Card onClick={() => { !isLoggedIn ? history.push('/login') : toggleLeagueCreation(); }} currentSport={currentSport} type="create" />
                   <Card onClick={() => history.push(JOIN_LEAGUE)} currentSport={currentSport} type="join" />
                 </div>
               </div>

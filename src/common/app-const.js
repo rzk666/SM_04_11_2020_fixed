@@ -27,6 +27,8 @@ const INITIAL_STATE = {
         totalWins: 0,
         leaguesPlayed: 0,
       },
+      currentScore: 0,
+      bets: [],
     },
   },
   availableMatches: {

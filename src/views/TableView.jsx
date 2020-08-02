@@ -12,20 +12,21 @@ import styles from './TableView.module.scss';
 const TableView = ({
   currentView,
   changeView,
+  activeTable,
 }) => {
   let View;
   switch (currentView) {
     case 'LEADERBOARD':
-      View = <Leaderboard />;
+      View = <Leaderboard activeTable={activeTable} />;
       break;
     case 'MY BETS':
-      View = <Bets />;
+      View = <Bets activeTable={activeTable} />;
       break;
     case 'LIVE STATUS':
-      View = <LiveStatus />;
+      View = <LiveStatus activeTable={activeTable} />;
       break;
     case 'REAL TABLE':
-      View = <RealTable />;
+      View = <RealTable activeTable={activeTable} />;
       break;
     default:
       break;

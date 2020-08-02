@@ -15,7 +15,8 @@ import pages from '../universal/pages';
 const Table = (props) => <TableController {...props} View={TableView} />;
 
 const mapStateToProps = (state) => ({
-  // auth: state.auth,
+  auth: state.auth,
+  activeTable: state.activeTable,
 });
 
 const mapDispatchToProps = (dispatch) => ({

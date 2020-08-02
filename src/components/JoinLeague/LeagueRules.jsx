@@ -27,13 +27,13 @@ const Rule = ({
   </div>
 );
 
-const LeagueRules = () => {
+const LeagueRules = ({ onClick }) => {
   const [active, setActive] = useState(0);
   return (
     <div className={styles.wrapper}>
-      <Rule isActive={active === 0} onClick={() => setActive(0)} img={FirstPlace} title="THERE CAN ONLY BE ONE" subText="First Place: 100% Winning Prize" />
-      <Rule isActive={active === 1} onClick={() => setActive(1)} img={SecondPlace} title="SPLIT THE FORTUNE" subText="First Place: 70%, Second Place: 30%" />
-      <Rule isActive={active === 2} onClick={() => setActive(2)} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%, Third Place: 20%" />
+      <Rule isActive={active === 0} onClick={() => { onClick && onClick('a'); setActive(0); }} img={FirstPlace} title="THERE CAN ONLY BE ONE" subText="First Place: 100% Winning Prize" />
+      <Rule isActive={active === 1} onClick={() => { onClick && onClick('b'); setActive(1); }} img={SecondPlace} title="SPLIT THE FORTUNE" subText="First Place: 70%, Second Place: 30%" />
+      <Rule isActive={active === 2} onClick={() => { onClick && onClick('c'); setActive(2); }} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%, Third Place: 20%" />
     </div>
   );
 };

@@ -17,11 +17,13 @@ import styles from './JoinLeagueView.module.scss';
 import { useHistory } from 'react-router-dom';
 // Misc
 import { FAKE_TABLES } from '../common/fake-data';
+import { useState } from 'react';
 
 const JoinModalContent = ({
-  prize, close, matches, players,
+  prize, close, matches, players, joinTable,
 }) => {
   const history = useHistory();
+  const [type, setType] = useState('a');
   return (
     <div className="modal_wrapper">
       <div className="top_row">
@@ -47,12 +49,9 @@ const JoinModalContent = ({
           </div>
         </div>
       </div>
-      <LeagueRules />
+      <LeagueRules onClick={(type) => setType(type)} />
       <div
-        onClick={() => history.push({
-          pathname: '/table',
-          state: { players, matches, prize },
-        })}
+        onClick={() => joinTable(type)}
         className="bottom"
       >
         JOIN LEAGUE
@@ -68,6 +67,7 @@ const JoinLeagueView = ({
   currentLeagueMatches,
   toggleModal,
   isModalOpen,
+  joinTable,
 }) => {
   const x = 5;
   return (
@@ -75,6 +75,7 @@ const JoinLeagueView = ({
       <div className={styles.wrapper}>
         <Modal className="join_modal" open={isModalOpen}>
           <JoinModalContent
+            joinTable={(type) => joinTable(type)}
             prize={currentPrice * currentLeaguePlayers}
             matches={currentLeagueMatches}
             players={currentLeaguePlayers}

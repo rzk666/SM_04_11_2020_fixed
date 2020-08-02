@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable max-len */
 import React, { Component, useState } from 'react';
 // Components
@@ -7,7 +8,6 @@ import OddsRow from '../common/OddsRow';
 // Images
 import LeagueAvatar from '../../static/images/createleague/LeagueAvatar.svg';
 import Share from '../../static/images/createleague/Share.svg';
-import Soccer from '../../static/images/icons/soccer.svg';
 import Link from '../../static/images/createleague/Link.svg';
 import Copy from '../../static/images/createleague/Copy.svg';
 import PremiereLeague from '../../static/images/createleague/PremiereLeague.png';
@@ -51,6 +51,7 @@ const getLeaguesArray = (matches) => {
       leagues.push(league);
     }
   });
+  return leagues;
 };
 
 // Misc
@@ -71,15 +72,40 @@ const FAKE_USERS = [{
   profilePicture: Buffon,
 }];
 
-const StageOne = ({ updateStage, stage }) => {
+const StageOne = ({
+  players,
+  leagueDescription,
+  leagueName,
+  betSize,
+  updateStage,
+  stage,
+  changeLeagueName,
+  changeLeagueDescription,
+  changeLeagueBet,
+  changeLeaguePlayers,
+}) => {
   const [weeklyActive, setActive] = useState(true);
   return (
     <div className={styles.stage_one_container}>
       <div className={styles.top_bg}>
         <div className={styles.bg_content_wrapper}>
           <div className={styles.title}>CREATE NEW LEAGUE</div>
-          <Input transparent className={styles.input_type_one} fluid placeholder="Choose a name for your league" />
-          <Input transparent className={styles.input_type_one} fluid placeholder="Write a description for your league" />
+          <Input
+            value={leagueName}
+            onChange={(e, data) => changeLeagueName(data.value)}
+            transparent
+            className={styles.input_type_one}
+            fluid
+            placeholder="Choose a name for your league"
+          />
+          <Input
+            value={leagueDescription}
+            onChange={(e, data) => changeLeagueDescription(data.value)}
+            transparent
+            className={styles.input_type_one}
+            fluid
+            placeholder="Write a description for your league"
+          />
         </div>
         <img src={LeagueAvatar} alt="Avatar" className={styles.league_avatar} />
       </div>
@@ -87,11 +113,26 @@ const StageOne = ({ updateStage, stage }) => {
         <div className={styles.first_details_row}>
           <div className={styles.titled_input} style={{ marginRight: '12.5px' }}>
             <p>League Bet</p>
-            <Input className={styles.input_type_two} icon="euro green large" iconPosition="left" fluid />
+            <Input
+              value={betSize || null}
+              onChange={(e, data) => parseInt(changeLeagueBet(data.value))}
+              className={styles.input_type_two}
+              icon="euro green large"
+              iconPosition="left"
+              fluid
+            />
           </div>
           <div className={classnames(styles.titled_input, styles.small_font)}>
             <p>Max Players</p>
-            <Input icon="users" iconPosition="left" className={classnames(styles.input_type_two, { [styles.empty]: true })} fluid placeholder="UNLIMITED" />
+            <Input
+              value={players || null}
+              onChange={(e, data) => parseInt(changeLeaguePlayers(data.value))}
+              icon="users"
+              iconPosition="left"
+              className={classnames(styles.input_type_two, { [styles.empty]: !players })}
+              fluid
+              placeholder="UNLIMITED"
+            />
           </div>
         </div>
         <div className={styles.unlimited} onClick={() => alert('unlimited')}>
@@ -119,7 +160,7 @@ const StageOne = ({ updateStage, stage }) => {
   );
 };
 
-const StageTwo = ({ stage, updateStage }) => {
+const StageTwo = ({ changeLeagueType, stage, updateStage }) => {
   const x = 5;
   return (
     <div className={styles.stage_two_container}>
@@ -127,7 +168,7 @@ const StageTwo = ({ stage, updateStage }) => {
         SELECT REWARDS
       </div>
       <div style={{ height: '315px', width: '100%' }}>
-        <LeagueRules />
+        <LeagueRules onClick={(type) => changeLeagueType(type)} />
       </div>
       <Bottom
         stage={stage}
@@ -270,7 +311,7 @@ const StageThree = ({
       />
       <Bottom
         stage={stage}
-        onClick={() => updateStage({ stageNumber: stage.stageNumber + 1, text: 'INVITE FRIENDS', img: RightArrowWhite })}
+        onClick={() => updateStage({ stageNumber: stage.stageNumber + 1, text: 'CREATE LEAGUE', img: RightArrowWhite })}
       />
     </div>
   );
@@ -310,7 +351,7 @@ const FriendRow = ({ invited, user }) => {
   );
 };
 
-const StageFour = ({ handleTableCreation }) => {
+const StageFour = ({ handleTableCreation, stage }) => {
   const history = useHistory();
   return (
     <div className={styles.stage_four_container}>
@@ -346,15 +387,10 @@ const StageFour = ({ handleTableCreation }) => {
         <FriendRow invited={false} user={FAKE_USERS[2]} />
         <FriendRow invited={false} user={FAKE_USERS[3]} />
       </div>
-      <motion.div
-        whileTap={{ scale: 0.9 }}
+      <Bottom
+        stage={stage}
         onClick={() => handleTableCreation()}
-        style={{ marginTop: 'auto', marginBottom: '15px' }}
-        className={styles.next_btn}
-      >
-        CREATE LEAGUE
-        <img src={Soccer} alt="Go to table" style={{ width: '20px' }} />
-      </motion.div>
+      />
     </div>
   );
 };
@@ -386,7 +422,7 @@ class CreateLeague extends Component {
       selectedMatches: [],
       betSize: 0,
       players: 0,
-      activeLeague: 'Champions League',
+      activeLeague: '',
     };
   }
 
@@ -400,10 +436,9 @@ class CreateLeague extends Component {
       players,
     } = this.state;
     const {
-      auth, updateActiveTable, history, availableMatches,
+      user, history, availableMatches, updateActiveTable,
     } = this.props;
     const { matches } = availableMatches;
-    const { user } = auth;
     const leagues = getLeaguesArray(matches);
     updateActiveTable({
       players,
@@ -413,7 +448,6 @@ class CreateLeague extends Component {
       description: leagueDescription,
       type: tableType,
       matches: selectedMatches,
-
     }, user);
     history.push('/table');
   }
@@ -427,13 +461,8 @@ class CreateLeague extends Component {
     }
   }
 
-  changeActiveLeague(leagueName) {
-    const { activeLeague } = this.state;
-    if (activeLeague === leagueName) {
-      this.setState({ activeLeague: '' });
-    } else {
-      this.setState({ activeLeague: leagueName });
-    }
+  changeLeagueBet(betSize) {
+    this.setState({ betSize });
   }
 
   changeLeagueName(leagueName) {
@@ -442,6 +471,23 @@ class CreateLeague extends Component {
 
   changeLeagueDescription(leagueDescription) {
     this.setState({ leagueDescription });
+  }
+
+  changeLeaguePlayers(players) {
+    this.setState({ players });
+  }
+
+  changeLeagueType(tableType) {
+    this.setState({ tableType });
+  }
+
+  changeActiveLeague(leagueName) {
+    const { activeLeague } = this.state;
+    if (activeLeague === leagueName) {
+      this.setState({ activeLeague: '' });
+    } else {
+      this.setState({ activeLeague: leagueName });
+    }
   }
 
   updateStage(stage) {
@@ -458,7 +504,11 @@ class CreateLeague extends Component {
       case 1:
         currentStage = (
           <StageOne
-            stage={stage}
+            {...this.state}
+            changeLeagueBet={(bet) => this.changeLeagueBet(bet)}
+            changeLeaguePlayers={(players) => this.changeLeaguePlayers(players)}
+            changeLeagueName={(name) => this.changeLeagueName(name)}
+            changeLeagueDescription={(description) => this.changeLeagueDescription(description)}
             updateStage={(stage) => this.updateStage(stage)}
           />
         );
@@ -466,7 +516,8 @@ class CreateLeague extends Component {
       case 2:
         currentStage = (
           <StageTwo
-            stage={stage}
+            changeLeagueType={(type) => this.changeLeagueType(type)}
+            {...this.state}
             updateStage={(stage) => this.updateStage(stage)}
           />
         );
@@ -485,7 +536,7 @@ class CreateLeague extends Component {
         );
         break;
       case 4:
-        currentStage = <StageFour {...this.state} />;
+        currentStage = <StageFour handleTableCreation={this.handleTableCreation()} {...this.state} />;
         break;
       default:
         break;
