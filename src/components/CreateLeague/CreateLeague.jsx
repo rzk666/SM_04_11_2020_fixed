@@ -3,6 +3,7 @@ import React, { Component, useState } from 'react';
 // Components
 import { Input } from 'semantic-ui-react';
 import LeagueRules from '../JoinLeague/LeagueRules';
+import OddsRow from '../common/OddsRow';
 // Images
 import LeagueAvatar from '../../static/images/createleague/LeagueAvatar.svg';
 import Share from '../../static/images/createleague/Share.svg';
@@ -11,6 +12,7 @@ import Link from '../../static/images/createleague/Link.svg';
 import Copy from '../../static/images/createleague/Copy.svg';
 import PremiereLeague from '../../static/images/createleague/PremiereLeague.png';
 import LaLiga from '../../static/images/createleague/LaLiga.png';
+import Champions from '../../static/images/leagues/champions.png';
 import RightArrowWhite from '../../static/images/icons/RightArrowWhite.svg';
 import DownArrow from '../../static/images/icons/DownArrow.svg';
 // MISC IMAGES
@@ -18,15 +20,29 @@ import Messi from '../../static/images/profiles/Messi.png';
 import Neymar from '../../static/images/profiles/Neymar.png';
 import Ronaldo from '../../static/images/profiles/Ronaldo.png';
 import Buffon from '../../static/images/profiles/Buffon.png';
+// TEAM IMAGES
+import Sevillia from '../../static/images/teams/Sevillia.png';
 // Animations
 import { motion } from 'framer-motion';
 // Styles
 import styles from './CreateLeague.module.scss';
 // Utils
+import { getShortDayName } from '../../common/libs';
 import classnames from 'classnames';
 import { useHistory } from 'react-router-dom';
 
 // Help Functions
+const getLeagueMatches = (matches, league) => matches.filter((match) => match.league === league);
+
+const getTeamImage = (team) => {
+  switch (team) {
+    case 'test':
+      return '';
+    default:
+      return Sevillia;
+  }
+};
+
 const getLeaguesArray = (matches) => {
   const leagues = [];
   matches.map((match) => {
@@ -55,7 +71,7 @@ const FAKE_USERS = [{
   profilePicture: Buffon,
 }];
 
-const StageOne = ({ updateStage }) => {
+const StageOne = ({ updateStage, stage }) => {
   const [weeklyActive, setActive] = useState(true);
   return (
     <div className={styles.stage_one_container}>
@@ -90,16 +106,20 @@ const StageOne = ({ updateStage }) => {
             SEASON
           </div>
         </div>
-        <motion.div whileTap={{ scale: 0.9 }} onClick={() => updateStage(2)} className={styles.next_btn}>
-          SELECT REWARDS
-          <img src={RightArrowWhite} alt="Next" />
-        </motion.div>
       </div>
+      <Bottom
+        stage={stage}
+        onClick={() => updateStage({
+          stageNumber: stage.stageNumber + 1,
+          text: 'SELECT MATCHES',
+          img: RightArrowWhite,
+        })}
+      />
     </div>
   );
 };
 
-const StageTwo = ({ updateStage }) => {
+const StageTwo = ({ stage, updateStage }) => {
   const x = 5;
   return (
     <div className={styles.stage_two_container}>
@@ -109,29 +129,110 @@ const StageTwo = ({ updateStage }) => {
       <div style={{ height: '315px', width: '100%' }}>
         <LeagueRules />
       </div>
-      <motion.div whileTap={{ scale: 0.9 }} onClick={() => updateStage(3)} style={{ marginTop: 'auto', marginBottom: '15px' }} className={styles.next_btn}>
-        SELECT MATCHES
-        <img src={RightArrowWhite} alt="Next" />
-      </motion.div>
+      <Bottom
+        stage={stage}
+        onClick={() => updateStage({ stageNumber: stage.stageNumber + 1, text: 'INVITE FRIENDS', img: RightArrowWhite })}
+      />
     </div>
   );
 };
 
-const LeagueRow = ({ name, img }) => (
-  <>
-    <div className={styles.league_row_container}>
-      <img src={img} alt="League Row Img" style={{ marginRight: '15px', width: '20px' }} />
+const Match = ({ onPick, isActive, match }) => {
+  const {
+    homeTeam,
+    awayTeam,
+    homeOdds,
+    awayOdds,
+    drawOdds,
+    startDate,
+  } = match;
+  // Team Component
+  const Team = ({ name }) => (
+    <div className={styles.team_container}>
+      <img src={getTeamImage(name)} alt={`${name}_img`} className={styles.team_image} />
       {name}
-      <img src={DownArrow} alt="Open" style={{ marginLeft: 'auto' }} />
     </div>
-    <div className={styles.divider} />
-  </>
-);
+  );
+  return (
+    <div className={styles.match_container} onClick={() => onPick()}>
+      <motion.div
+        animate={{ backgroundColor: isActive ? '#60d587' : '#cbcbcb' }}
+        className={classnames(styles.pick_btn, { [styles.is_active]: isActive })}
+      />
+      <div className={styles.match_top_row}>
+        <Team name={homeTeam} />
+        <div className={styles.vs_container}>
+          VS
+          <div className={styles.date_container}>
+            <p>{`${getShortDayName(startDate.getDay())}, ${startDate.getDate()}/${startDate.getMonth() + 1}`}</p>
+            <p>{`${startDate.getHours()}:00`}</p>
+          </div>
+        </div>
+        <Team name={awayTeam} />
+      </div>
+      <OddsRow
+        homeOdds={homeOdds}
+        awayOdds={awayOdds}
+        drawOdds={drawOdds}
+        type="b"
+      />
+    </div>
+  );
+};
 
-const StageThree = ({ updateStage }) => {
-  const x = 5;
+const LeagueRow = ({
+  isActive,
+  changeActiveLeague,
+  matches,
+  name,
+  img,
+  selectedMatches,
+  toggleMatch,
+}) => {
+  let selectedCounter = 0;
+  matches.forEach((match) => {
+    if (selectedMatches.includes(match.id) && match.league === name) {
+      selectedCounter += 1;
+    }
+  });
+  return (
+    <>
+      <div
+        onClick={() => changeActiveLeague(name)}
+        className={styles.league_row_container}
+      >
+        <img src={img} alt="League Row Img" style={{ marginRight: '15px', width: '20px' }} />
+        { selectedCounter > 0 && (
+        <div className={styles.selected}>
+          {selectedCounter}
+        </div>
+        )}
+        {name}
+        <img src={DownArrow} alt="Open" style={{ marginLeft: 'auto' }} />
+      </div>
+      <div className={styles.divider} />
+      { isActive && (
+      <div className={styles.matches_container}>
+        {matches.map((match) => (<Match isActive={selectedMatches.includes(match.id)} onPick={() => toggleMatch(match.id)} match={match} />))}
+      </div>
+      )}
+    </>
+  );
+};
+
+const StageThree = ({
+  changeActiveLeague,
+  activeLeague,
+  updateStage,
+  availableMatches,
+  stage,
+  toggleMatch,
+  selectedMatches,
+}) => {
+  const { matches } = availableMatches;
   return (
     <div className={styles.stage_three_container}>
+      <div className={styles.gradient_block} />
       <div className={styles.title}>SELECT MATCHES</div>
       <Input
         fluid
@@ -140,12 +241,52 @@ const StageThree = ({ updateStage }) => {
         placeholder="Search Matches"
         className={styles.search}
       />
-      <LeagueRow name="Premiere League" img={PremiereLeague} />
-      <LeagueRow name="La Liga" img={LaLiga} />
-      <motion.div whileTap={{ scale: 0.9 }} onClick={() => updateStage(4)} style={{ marginTop: 'auto', marginBottom: '15px' }} className={styles.next_btn}>
-        INVITE FRIENDS
-        <img src={RightArrowWhite} alt="Next" />
+      <LeagueRow
+        selectedMatches={selectedMatches}
+        toggleMatch={(match) => toggleMatch(match)}
+        changeActiveLeague={() => changeActiveLeague('Premiere League')}
+        isActive={activeLeague === 'Premiere League'}
+        matches={getLeagueMatches(matches, 'Premiere League')}
+        name="Premiere League"
+        img={PremiereLeague}
+      />
+      <LeagueRow
+        selectedMatches={selectedMatches}
+        toggleMatch={(match) => toggleMatch(match)}
+        changeActiveLeague={() => changeActiveLeague('La Liga')}
+        isActive={activeLeague === 'La Liga'}
+        matches={getLeagueMatches(matches, 'La Liga')}
+        name="La Liga"
+        img={LaLiga}
+      />
+      <LeagueRow
+        selectedMatches={selectedMatches}
+        toggleMatch={(match) => toggleMatch(match)}
+        changeActiveLeague={() => changeActiveLeague('Champions League')}
+        isActive={activeLeague === 'Champions League'}
+        matches={getLeagueMatches(matches, 'Champions League')}
+        name="Champions League"
+        img={Champions}
+      />
+      <Bottom
+        stage={stage}
+        onClick={() => updateStage({ stageNumber: stage.stageNumber + 1, text: 'INVITE FRIENDS', img: RightArrowWhite })}
+      />
+    </div>
+  );
+};
+
+const Bottom = ({
+  stage, onClick,
+}) => {
+  const { stageNumber, text, img } = stage;
+  return (
+    <div className={styles.bottom_container}>
+      <motion.div whileTap={{ scale: 0.9 }} onClick={() => onClick()} style={{ marginTop: 'auto', marginBottom: '15px' }} className={styles.next_btn}>
+        {text}
+        <img src={img} alt={`${img}_logo`} />
       </motion.div>
+      <CurrentStageIndicator stage={stageNumber} />
     </div>
   );
 };
@@ -173,6 +314,7 @@ const StageFour = ({ handleTableCreation }) => {
   const history = useHistory();
   return (
     <div className={styles.stage_four_container}>
+      <div className={styles.gradient_block} />
       <div className={styles.title}>INVITE FRIENDS</div>
       <div className={styles.invite_link_container}>
         <div className={styles.link_title}>INVITATION LINK</div>
@@ -233,13 +375,18 @@ class CreateLeague extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: 1,
+      stage: {
+        stageNumber: 1,
+        img: RightArrowWhite,
+        text: 'SELECT REWARDS',
+      },
       leagueName: '',
       leagueDescription: '',
       tableType: 'a',
       selectedMatches: [],
       betSize: 0,
       players: 0,
+      activeLeague: 'Champions League',
     };
   }
 
@@ -271,6 +418,24 @@ class CreateLeague extends Component {
     history.push('/table');
   }
 
+  toggleMatch(matchId) {
+    const { selectedMatches } = this.state;
+    if (selectedMatches.includes(matchId)) {
+      this.setState({ selectedMatches: [...selectedMatches].filter((match) => match !== matchId) });
+    } else {
+      this.setState({ selectedMatches: [...selectedMatches, matchId] });
+    }
+  }
+
+  changeActiveLeague(leagueName) {
+    const { activeLeague } = this.state;
+    if (activeLeague === leagueName) {
+      this.setState({ activeLeague: '' });
+    } else {
+      this.setState({ activeLeague: leagueName });
+    }
+  }
+
   changeLeagueName(leagueName) {
     this.setState({ leagueName });
   }
@@ -285,17 +450,39 @@ class CreateLeague extends Component {
 
 
   render() {
-    const { stage } = this.state;
+    const { stage, activeLeague, selectedMatches } = this.state;
+    const { availableMatches } = this.props;
+    const { stageNumber } = stage;
     let currentStage;
-    switch (stage) {
+    switch (stageNumber) {
       case 1:
-        currentStage = <StageOne updateStage={(stage) => this.updateStage(stage)} />;
+        currentStage = (
+          <StageOne
+            stage={stage}
+            updateStage={(stage) => this.updateStage(stage)}
+          />
+        );
         break;
       case 2:
-        currentStage = <StageTwo updateStage={(stage) => this.updateStage(stage)} />;
+        currentStage = (
+          <StageTwo
+            stage={stage}
+            updateStage={(stage) => this.updateStage(stage)}
+          />
+        );
         break;
       case 3:
-        currentStage = <StageThree updateStage={(stage) => this.updateStage(stage)} />;
+        currentStage = (
+          <StageThree
+            toggleMatch={(matchId) => this.toggleMatch(matchId)}
+            selectedMatches={selectedMatches}
+            stage={stage}
+            activeLeague={activeLeague}
+            changeActiveLeague={(league) => this.changeActiveLeague(league)}
+            availableMatches={availableMatches}
+            updateStage={(stage) => this.updateStage(stage)}
+          />
+        );
         break;
       case 4:
         currentStage = <StageFour {...this.state} />;
@@ -306,7 +493,6 @@ class CreateLeague extends Component {
     return (
       <div className={styles.container}>
         {currentStage}
-        <CurrentStageIndicator stage={stage} />
       </div>
     );
   }

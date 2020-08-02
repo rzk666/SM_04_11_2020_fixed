@@ -102,6 +102,7 @@ const HomeView = ({
   toggleLeagueCreation,
   history,
   auth,
+  availableMatches,
 }) => {
   const controls = useAnimation();
   const { user } = auth;
@@ -114,7 +115,7 @@ const HomeView = ({
   return (
     <div className={styles.wrapper}>
       <SportsBar currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
-      { creatingLeague ? <CreateLeague user={user} />
+      { creatingLeague ? <CreateLeague availableMatches={availableMatches} user={user} />
         : (
           <>
             <AnimatePresence initial={false}>

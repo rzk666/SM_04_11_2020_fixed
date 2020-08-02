@@ -2,6 +2,7 @@
 import React from 'react';
 // Components
 import { Modal } from 'semantic-ui-react';
+import OddsRow from '../components/common/OddsRow';
 // Images
 import PremiereLeague from '../static/images/weeklymatches/premiereLeague.png';
 import Valencia from '../static/images/weeklymatches/Valencia.png';
@@ -162,7 +163,7 @@ const TeamRow = ({ team }) => {
   );
 };
 
-const Match = ({ match }) => {
+export const Match = ({ match }) => {
   const {
     homeTeam, awayTeam, dayName, time, homeOdds, awayOdds, drawOdds,
   } = match;
@@ -188,20 +189,7 @@ const Match = ({ match }) => {
           {awayTeam}
         </div>
       </div>
-      <div className={styles.score_row_container}>
-        <div className={styles.home_score_wrapper}>
-          {homeOdds}
-          <p>PTS</p>
-        </div>
-        <div className={styles.draw_score_wrapper}>
-          {drawOdds}
-          <p>PTS</p>
-        </div>
-        <div className={styles.away_score_wrapper}>
-          {awayOdds}
-          <p>PTS</p>
-        </div>
-      </div>
+      <OddsRow homeOdds={homeOdds} drawOdds={drawOdds} awayOdds={awayOdds} />
     </div>
   );
 };
