@@ -87,12 +87,35 @@ const User = ({
 }) => {
   const { name, profilePicture, currentScore } = user;
   const [isActive, toggleActive] = useState(false);
+  let shadowOne;
+  let shadowTwo;
+  let shadowLast;
+  switch (rank) {
+    case 1:
+      shadowOne = 'rgba(229, 156, 51, 0.2)';
+      shadowTwo = 'rgba(229, 156, 51, 0.7)';
+      shadowLast = 'rgba(229, 156, 51, 0)';
+      break;
+    case 2:
+      shadowOne = 'rgba(140, 172, 175, 0.2)';
+      shadowTwo = 'rgba(140, 172, 175, 0.7)';
+      shadowLast = 'rgba(140, 172, 175, 0)';
+      break;
+    case 3:
+      shadowOne = 'rgba(186, 120, 74, 0.2)';
+      shadowTwo = 'rgba(186, 120, 74, 0.7)';
+      shadowLast = 'rgba(186, 120, 74, 0)';
+      break;
+    default:
+      break;
+  }
+
   return (
     <>
       <motion.div
         onClick={() => toggleActive(!isActive)}
-        animate={{ opacity: [0, 1, 1, 1], width: ['45%', '45%', '45%', '100%'] }}
-        transition={{ delay: 0.10 + (0.10 * rank), ease: 'easeInOut', duration: 1.75 }}
+        animate={{ opacity: [1, 1, 1, 1], width: ['45%', '45%', '45%', '100%'] }}
+        transition={{ delay: (0.10 * rank), ease: 'easeInOut', duration: 1.75 }}
         className={classnames(styles.user_row_container,
           {
             [styles.first]: rank === 1,
@@ -101,19 +124,26 @@ const User = ({
           })}
       >
         <motion.div
+          style={{
+            position: 'absolute', backgroundColor: '#ffffff', width: '100%', height: '100%', borderRadius: '15px',
+          }}
+          animate={{ opacity: [1, 0] }}
+          className={styles.bg_cover}
+        />
+        <motion.div
           onClick={() => toggleActive(!isActive)}
           transition={{ delay: 2.35 + (rank * 0.30), duration: 1, ease: 'easeInOut' }}
           animate={(rank === 1 || rank === 2 || rank === 3) ? {
             x: 330,
             boxShadow: [
-              '0px 0px 25px 15px rgba(255,255,255,0)',
-              '0px 0px 25px 15px rgba(255,255,255,0.65)',
-              '0px 0px 25px 15px rgba(255,255,255,0)'],
+              `0px 0px 15px 12px ${shadowOne}`,
+              `0px 0px 15px 12px ${shadowTwo}`,
+              `0px 0px 15px 12px ${shadowLast}`],
           } : {}}
           className={styles.flash}
         />
         {rank}
-        <motion.div animate={{ opacity: 1 }} transition={{ delay: 2.8 * (0.5 * 3) + 0.3, duration: 1 }} className={styles.user_main_container}>
+        <motion.div animate={{ opacity: [1, 1, 1], scale: [1.1, 0.9, 1] }} transition={{ delay: 3.1 * (0.5 * 3) + (rank * 0.10), ease: 'easeIn', duration: 0.10 }} className={styles.user_main_container}>
           <img src={profilePicture} alt={`${name}_img`} className={styles.profile_image} />
           <p className={styles.name}>{name}</p>
           <div className={styles.prize_score_container}>
