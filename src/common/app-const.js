@@ -42,7 +42,7 @@ const INITIAL_STATE = {
       awayOdds: 200,
       drawOdds: 100,
       startDate: new Date(2020, 8, 13, 20),
-      isLocked: false,
+      isLocked: true,
       homeScore: 0,
       awayScore: 0,
       // This could be 'HT', 'FT', or a minute in the match
@@ -60,7 +60,7 @@ const INITIAL_STATE = {
       isLocked: false,
       homeScore: 0,
       awayScore: 0,
-      matchTime: 0,
+      matchTime: 2,
     },
     {
       league: 'La Liga',
@@ -74,7 +74,7 @@ const INITIAL_STATE = {
       isLocked: false,
       homeScore: 0,
       awayScore: 0,
-      matchTime: 0,
+      matchTime: 'FT',
     },
     {
       league: 'Premiere League',

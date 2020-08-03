@@ -7,7 +7,8 @@ const activeTable = (state = INITIAL_STATE.activeTable, action) => {
   switch (action.type) {
     case UPDATE_TABLE: {
       const { data, user } = action;
-      const newUsersList = [...state.users];
+      const { players } = data;
+      const newUsersList = [...state.users].splice(0, players > 8 ? 8 : players - 1);
       let shouldPushUser = true;
       state.users.forEach((activeUser) => {
         if (activeUser.name === user.name) {
@@ -15,7 +16,7 @@ const activeTable = (state = INITIAL_STATE.activeTable, action) => {
         }
       });
       if (shouldPushUser) {
-        newUsersList.push(user);
+        newUsersList.push({ ...user, currentScore: 0 });
       }
       return {
         ...state,
