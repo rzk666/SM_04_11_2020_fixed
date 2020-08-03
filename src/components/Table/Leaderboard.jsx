@@ -87,32 +87,40 @@ const User = ({
 }) => {
   const { name, profilePicture, currentScore } = user;
   const [isActive, toggleActive] = useState(false);
+  const isTopThree = (rank === 1 || rank === 2 || rank === 3);
   let shadowOne;
   let shadowTwo;
   let shadowLast;
+  let mainColor;
   switch (rank) {
     case 1:
       shadowOne = 'rgba(229, 156, 51, 0.2)';
       shadowTwo = 'rgba(229, 156, 51, 0.7)';
       shadowLast = 'rgba(229, 156, 51, 0)';
+      mainColor = 'rgba(229, 156, 51, 1)';
       break;
     case 2:
       shadowOne = 'rgba(140, 172, 175, 0.2)';
       shadowTwo = 'rgba(140, 172, 175, 0.7)';
       shadowLast = 'rgba(140, 172, 175, 0)';
+      mainColor = 'rgba(140, 172, 175, 1)';
       break;
     case 3:
       shadowOne = 'rgba(186, 120, 74, 0.2)';
       shadowTwo = 'rgba(186, 120, 74, 0.7)';
       shadowLast = 'rgba(186, 120, 74, 0)';
+      mainColor = 'rgba(186, 120, 74, 1)';
       break;
     default:
+      shadowOne = '';
+      mainColor = 0;
       break;
   }
 
   return (
     <>
       <motion.div
+        style={{ boxShadow: `0 2px 3px 0 ${shadowOne || 'rgba(0,0,0,0)'}` }}
         onClick={() => toggleActive(!isActive)}
         animate={{ opacity: [1, 1, 1, 1], width: ['45%', '45%', '45%', '100%'] }}
         transition={{ delay: (0.10 * rank), ease: 'easeInOut', duration: 1.75 }}
@@ -124,29 +132,22 @@ const User = ({
           })}
       >
         <motion.div
-          style={{
-            position: 'absolute', backgroundColor: '#ffffff', width: '100%', height: '100%', borderRadius: '15px',
-          }}
-          animate={{ opacity: [1, 0] }}
+          transition={isTopThree ? {
+            delay: 7 + (1 * rank), duration: 3.5, loop: Infinity, repeatDelay: 3.5, ease: 'easeIn',
+          } : ''}
+          animate={{ opacity: [0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0] }}
           className={styles.bg_cover}
         />
-        <motion.div
-          onClick={() => toggleActive(!isActive)}
-          transition={{ delay: 2.35 + (rank * 0.30), duration: 1, ease: 'easeInOut' }}
-          animate={(rank === 1 || rank === 2 || rank === 3) ? {
-            x: 330,
-            boxShadow: [
-              `0px 0px 15px 12px ${shadowOne}`,
-              `0px 0px 15px 12px ${shadowTwo}`,
-              `0px 0px 15px 12px ${shadowLast}`],
-          } : {}}
-          className={styles.flash}
-        />
         {rank}
-        <motion.div animate={{ opacity: [1, 1, 1], scale: [1.1, 0.9, 1] }} transition={{ delay: 3.1 * (0.5 * 3) + (rank * 0.10), ease: 'easeIn', duration: 0.10 }} className={styles.user_main_container}>
+        <motion.div animate={{ opacity: [1, 1, 1], scale: [1.1, 1] }} transition={{ delay: 3.1 + (rank * 0.10), ease: 'easeInOut', duration: 0.25 }} className={styles.user_main_container}>
           <img src={profilePicture} alt={`${name}_img`} className={styles.profile_image} />
-          <p className={styles.name}>{name}</p>
-          <div className={styles.prize_score_container}>
+          <p style={{ color: mainColor || '#53575a' }} className={styles.name}>{name}</p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 4.4 + (rank * 0.25) }}
+            animate={{ opacity: [0.5, 1], scale: [1.1, 1] }}
+            className={styles.prize_score_container}
+          >
             { rank === 1 && <img src={GoldTrophy} alt="trophy" />}
             { rank === 1 && <div className={styles.prize}>{`€${prizes[0]}`}</div>}
             { (rank === 2 && ((type === 'b') || (type === 'c'))) && <img src={SilverTrophy} alt="trophy" />}
@@ -157,8 +158,15 @@ const User = ({
               <p>{currentScore}</p>
               <p style={{ fontSize: '10px' }}>PTS</p>
             </div>
-          </div>
-          <img src={DownArrow} alt="Down Arrow" className={styles.down_arrow} />
+          </motion.div>
+          <motion.img
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 4.4 + (rank * 0.25) }}
+            animate={{ opacity: [0.5, 1], scale: [1.1, 1] }}
+            src={DownArrow}
+            alt="Down Arrow"
+            className={styles.down_arrow}
+          />
         </motion.div>
       </motion.div>
       { isActive && <UserBets matches={matches} user={user} />}
