@@ -9,13 +9,26 @@ class TableController extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { initBets } = this.props;
+    initBets();
+  }
+
   changeView(view) {
     this.setState({ currentView: view });
+  }
+
+  confirmBets(bets) {
+    const { confirmBets, auth } = this.props;
+    const { user } = auth;
+    const { name } = user;
+    confirmBets(bets, name);
   }
 
   callbacks() {
     return {
       changeView: this.changeView.bind(this),
+      confirmBets: this.confirmBets.bind(this),
     };
   }
 

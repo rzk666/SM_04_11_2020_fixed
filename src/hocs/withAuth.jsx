@@ -68,6 +68,7 @@ export default (ComposedComponent) => {
       const { location } = history;
       const { pathname } = location;
       const cookie = cookies.get('auth', '/');
+      console.log(auth);
       // Admin login
       if (hasAccess && !prevProps.auth.hasAccess) {
         if (!cookie) {
@@ -82,9 +83,6 @@ export default (ComposedComponent) => {
       if (!isLoggedIn && prevProps.auth.isLoggedIn) {
         cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
         enforceAuth(this.props);
-      }
-      if (isLoggedIn && !cookie.isLoggedIn) {
-        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
       }
       // User Login
       if (isLoggedIn && !cookie.isLoggedIn) {

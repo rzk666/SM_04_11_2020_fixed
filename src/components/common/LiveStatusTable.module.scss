@@ -1,0 +1,110 @@
+.table_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.11);
+    font-family: Roboto;
+    margin-bottom: 25px;
+    .table_title{
+        align-items: center;
+        display: flex;
+        height: 25px;
+        padding: 10px 6px;
+        font-size: 9px;
+        font-weight: bold;
+        letter-spacing: 0.45px;
+    }
+    // TABLE
+    .bottom{
+        height: 22px;
+        width: 100%;
+    }
+    .top_row_container{
+        display: flex;
+        width: 100%;
+        height: 22px;
+        font-size: 7px;
+        font-weight: bold;
+        color: var(--main-solid-dark-grey);
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .team_row_container{
+        display: flex;
+        width: 100%;
+        height: 33px;
+        font-size: 7px;
+        font-weight: medium;
+        color: var(--main-solid-dark-grey);
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .position{
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .last_six_wrapper{
+            display: flex;
+            .dot{
+                width: 5px;
+                height: 5px;
+                border-radius: 50px;
+                margin-right: 2.5px;
+                &.win{
+                    background-color: #47ff84;
+                }
+                &.draw{
+                    background-color: #cbcbcb;
+                }
+                &.lose{
+                    background-color: #ff6464;
+                }
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    .position{
+        width: 10%;
+    }
+    .team{
+        padding-left: 5px;
+        flex: 1;
+        justify-content: flex-start!important;
+    }
+    .games{
+        width: 5%;
+    }
+    .wins{
+        width: 5%;
+    }
+    .draws{
+        width: 5%;
+    }
+    .loses{
+        width: 5%;
+    }
+    .goals{
+        width: 5%;
+    }
+    .against{
+        width: 5%;
+    }
+    .goal_differance{
+        width: 5%;
+    }
+    .points{
+        width: 5%;
+    }
+    .last_six{
+        width: 20%;
+    }
+}

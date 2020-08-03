@@ -2,6 +2,7 @@
 // Types
 import {
   UPDATE_TABLE,
+  CONFIRM_BETS,
 } from './activeTableTypes';
 
 export const updateActiveTable = (data, user) => ({
@@ -10,8 +11,8 @@ export const updateActiveTable = (data, user) => ({
   user,
 });
 
-// REMOVE
-export const authIsLoading = (isLoading) => ({
-  type: 'test',
-  isLoading,
+export const confirmBets = (data, username) => ({
+  type: CONFIRM_BETS,
+  data,
+  username,
 });

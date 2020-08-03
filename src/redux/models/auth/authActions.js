@@ -8,6 +8,7 @@ import {
   AUTH_ADMIN,
   SIGNOUT,
   LOGIN,
+  INIT_BETS,
 } from './authTypes';
 // API
 import { API } from '../../api';
@@ -16,6 +17,12 @@ import config from '../../../common/config';
 
 export const signOut = () => ({
   type: SIGNOUT,
+});
+
+
+
+export const initBets = () => ({
+  type: INIT_BETS,
 });
 
 export const authIsLoading = (isLoading) => ({

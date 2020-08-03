@@ -5,3 +5,4 @@ export const AUTH_HAS_ERROR = 'AUTH_HAS_ERROR';
 export const REFRESH_AUTH = 'REFRESH_AUTH';
 export const SIGNOUT = 'SIGNOUT';
 export const RESET_AUTH_ERRORS = 'RESET_AUTH_ERRORS';
+export const INIT_BETS = 'INIT_BETS';

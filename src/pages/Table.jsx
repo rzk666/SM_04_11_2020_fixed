@@ -3,6 +3,8 @@ import React from 'react';
 // Utils
 import { connect } from 'react-redux';
 // Redux Actions
+import { initBets } from '../redux/models/auth/authActions';
+import { confirmBets } from '../redux/models/activeTable/activeTableActions';
 // Hocs
 import page from '../hocs/page';
 // Controller & View
@@ -17,10 +19,12 @@ const Table = (props) => <TableController {...props} View={TableView} />;
 const mapStateToProps = (state) => ({
   auth: state.auth,
   activeTable: state.activeTable,
+  availableMatches: state.availableMatches,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // adminLogin: (data) => dispatch(adminLogin(data)),
+  confirmBets: (data, username) => dispatch(confirmBets(data, username)),
+  initBets: () => dispatch(initBets()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((Table), pages.TABLE));

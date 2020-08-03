@@ -14,9 +14,52 @@ import {
   REFRESH_AUTH,
   SIGNOUT,
   RESET_AUTH_ERRORS,
+  INIT_BETS,
 } from './authTypes';
 
 // ----- Consts & Dicts ----- //
+
+const INITIAL_BETS = [{
+  matchId: 1,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 2,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 3,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 4,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 5,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 6,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 7,
+  homeScore: 0,
+  awayScore: 0,
+},
+{
+  matchId: 8,
+  homeScore: 0,
+  awayScore: 0,
+}];
+
 export const USERS = {
   razi: {
     name: 'Razi Elbaz',
@@ -28,7 +71,6 @@ export const USERS = {
     balance: 1450,
     profilePicture: Razi,
     notifications: 1,
-    currentScore: 0,
     bets: [],
     stats: {
       score: 1000,
@@ -47,9 +89,8 @@ export const USERS = {
     email: 'tal@beatem.uk',
     rank: 'legend',
     score: 1000,
-    currentScore: 0,
-    bets: [],
     achievements: [],
+    bets: [],
     notifications: 3,
     balance: 980,
     profilePicture: Tal,
@@ -71,11 +112,10 @@ export const USERS = {
     rank: 'amateur',
     email: 'lee@beatem.uk',
     score: 1200,
-    currentScore: 0,
-    bets: [],
     balance: 455,
     notifications: 4,
     achievements: [],
+    bets: [],
     profilePicture: Lee,
     friends: ['tal', 'barak', 'razi'],
     stats: {
@@ -96,9 +136,8 @@ export const USERS = {
     email: 'barak@beatem.uk',
     score: 1231,
     balance: 1270,
-    currentScore: 0,
-    bets: [],
     notifications: 2,
+    bets: [],
     achievements: [],
     profilePicture: Barak,
     friends: ['tal', 'lee', 'razi'],
@@ -120,6 +159,13 @@ const EMAILS = ['barak', 'razi', 'tal', 'lee'];
 
 const auth = (state = INITIAL_STATE.auth, action) => {
   switch (action.type) {
+    case INIT_BETS: {
+      const { user } = state;
+      return {
+        ...state,
+        user: { ...user, bets: INITIAL_BETS },
+      };
+    }
     case REFRESH_AUTH: {
       const { data } = action;
       return {

@@ -1,32 +1,10 @@
-.pricebar_container{
+.container{
     display: flex;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 52px;
+    height: auto;
     position: relative;
-    background-color: #f6f6f6;
-    .underbar{
-        background-color: var(--main-solid-green);
-        position: absolute;
-        bottom: 0;
-        width: 25%;
-        height: 4px;
-    }
-    .price_container{
-        width: 100%;
-        height: 100%;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 5px;
-        color: var(--main-solid-dark-grey);
-        font-size: 7px;
-        font-family: Roboto;
-        font-weight: bold;
-        letter-spacing: 0.21px;
-        &.active{
-            color: var(--main-solid-green);
-        }
-    }
+    background-color: #ebebeb;
+    margin-top: 9.5px;
 }

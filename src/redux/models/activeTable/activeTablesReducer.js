@@ -1,7 +1,7 @@
 // Initial State
 import INITIAL_STATE from '../../../common/app-const';
 // Action Types
-import { UPDATE_TABLE } from './activeTableTypes';
+import { UPDATE_TABLE, CONFIRM_BETS } from './activeTableTypes';
 
 const activeTable = (state = INITIAL_STATE.activeTable, action) => {
   switch (action.type) {
@@ -21,6 +21,18 @@ const activeTable = (state = INITIAL_STATE.activeTable, action) => {
         ...state,
         ...data,
         users: newUsersList,
+      };
+    }
+    case CONFIRM_BETS: {
+      const { data, username } = action;
+      const { users } = state;
+      const playerUser = users.find((user) => user.name === username);
+      const newUsersArray = [...users].filter((user) => user.name !== username);
+      const userWithUpdatedBets = { ...playerUser, bets: data };
+      newUsersArray.push(userWithUpdatedBets);
+      return {
+        ...state,
+        users: newUsersArray,
       };
     }
     default: {

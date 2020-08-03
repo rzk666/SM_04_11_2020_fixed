@@ -17,7 +17,6 @@ const Leaderboard = ({ activeTable }) => {
   //   matches,
   //   users,
   // } = activeTable;
-  console.log(activeTable);
   return (
     <div className={styles.container}>
       {/* {name}

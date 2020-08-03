@@ -1,44 +1,36 @@
 import React from 'react';
 // Styles
-import styles from './TableTopBar.module.scss';
+import styles from './LiveStatus.module.scss';
 // Animations
 import { motion } from 'framer-motion';
 // Utils
 import classnames from 'classnames';
-
-// ----- Dicts & Consts ----- //
-const PRICES = ['LEADERBOARD', 'MY BETS', 'LIVE STATUS', 'REAL TABLE'];
+import LeagueLiveTable from '../common/LeagueLiveTable';
 
 // ----- Help Functions ----- //
-const getUnderbarX = (priceIndex) => {
-  const underbarWidth = window.innerWidth / 4;
-  return priceIndex * underbarWidth;
+const getLeagueMatches = (currentLeague, availableMatches, currentMatches) => {
+  const leagueMatches = availableMatches.filter((match) => {
+    const { id, league } = match;
+    return (currentMatches.includes(id) && currentLeague === league);
+  });
+  return leagueMatches;
 };
 
-const PriceBar = ({ currentView, changeView }) => {
-  const priceIndex = PRICES.indexOf(currentView);
-  const animateUnderbar = {
-    x: getUnderbarX(priceIndex),
-    backgroundColor: '#57bb78',
-  };
+const LiveStatus = ({ activeTable, availableMatches }) => {
+  const { leagues, matches } = activeTable;
   return (
-    <div className={styles.pricebar_container}>
-      <motion.div
-        transition={{ type: 'spring', damping: 18 }}
-        animate={animateUnderbar}
-        className={styles.underbar}
-      />
-      {PRICES.map((price, i) => (
-        <div
-          key={`${price}_${i}`}
-          className={classnames(styles.price_container, { [styles.active]: price === currentView })}
-          onClick={() => changeView(price)}
-        >
-          {price}
+    <div className={styles.container}>
+      {leagues.map((league) => (
+        <div style={{ width: '90%' }}>
+          <LeagueLiveTable
+            type="live"
+            currentLeague={league}
+            matches={getLeagueMatches(league, availableMatches.matches, matches)}
+          />
         </div>
       ))}
     </div>
   );
 };
 
-export default PriceBar;
+export default LiveStatus;
