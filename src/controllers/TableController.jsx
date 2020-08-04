@@ -14,6 +14,10 @@ class TableController extends React.Component {
     initBets();
   }
 
+  componentDidUpdate() {
+    console.log('I RAN');
+  }
+
   changeView(view) {
     this.setState({ currentView: view });
   }

@@ -17,7 +17,7 @@ class LoginController extends React.Component {
     } = this.props;
     const { isLoggedIn } = auth;
     if (isLoggedIn) {
-      history.go(-1);
+      history.push('/');
     }
     if (!prevProps.auth.hasError && auth.hasError) {
       resetAuthErrors();
