@@ -12,7 +12,7 @@ const activeTable = (state = INITIAL_STATE.activeTable, action) => {
       let shouldPushUser = true;
       state.users.forEach((activeUser) => {
         if (activeUser.name === user.name) {
-          shouldPushUser = false;
+          shouldPushUser = true;
         }
       });
       if (shouldPushUser) {
