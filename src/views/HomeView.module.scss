@@ -4,6 +4,14 @@
     max-height: calc(100vh - var(--header-height));
     display: flex;
     flex-direction: column;
+    .clean{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        z-index: 10;
+        top: 12px;
+        right: 35px;
+    }
     .top_banner{
         margin-top: 8px;
         min-height: 150px;
@@ -86,11 +94,12 @@
     }
     .compete_text{
         margin-top: 15px;
-        margin-bottom: 23.5px;
+        margin-bottom: 12.5px;
         padding: 0 30px;
     }
     .search{
         width: calc(100% - 54px);
         margin: 0 auto;
+        box-shadow: 0 3px 11px 0 rgba(0,0,0,0.07);
     }
 }

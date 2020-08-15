@@ -19,7 +19,7 @@ const LoginInput = ({
       error={hasError}
       icon={isEmailInput ? 'green user circle outline' : 'green key'}
       iconPosition="left"
-      placeholder={isEmailInput ? 'Email' : 'Password'}
+      placeholder={isEmailInput ? 'Username' : 'Password'}
       className={styles.login_input}
       fluid
       onChange={(e, data) => onChange(data.value)}

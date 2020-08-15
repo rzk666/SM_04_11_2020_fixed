@@ -84,10 +84,10 @@ const Notifications = ({ count, onMenu }) => {
   );
 };
 
-const HeaderProfile = ({ signOut, user }) => {
+const HeaderProfile = ({ signOut, user, onClick }) => {
   const { score, balance, profilePicture } = user;
   return (
-    <div className={styles.header_profile_container}>
+    <div onClick={() => onClick()} className={styles.header_profile_container}>
       <div className={styles.stats_container}>
         <span className={styles.balance}>{getBalance(balance)}</span>
         <span className={styles.score}>{`${score} Points`}</span>
@@ -226,19 +226,19 @@ const UserMenu = ({
           <div className={styles.user_menu_bottom}>
             <MenuItem name="Home" notifications={0} onClick={() => { history.push('/'); close(); }} />
             <MenuItem name="Profile" notifications={0} onClick={() => { history.push('/profile'); close(); }} />
-            <MenuItem name="My Leagues" notifications={0} onClick={() => history.push('/profile')} />
-            <MenuItem name="Achievements" notifications={1} onClick={() => history.push('/profile')} />
-            <MenuItem name="Create League" notifications={0} onClick={() => history.push('/profile')} />
-            <MenuItem name="Join League" notifications={0} onClick={() => history.push('/profile')} />
-            <MenuItem name="Specials" notifications={0} onClick={() => history.push('/profile')} />
-            <MenuItem name="How It Works?" notifications={0} onClick={() => history.push('/profile')} />
-            <MenuItem name="Notifications" notifications={3} onClick={() => history.push('/profile')} />
+            <MenuItem name="My Leagues" notifications={0} />
+            <MenuItem name="Achievements" notifications={1} />
+            <MenuItem name="Create League" notifications={0}  />
+            <MenuItem name="Join League" notifications={0}  />
+            <MenuItem name="Specials" notifications={0}  />
+            <MenuItem name="How It Works?" notifications={0}  />
+            <MenuItem name="Notifications" notifications={3}  />
             <MenuItem name="Friends" notifications={0} onClick={() => alert('FRIENDS')} />
             <MenuItem name="Contact" notifications={0} onClick={() => alert('CONTACT')} />
             <MenuItem name="FAQ" notifications={0} onClick={() => alert('FAQ')} />
             <MenuItem name="Legal" notifications={0} onClick={() => alert('LEGAL')} />
             <div onClick={() => { signOut(); close(); }} className={styles.sign_out}>
-              SIGN OUT
+              LOG OUT
             </div>
           </div>
         </motion.div>
@@ -292,7 +292,7 @@ const Header = ({
               Login
             </div>
           )
-            : <HeaderProfile user={user} />}
+            : <HeaderProfile onClick={() => history.push('/profile')} user={user} />}
           { isLoggedIn && (
           <motion.img
             whileTap={{ scale: 0.8 }}
@@ -306,10 +306,10 @@ const Header = ({
             src={Home}
             alt="HOME_ICON"
             className={styles.home}
-            onClick={() => history.push('/')}
+            onClick={() => history.push({ pathname: '/', state: { resetHome: true } })}
           />
           <div className={styles.menu_icon_container}>
-            { notifications !== 0 && <Notifications count={notifications} />}
+            { !!notifications && <Notifications count={notifications} />}
             <motion.img
               onClick={() => toggleMenu(true)}
               whileTap={{ scale: 0.8 }}

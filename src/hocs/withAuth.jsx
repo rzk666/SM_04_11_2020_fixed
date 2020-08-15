@@ -111,7 +111,7 @@ export default (ComposedComponent) => {
         cookies.set('auth', {
           adminToken: auth.adminToken, hasAccess: auth.hasAccess, isLoggedIn: auth.isLoggedIn, user: auth.user,
         }, {
-          path: '/', expires: COOKIES_EXP_DATE, overwrite: true, sameSite: true, domain: 'localhost',
+          path: '/', expires: COOKIES_EXP_DATE, overwrite: true, sameSite: true,
         });
         // cookies.set('auth', {
         //   isLoading: auth.isLoading, hasError: auth.hasError, error: auth.error, isLoggedIn: auth.isLoggedIn, adminToken: auth.adminToken, user: auth.user, hasAccess: auth.hasAcces,

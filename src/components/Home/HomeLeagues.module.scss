@@ -1,20 +1,20 @@
 .leagues_wrapper{
     margin-top: 20px;
     height: 100%;
-    min-height: 393.5px;
-    max-height: 393.5px;
-    overflow: auto;
+    min-height: 330px;
     .leagues_container{
-        padding: 0 12px;
+        padding: 0 6px 0 24px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         .no_leagues{
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
         .league{
+            margin-right: 20px;
             width: 90px;
             height: 90px;
             border-radius: 15px;
@@ -45,6 +45,7 @@
                 justify-content: center;
                 height: 10px;
                 margin-top: 2px;
+                font-size: 10px;
             }
             .league_image_container{
                 display: flex;

@@ -151,7 +151,7 @@ const DataViewBar = ({ currentView, updateView }) => {
           className={styles.data_view_top_button_container}
           onClick={() => updateView(view)}
         >
-          <span style={{ color: currentView === view ? 'var(--main-solid-green)' : '#53575a' }} className={styles.data_top_bar_text}>
+          <span style={{ fontSize: '10px', color: currentView === view ? 'var(--main-solid-green)' : '#53575a' }} className={styles.data_top_bar_text}>
             {view}
           </span>
         </div>

@@ -18,6 +18,7 @@ import classnames from 'classnames';
 import { motion, useAnimation } from 'framer-motion';
 // Universal
 import LEAGUES from '../../universal/leagues';
+import { useHistory } from 'react-router-dom';
 
 // ----- Help Functions ----- //
 const getLeagueImage = (league) => {
@@ -79,8 +80,9 @@ const EmptyLeagues = () => (
 
 const HomeLeagues = ({ leaguesSearch, currentSport }) => {
   const filteredLeagues = leaguesSearch
-    ? LEAGUES[currentSport].filter((league) => league.includes(leaguesSearch))
+    ? LEAGUES[currentSport].filter((league) => league.toLowerCase().includes(leaguesSearch.toLowerCase()))
     : LEAGUES[currentSport];
+  const history = useHistory();
   const controls = useAnimation();
   controls.start({
     opacity: [0, 1],
@@ -88,12 +90,12 @@ const HomeLeagues = ({ leaguesSearch, currentSport }) => {
   });
   return (
     <div className={styles.leagues_wrapper}>
-      <div className={styles.leagues_container}>
+      <div className={styles.leagues_container} style={!filteredLeagues.length ? { justifyContent: 'center', alignItems: 'center' } : {}}>
         {!filteredLeagues.length ? <EmptyLeagues />
           : (
             <>
               {filteredLeagues.map((league, i) => (
-                <motion.div whileTap={{ scale: 0.9 }} animate={controls} key={`${league}_${i}`} className={classnames(styles.league, styles[currentSport])}>
+                <motion.div onClick={() => history.push('joinLeague')} whileTap={{ scale: 0.9 }} animate={controls} key={`${league}_${i}`} className={classnames(styles.league, styles[currentSport])}>
                   <div className={styles.league_image_container}>
                     <motion.img
                       animate={{ opacity: 1 }}
@@ -104,7 +106,7 @@ const HomeLeagues = ({ leaguesSearch, currentSport }) => {
                       className={styles[getLeagueName(league)]}
                     />
                   </div>
-                  <div className={classnames(styles.league_name, 'white_text_3')}>
+                  <div style={{ marginTop: '1px', fontSize: '9px'}} className={classnames(styles.league_name, 'white_text_3')}>
                     {league}
                   </div>
                 </motion.div>

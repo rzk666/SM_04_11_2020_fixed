@@ -9,11 +9,35 @@ class HomeController extends React.Component {
       showSplash: true,
       leaguesSearch: '',
       creatingLeague: false,
+      joiningLeague: false,
     };
   }
 
   componentDidMount() {
     _LoadImages('home');
+  }
+
+  componentDidUpdate(prevProps) {
+    const { history } = this.props;
+    const { creatingLeague, joiningLeague } = this.state;
+    let state = {};
+    if (history
+      && history.location
+      && history.location.state
+      && prevProps.history
+      && prevProps.history.location
+      && prevProps.history.location.state) {
+      state = history.location.state;
+      // On Homepage click
+      if (state.resetHome) {
+        this.setState({ creatingLeague: false, joiningLeague: false });
+        history.push({ pathname: '/', state: { resetHome: false } });
+      }
+    }
+  }
+
+  resetHome() {
+    this.setState({ creatingLeague: false, joiningLeague: false });
   }
 
   handleSearchChange(leaguesSearch) {
@@ -25,9 +49,16 @@ class HomeController extends React.Component {
     this.setState({ creatingLeague: !creatingLeague });
   }
 
+  toggleJoiningLeague() {
+    const { joiningLeague } = this.state;
+    this.setState({ joiningLeague: !joiningLeague });
+  }
+
   callbacks() {
     return {
       // login: this.login.bind(this),
+      resetHome: this.resetHome.bind(this),
+      toggleJoiningLeague: this.toggleJoiningLeague.bind(this),
       handleSearchChange: this.handleSearchChange.bind(this),
       toggleLeagueCreation: this.toggleLeagueCreation.bind(this),
     };

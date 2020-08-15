@@ -7,6 +7,7 @@ import CreateLeague from '../components/CreateLeague/CreateLeague';
 import { Input } from 'semantic-ui-react';
 // Images
 import RightArrowGreen from '../static/images/icons/RightArrowGreen.svg';
+import ExitIcon from '../static/images/icons/Exit.svg';
 import RightArrowRed from '../static/images/icons/RightArrowRed.svg';
 import RightArrowGrey from '../static/images/icons/RightArrowGrey.svg';
 import RightArrowOrange from '../static/images/icons/RightArrowOrange.svg';
@@ -49,6 +50,40 @@ const getTopBanner = (sport) => {
 };
 
 // ----- App Components ----- //
+const LEAGUE_VIEW_GAMES = [
+  {
+    name: 'Razi\'s League',
+    description: 'Best league in the world',
+    players: 8,
+    matches: 8,
+    betSize: 30,
+    invitedBy: 'Razi',
+  }, {
+    name: 'Barak\'s League',
+    description: 'This league is really great',
+    players: 8,
+    matches: 8,
+    betSize: 30,
+    invitedBy: 'Razi',
+  }, {
+    name: 'Tal\'s League',
+    description: 'This is a beatem league of friends',
+    players: 8,
+    matches: 8,
+    betSize: 30,
+    invitedBy: 'Razi',
+  }];
+const JoinLeagueView = () => {
+  const x = 5;
+  return (
+    <div className={styles.stage_three_container}>
+      <div className={styles.title}>SELECT MATCHES</div>
+
+    </div>
+  );
+};
+
+
 const Card = ({ type, currentSport, onClick }) => {
   const getArrow = (sport) => {
     switch (sport) {
@@ -104,10 +139,12 @@ const HomeView = ({
   auth,
   availableMatches,
   updateActiveTable,
+  toggleJoiningLeague,
+  joiningLeague,
 }) => {
   const controls = useAnimation();
   const { user, isLoggedIn } = auth;
-  if (!creatingLeague) {
+  if (!creatingLeague && !joiningLeague) {
     controls.start({
       opacity: [0, 1],
       transiton: { duration: 0.3, ease: 'easeIn' },
@@ -126,43 +163,73 @@ const HomeView = ({
       )
         : (
           <>
-            <AnimatePresence initial={false}>
-              <div
-                className={styles.top_banner}
-              >
-                <motion.img
-                  className={styles.top_banner_image}
-                  src={getTopBanner(currentSport)}
-                  alt={`${currentSport}_top_banner`}
-                  key={`${currentSport}_animated_top_banner`}
-                  initial={{ opacity: 0.25 }}
-                  animate={{ opacity: 1 }}
-                  transiton={{ duration: 0.15, ease: 'easeIn' }}
-                  exit={{ opacity: 0 }}
-                />
-                <div className={classnames(styles.banner_title, 'white_text_1')}>
-                  JOIN OR CREATE YOUR OWN LEAGUES!
-                </div>
-                <div className={styles.buttons_container}>
-                  <Card onClick={() => { !isLoggedIn ? history.push('/login') : toggleLeagueCreation(); }} currentSport={currentSport} type="create" />
-                  <Card onClick={() => history.push(JOIN_LEAGUE)} currentSport={currentSport} type="join" />
-                </div>
-              </div>
-            </AnimatePresence>
-            <div className={classnames(styles.compete_text, 'grey_text_1')}>
-              COMPETE WITH PLAYERS ALL AROUND THE WORLD!
-              CHOOSE A LEAGUE, PICK YOUR BET AND BEAT'EM ALL
-            </div>
-            <Input
-              icon="search"
-              iconPosition="left"
-              placeholder="Search League"
-              className={styles.search}
-              onChange={(e, data) => handleSearchChange(data.value)}
-              value={leaguesSearch}
-            />
-            <HomeLeagues currentSport={currentSport} leaguesSearch={leaguesSearch} />
-            <HomeFooter currentSport={currentSport} />
+            { joiningLeague ? <JoinLeagueView />
+              : (
+                <>
+                  <AnimatePresence initial={false}>
+                    <div
+                      className={styles.top_banner}
+                    >
+                      <motion.img
+                        className={styles.top_banner_image}
+                        src={getTopBanner(currentSport)}
+                        alt={`${currentSport}_top_banner`}
+                        key={`${currentSport}_animated_top_banner`}
+                        initial={{ opacity: 0.25 }}
+                        animate={{ opacity: 1 }}
+                        transiton={{ duration: 0.15, ease: 'easeIn' }}
+                        exit={{ opacity: 0 }}
+                      />
+                      <div className={classnames(styles.banner_title, 'white_text_1')}>
+                        JOIN OR CREATE YOUR OWN LEAGUES!
+                      </div>
+                      <div className={styles.buttons_container}>
+                        <Card
+                          onClick={() => {
+                            if (currentSport !== 'soccer') {
+                              alert('Coming Soon...');
+                            } else if (!isLoggedIn) {
+                              history.push('/login');
+                            } else {
+                              toggleLeagueCreation();
+                            }
+                          }}
+                          currentSport={currentSport}
+                          type="create"
+                        />
+                        <Card
+                          onClick={() => {
+                            if (currentSport !== 'soccer') {
+                              alert('Coming Soon...');
+                            } else {
+                              toggleJoiningLeague();
+                            }
+                          }}
+                          currentSport={currentSport}
+                          type="join"
+                        />
+                      </div>
+                    </div>
+                  </AnimatePresence>
+                  <div className={classnames(styles.compete_text, 'grey_text_1')}>
+                    COMPETE WITH PLAYERS ALL AROUND THE WORLD!
+                    CHOOSE A LEAGUE, PICK YOUR BET AND BEAT'EM ALL
+                  </div>
+                  <div style={{ position: 'relative', textAlign: 'center' }}>
+                    <img onClick={() => handleSearchChange('')} alt="clean" src={ExitIcon} className={styles.clean} />
+                    <Input
+                      icon="search"
+                      iconPosition="left"
+                      placeholder="Search League"
+                      className={styles.search}
+                      onChange={(e, data) => handleSearchChange(data.value)}
+                      value={leaguesSearch}
+                    />
+                  </div>
+                  <HomeLeagues currentSport={currentSport} leaguesSearch={leaguesSearch} />
+                  <HomeFooter currentSport={currentSport} />
+                </>
+              )}
           </>
         )}
     </div>

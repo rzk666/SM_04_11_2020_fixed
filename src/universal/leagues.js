@@ -8,12 +8,7 @@ const LEAGUES = {
     'Eredivisie',
     'Liga MX',
     'Champions League',
-    'Serie A Brazil',
-    'TEST LEAGUE',
-    'TEST LEAGUE',
-    'TEST LEAGUE',
-    'TEST LEAGUE',
-    'TEST LEAGUE'],
+    'Serie A Brazil'],
   basketball: [
     'Premier League',
     'La Liga',
