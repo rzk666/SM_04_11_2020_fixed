@@ -536,7 +536,7 @@ class CreateLeague extends Component {
         );
         break;
       case 4:
-        currentStage = <StageFour handleTableCreation={this.handleTableCreation()} {...this.state} />;
+        currentStage = <StageFour handleTableCreation={() => this.handleTableCreation()} {...this.state} />;
         break;
       default:
         break;
