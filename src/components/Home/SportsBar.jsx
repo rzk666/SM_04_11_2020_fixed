@@ -58,7 +58,7 @@ const getUnderbarColor = (sport) => {
   }
 };
 
-const SportsBar = ({ currentSport, changeSport }) => {
+const SportsBar = ({ isActive, currentSport, changeSport }) => {
   const sportIndex = SPORTS.indexOf(currentSport);
   const animateUnderbar = {
     x: getUnderbarX(sportIndex),
@@ -74,7 +74,7 @@ const SportsBar = ({ currentSport, changeSport }) => {
         <div
           key={`${sport}_${i}`}
           className={styles.sports_container}
-          onClick={() => changeSport(sport)}
+          onClick={isActive ? () => changeSport(sport) : null}
         >
           <img
             src={getSportImage(sport, sport === currentSport)}

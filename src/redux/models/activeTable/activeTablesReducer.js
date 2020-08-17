@@ -2,17 +2,19 @@
 import INITIAL_STATE from '../../../common/app-const';
 // Action Types
 import { UPDATE_TABLE, CONFIRM_BETS } from './activeTableTypes';
+// Misc
+const ORIGINAL_USERS = INITIAL_STATE.activeTable.users;
 
 const activeTable = (state = INITIAL_STATE.activeTable, action) => {
   switch (action.type) {
     case UPDATE_TABLE: {
       const { data, user } = action;
       const { players } = data;
-      const newUsersList = [...state.users].splice(0, players > 8 ? 8 : players - 1);
+      const newUsersList = [...ORIGINAL_USERS].splice(0, players > 8 ? 8 : players - 1);
       let shouldPushUser = true;
-      state.users.forEach((activeUser) => {
+      newUsersList.forEach((activeUser) => {
         if (activeUser.name === user.name) {
-          shouldPushUser = true;
+          shouldPushUser = false;
         }
       });
       if (shouldPushUser) {

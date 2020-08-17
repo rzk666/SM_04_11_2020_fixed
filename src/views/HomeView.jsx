@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 // Components
 import SportsBar from '../components/Home/SportsBar';
 import HomeFooter from '../components/Home/HomeFooter';
@@ -12,6 +13,12 @@ import RightArrowRed from '../static/images/icons/RightArrowRed.svg';
 import RightArrowGrey from '../static/images/icons/RightArrowGrey.svg';
 import RightArrowOrange from '../static/images/icons/RightArrowOrange.svg';
 import RightArrowCyan from '../static/images/icons/RightArrowCyan.svg';
+import Player from '../static/images/joinleague/player.svg';
+import Soccer from '../static/images/joinleague/soccer.svg';
+import Plus from '../static/images/joinleague/plus.svg';
+import Friends from '../static/images/joinleague/Friends.png';
+import Trophy from '../static/images/joinleague/trophy.svg';
+import Info from '../static/images/icons/InfoGrey.svg';
 import SoccerTopBanner from '../static/images/home/SoccerTopBanner.png';
 import HockeyTopBanner from '../static/images/home/HockeyTopBanner.png';
 import FootballTopBanner from '../static/images/home/FootballTopBanner.png';
@@ -54,8 +61,8 @@ const LEAGUE_VIEW_GAMES = [
   {
     name: 'Razi\'s League',
     description: 'Best league in the world',
-    players: 8,
-    matches: 8,
+    players: 9,
+    matches: 6,
     betSize: 30,
     invitedBy: 'Razi',
   }, {
@@ -64,24 +71,101 @@ const LEAGUE_VIEW_GAMES = [
     players: 8,
     matches: 8,
     betSize: 30,
-    invitedBy: 'Razi',
+    invitedBy: 'Barak',
   }, {
     name: 'Tal\'s League',
-    description: 'This is a beatem league of friends',
-    players: 8,
-    matches: 8,
-    betSize: 30,
-    invitedBy: 'Razi',
+    description: 'This is a beatem league of friends and it is a really great league',
+    players: 5,
+    matches: 12,
+    betSize: 15,
+    invitedBy: 'Tal',
   }];
-const JoinLeagueView = () => {
-  const x = 5;
-  return (
-    <div className={styles.stage_three_container}>
-      <div className={styles.title}>SELECT MATCHES</div>
 
-    </div>
+const JoinLeagueCard = ({
+  name, players, matches, description, betSize, invitedBy, joinTable,
+}) => {
+  const history = useHistory();
+  return (
+    <motion.div onClick={() => { joinTable(); history.push('/table'); }} whileTap={{ scale: 0.9 }} className={styles.card_container}>
+      <div className={styles.top_row}>
+        <div className={styles.stats}>
+          <div className={styles.players}>
+            <img
+              src={Player}
+              alt="Players"
+              style={{ marginRight: '5px' }}
+            />
+            {`${players} Players`}
+          </div>
+          <div className={styles.matches}>
+            <img
+              src={Soccer}
+              alt="Matches"
+              style={{ marginRight: '5px' }}
+            />
+            {`${matches} Matches`}
+          </div>
+        </div>
+        <img src={Info} alt="Info" className={styles.info} />
+      </div>
+      <div className={styles.middle}>
+        <img src={Friends} alt="Friends" className={styles.friends} />
+        <div className={styles.card_text}>
+          <span className={styles.card_title}>{name}</span>
+          <span className={styles.card_description}>{description}</span>
+        </div>
+        <div className={styles.card_join}>
+          <div className={styles.join}>
+            <img className={styles.plus} src={Plus} alt="Plus" />
+            JOIN
+          </div>
+          <div className={styles.prize}>
+            <img className={styles.trophy} src={Trophy} alt="Trophy" />
+            {`${betSize * players}€`}
+          </div>
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <span>
+          Invited by
+          <b style={{ marginLeft: '3px' }}>{invitedBy}</b>
+        </span>
+      </div>
+    </motion.div>
   );
 };
+
+const JoinLeagueView = ({ joinTable }) => (
+  <div className={styles.join_league_container}>
+    <div className={styles.title}>JOIN LEAGUE</div>
+    <div className={styles.invites_container}>
+      {LEAGUE_VIEW_GAMES.map((league) => {
+        const {
+          name, players, matches, description, betSize, invitedBy,
+        } = league;
+        return (
+          <JoinLeagueCard
+            joinTable={() => joinTable({
+              players,
+              leagues: ['Premiere League', 'La Liga', 'Champions League'],
+              prizePool: betSize * players,
+              name,
+              description,
+              type: 'a',
+              matches: [1, 2, 3, 4, 5, 6, 7, 8],
+            })}
+            name={name}
+            players={players}
+            matches={matches}
+            description={description}
+            betSize={betSize}
+            invitedBy={invitedBy}
+          />
+        );
+      })}
+    </div>
+  </div>
+);
 
 
 const Card = ({ type, currentSport, onClick }) => {
@@ -152,7 +236,7 @@ const HomeView = ({
   }
   return (
     <div className={styles.wrapper}>
-      <SportsBar currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
+      <SportsBar isActive={!creatingLeague && !joiningLeague} currentSport={currentSport} changeSport={(sport) => changeSport(sport)} />
       { creatingLeague ? (
         <CreateLeague
           updateActiveTable={(data) => updateActiveTable(data, user)}
@@ -163,7 +247,7 @@ const HomeView = ({
       )
         : (
           <>
-            { joiningLeague ? <JoinLeagueView />
+            { joiningLeague ? <JoinLeagueView joinTable={(data) => updateActiveTable(data, user)} />
               : (
                 <>
                   <AnimatePresence initial={false}>
