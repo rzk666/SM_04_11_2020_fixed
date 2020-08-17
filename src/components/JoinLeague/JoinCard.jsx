@@ -64,7 +64,9 @@ const Footer = ({ createdBy }) => (
   </div>
 );
 
-const JoinCard = ({ onClick, players, matches, currentPrice }) => {
+const JoinCard = ({
+  onClick, players, matches, currentPrice,
+}) => {
   const x = 5;
   return (
     <motion.div

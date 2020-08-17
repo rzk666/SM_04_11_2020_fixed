@@ -160,7 +160,9 @@ const StageOne = ({
   );
 };
 
-const StageTwo = ({ changeLeagueType, stage, updateStage }) => {
+const StageTwo = ({
+  players, changeLeagueType, stage, updateStage,
+}) => {
   const x = 5;
   return (
     <div className={styles.stage_two_container}>
@@ -168,7 +170,7 @@ const StageTwo = ({ changeLeagueType, stage, updateStage }) => {
         SELECT REWARDS
       </div>
       <div style={{ height: '315px', width: '100%' }}>
-        <LeagueRules onClick={(type) => changeLeagueType(type)} />
+        <LeagueRules players={players} onClick={(type) => changeLeagueType(type)} />
       </div>
       <Bottom
         stage={stage}

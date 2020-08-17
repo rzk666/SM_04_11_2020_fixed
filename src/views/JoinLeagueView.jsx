@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 // Images
 import PlayerIcon from '../static/images/joinleague/player.svg';
 import SoccerIcon from '../static/images/joinleague/soccer.svg';
@@ -17,7 +17,6 @@ import styles from './JoinLeagueView.module.scss';
 import { useHistory } from 'react-router-dom';
 // Misc
 import { FAKE_TABLES } from '../common/fake-data';
-import { useState } from 'react';
 
 const JoinModalContent = ({
   prize, close, matches, players, joinTable,
@@ -49,7 +48,7 @@ const JoinModalContent = ({
           </div>
         </div>
       </div>
-      <LeagueRules onClick={(type) => setType(type)} />
+      <LeagueRules players={players} onClick={(type) => setType(type)} />
       <div
         onClick={() => joinTable(type)}
         className="bottom"

@@ -11,9 +11,9 @@ import classnames from 'classnames';
 import styles from './LeagueRules.module.scss';
 
 const Rule = ({
-  img, isActive, title, subText, reduceTextSize, onClick,
+  img, isActive, title, subText, reduceTextSize, onClick, disabled,
 }) => (
-  <div onClick={() => onClick()} className={classnames(styles.rule, { [styles.active]: isActive })}>
+  <div style={disabled ? { opacity: 0.5 } : {}} onClick={() => { !disabled && onClick(); }} className={classnames(styles.rule, { [styles.active]: isActive })}>
     <div className={styles.first_section}>
       <div className={classnames(styles.radio, { [styles.active]: isActive })} />
       <motion.img initial={{ scale: 0.9 }} animate={isActive ? { scale: 1 } : { scale: 0.8 }} src={img} alt="trophies" />
@@ -27,13 +27,13 @@ const Rule = ({
   </div>
 );
 
-const LeagueRules = ({ onClick }) => {
+const LeagueRules = ({ players, onClick }) => {
   const [active, setActive] = useState(0);
   return (
     <div className={styles.wrapper}>
       <Rule isActive={active === 0} onClick={() => { onClick && onClick('a'); setActive(0); }} img={FirstPlace} title="THERE CAN ONLY BE ONE" subText="First Place: 100% Winning Prize" />
-      <Rule isActive={active === 1} onClick={() => { onClick && onClick('b'); setActive(1); }} img={SecondPlace} title="SPLIT THE FORTUNE" subText="First Place: 70%, Second Place: 30%" />
-      <Rule isActive={active === 2} onClick={() => { onClick && onClick('c'); setActive(2); }} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%, Third Place: 20%" />
+      <Rule disabled={players < 5} isActive={active === 1} onClick={() => { if (players >= 5) { onClick && onClick('b'); setActive(1); } }} img={SecondPlace} title="SPLIT THE FORTUNE" subText="First Place: 70%, Second Place: 30%" />
+      <Rule disabled={players < 9} isActive={active === 2} onClick={() => { if (players >= 9) { onClick && onClick('c'); setActive(2); } }} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%, Third Place: 20%" />
     </div>
   );
 };
