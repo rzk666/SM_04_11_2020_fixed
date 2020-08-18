@@ -94,26 +94,23 @@ const TableTopRow = () => (
     <div className={styles.points}>
       Pts
     </div>
-    <div className={styles.last_six}>
-      Last 6
-    </div>
   </div>
 );
 
-const LastSix = ({ data }) => (
-  <div className={styles.last_six_wrapper}>
-    {data.map((result) => (
-      <div
-        className={classnames(styles.dot,
-          {
-            [styles.win]: result === 'win',
-            [styles.draw]: result === 'draw',
-            [styles.lose]: result === 'lose',
-          })}
-      />
-    ))}
-  </div>
-);
+// const LastSix = ({ data }) => (
+//   <div className={styles.last_six_wrapper}>
+//     {data.map((result) => (
+//       <div
+//         className={classnames(styles.dot,
+//           {
+//             [styles.win]: result === 'win',
+//             [styles.draw]: result === 'draw',
+//             [styles.lose]: result === 'lose',
+//           })}
+//       />
+//     ))}
+//   </div>
+// );
 
 const TeamRow = ({ team }) => {
   const {
@@ -155,9 +152,6 @@ const TeamRow = ({ team }) => {
       </div>
       <div className={styles.points}>
         {points}
-      </div>
-      <div className={styles.last_six}>
-        <LastSix data={lastSixMatches} />
       </div>
     </div>
   );

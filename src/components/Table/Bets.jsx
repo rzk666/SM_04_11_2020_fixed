@@ -7,25 +7,12 @@ import { Input } from 'semantic-ui-react';
 // Animations
 import { motion, useAnimation } from 'framer-motion';
 // Images
-import Sevillia from '../../static/images/teams/Sevillia.png';
 import LockIcon from '../../static/images/icons/lockicon.svg';
 import EditIcon from '../../static/images/icons/editicon.svg';
 import GreenConfirm from '../../static/images/icons/confirmgreen.svg';
-import BeatEm from '../../static/images/splash/mainSplash.svg';
 // Utils
-import classnames from 'classnames';
-import { getShortDayName } from '../../common/libs';
-import { confirmBets } from '../../redux/models/auth/authActions';
+import { getShortDayName, getTeamImage } from '../../common/libs';
 
-// ----- Help Functions ----- //
-const getTeamImage = (team) => {
-  switch (team) {
-    case 'Barcelona':
-      return Sevillia;
-    default:
-      return Sevillia;
-  }
-};
 
 const getMatchRowIcon = (isLocked, matchTime) => {
   let icon;
@@ -79,9 +66,9 @@ const MatchBetRow = ({
         </div>
         <div className={styles.bets_container}>
           <div className={styles.bets}>
-            <Input value={currentBets.find((bet) => bet.matchId === id).homeScore} fluid className={styles.bet_input} onChange={(e, data) => setBets(id, 'homeScore', parseInt(data.value))} />
+            <Input disabled={isLocked} value={currentBets.find((bet) => bet.matchId === id).homeScore} fluid className={styles.bet_input} onChange={(e, data) => setBets(id, 'homeScore', parseInt(data.value[data.value.length - 1]))} />
             <p style={{ margin: '0 5px' }}>:</p>
-            <Input value={currentBets.find((bet) => bet.matchId === id).awayScore} fluid className={styles.bet_input} onChange={(e, data) => setBets(id, 'awayScore', parseInt(data.value))} />
+            <Input disabled={isLocked} value={currentBets.find((bet) => bet.matchId === id).awayScore} fluid className={styles.bet_input} onChange={(e, data) => setBets(id, 'awayScore', parseInt(data.value[data.value.length - 1]))} />
           </div>
           {matchTime === 0
             ? (
@@ -180,9 +167,14 @@ class Bets extends React.Component {
     const { availableMatches, activeTable } = this.props;
     const selectedMatches = activeTable.matches;
     const { matches } = availableMatches;
+    const sortedMatches = selectedMatches.sort((a, b) => {
+      const matchA = matches.find((match) => match.id === a);
+      const matchB = matches.find((match) => match.id === b);
+      return matchA.order - matchB.order;
+    });
     return (
       <div className={styles.container}>
-        {selectedMatches.map((matchId, index) => {
+        {sortedMatches.map((matchId, index) => {
           const currentMatch = matches.find((match) => match.id === matchId);
           const isLast = index === selectedMatches.length - 1;
           return (
@@ -195,9 +187,7 @@ class Bets extends React.Component {
                 />
               </div>
               {isLast && (
-              <div className={styles.dead_background}>
-                <img src={BeatEm} alt="beatem" />
-              </div>
+              <div className={styles.dead_background} />
               )}
             </>
           );

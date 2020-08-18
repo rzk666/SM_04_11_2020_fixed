@@ -21,7 +21,7 @@ const TableView = ({
   const { bets } = user;
   switch (currentView) {
     case 'LEADERBOARD':
-      View = <Leaderboard availableMatches={availableMatches} activeTable={activeTable} />;
+      View = <Leaderboard user={user} availableMatches={availableMatches} activeTable={activeTable} />;
       break;
     case 'MY BETS':
       View = (

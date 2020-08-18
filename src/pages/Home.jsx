@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Redux Actions
 import {
   login,
+  initBets,
 } from '../redux/models/auth/authActions';
 import {
   updateActiveTable,
@@ -28,6 +29,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (data) => dispatch(login(data)),
+  initBets: () => dispatch(initBets()),
   updateActiveTable: (data, user) => dispatch(updateActiveTable(data, user)),
 });
 

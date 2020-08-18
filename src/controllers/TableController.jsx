@@ -10,12 +10,10 @@ class TableController extends React.Component {
   }
 
   componentDidMount() {
-    const { initBets } = this.props;
-    initBets();
-  }
-
-  componentDidUpdate() {
-    console.log('I RAN');
+    const { activeTable, history } = this.props;
+    if (!activeTable.name) {
+      history.push('/');
+    }
   }
 
   changeView(view) {

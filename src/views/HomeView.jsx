@@ -285,6 +285,8 @@ const HomeView = ({
                           onClick={() => {
                             if (currentSport !== 'soccer') {
                               alert('Coming Soon...');
+                            } else if (!isLoggedIn) {
+                              history.push('/login');
                             } else {
                               toggleJoiningLeague();
                             }

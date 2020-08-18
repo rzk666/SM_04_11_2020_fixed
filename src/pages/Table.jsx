@@ -3,7 +3,6 @@ import React from 'react';
 // Utils
 import { connect } from 'react-redux';
 // Redux Actions
-import { initBets } from '../redux/models/auth/authActions';
 import { confirmBets } from '../redux/models/activeTable/activeTableActions';
 // Hocs
 import page from '../hocs/page';
@@ -24,7 +23,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   confirmBets: (data, username) => dispatch(confirmBets(data, username)),
-  initBets: () => dispatch(initBets()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((Table), pages.TABLE));

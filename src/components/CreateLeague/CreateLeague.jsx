@@ -20,28 +20,17 @@ import Messi from '../../static/images/profiles/Messi.png';
 import Neymar from '../../static/images/profiles/Neymar.png';
 import Ronaldo from '../../static/images/profiles/Ronaldo.png';
 import Buffon from '../../static/images/profiles/Buffon.png';
-// TEAM IMAGES
-import Sevillia from '../../static/images/teams/Sevillia.png';
 // Animations
 import { motion } from 'framer-motion';
 // Styles
 import styles from './CreateLeague.module.scss';
 // Utils
-import { getShortDayName } from '../../common/libs';
+import { getShortDayName, getTeamImage } from '../../common/libs';
 import classnames from 'classnames';
 import { useHistory } from 'react-router-dom';
 
 // Help Functions
 const getLeagueMatches = (matches, league) => matches.filter((match) => match.league === league);
-
-const getTeamImage = (team) => {
-  switch (team) {
-    case 'test':
-      return '';
-    default:
-      return Sevillia;
-  }
-};
 
 const getLeaguesArray = (matches) => {
   const leagues = [];
@@ -83,6 +72,8 @@ const StageOne = ({
   changeLeagueDescription,
   changeLeagueBet,
   changeLeaguePlayers,
+  unlimited,
+  toggleUnlimited,
 }) => {
   const [weeklyActive, setActive] = useState(true);
   return (
@@ -131,12 +122,13 @@ const StageOne = ({
               iconPosition="left"
               className={classnames(styles.input_type_two, { [styles.empty]: !players })}
               fluid
+              disabled={unlimited}
               placeholder="UNLIMITED"
             />
           </div>
         </div>
-        <div className={styles.unlimited} onClick={() => alert('unlimited')}>
-          <div className={classnames(styles.radio, { [styles.active]: true })} />
+        <div className={styles.unlimited} onClick={() => toggleUnlimited()}>
+          <div className={classnames(styles.radio, { [styles.active]: unlimited })} />
           Create league with unlimited number of players
         </div>
         <div className={styles.weekly_season_row}>
@@ -169,8 +161,8 @@ const StageTwo = ({
       <div className={styles.title}>
         SELECT REWARDS
       </div>
-      <div style={{ height: '315px', width: '100%' }}>
-        <LeagueRules players={players} onClick={(type) => changeLeagueType(type)} />
+      <div style={{ height: '70%', width: '100%' }}>
+        <LeagueRules creating players={players} onClick={(type) => changeLeagueType(type)} />
       </div>
       <Bottom
         stage={stage}
@@ -180,7 +172,9 @@ const StageTwo = ({
   );
 };
 
-const Match = ({ onPick, isActive, match }) => {
+const Match = ({
+  onPick, isActive, match, isLast,
+}) => {
   const {
     homeTeam,
     awayTeam,
@@ -189,6 +183,8 @@ const Match = ({ onPick, isActive, match }) => {
     drawOdds,
     startDate,
   } = match;
+  const lastStyles = isLast ? { marginBottom: '111px!important' } : {};
+  console.log(lastStyles);
   // Team Component
   const Team = ({ name }) => (
     <div className={styles.team_container}>
@@ -197,7 +193,7 @@ const Match = ({ onPick, isActive, match }) => {
     </div>
   );
   return (
-    <div className={styles.match_container} onClick={() => onPick()}>
+    <div style={lastStyles} className={classnames(styles.match_container, { [styles.last_match]: isLast })} onClick={() => onPick()}>
       <motion.div
         animate={{ backgroundColor: isActive ? '#60d587' : '#cbcbcb' }}
         className={classnames(styles.pick_btn, { [styles.is_active]: isActive })}
@@ -231,6 +227,7 @@ const LeagueRow = ({
   img,
   selectedMatches,
   toggleMatch,
+  isLast,
 }) => {
   let selectedCounter = 0;
   matches.forEach((match) => {
@@ -241,6 +238,7 @@ const LeagueRow = ({
   return (
     <>
       <div
+        style={(isLast && !isActive) ? { marginBottom: '111px' } : {}}
         onClick={() => changeActiveLeague(name)}
         className={styles.league_row_container}
       >
@@ -256,7 +254,7 @@ const LeagueRow = ({
       <div className={styles.divider} />
       { isActive && (
       <div className={styles.matches_container}>
-        {matches.map((match) => (<Match isActive={selectedMatches.includes(match.id)} onPick={() => toggleMatch(match.id)} match={match} />))}
+        {matches.map((match, i) => (<Match isLast={isLast && (i === (matches.length - 1))} isActive={selectedMatches.includes(match.id)} onPick={() => toggleMatch(match.id)} match={match} />))}
       </div>
       )}
     </>
@@ -265,7 +263,7 @@ const LeagueRow = ({
 
 const StageThree = ({
   changeActiveLeague,
-  activeLeague,
+  activeLeagues,
   updateStage,
   availableMatches,
   stage,
@@ -288,7 +286,7 @@ const StageThree = ({
         selectedMatches={selectedMatches}
         toggleMatch={(match) => toggleMatch(match)}
         changeActiveLeague={() => changeActiveLeague('Premiere League')}
-        isActive={activeLeague === 'Premiere League'}
+        isActive={activeLeagues.includes('Premiere League')}
         matches={getLeagueMatches(matches, 'Premiere League')}
         name="Premiere League"
         img={PremiereLeague}
@@ -297,16 +295,17 @@ const StageThree = ({
         selectedMatches={selectedMatches}
         toggleMatch={(match) => toggleMatch(match)}
         changeActiveLeague={() => changeActiveLeague('La Liga')}
-        isActive={activeLeague === 'La Liga'}
+        isActive={activeLeagues.includes('La Liga')}
         matches={getLeagueMatches(matches, 'La Liga')}
         name="La Liga"
         img={LaLiga}
       />
       <LeagueRow
+        isLast
         selectedMatches={selectedMatches}
         toggleMatch={(match) => toggleMatch(match)}
         changeActiveLeague={() => changeActiveLeague('Champions League')}
-        isActive={activeLeague === 'Champions League'}
+        isActive={activeLeagues.includes('Champions League')}
         matches={getLeagueMatches(matches, 'Champions League')}
         name="Champions League"
         img={Champions}
@@ -334,8 +333,9 @@ const Bottom = ({
   );
 };
 
-const FriendRow = ({ invited, user }) => {
+const FriendRow = ({ user }) => {
   const { name, profilePicture } = user;
+  const [invited, invite] = useState(false);
   return (
     <>
       <div className={styles.friend_row}>
@@ -343,6 +343,7 @@ const FriendRow = ({ invited, user }) => {
         {name}
         <motion.div
           whileTap={{ scale: 0.9 }}
+          onClick={() => invite(true)}
           className={classnames(styles.invite_btn, { [styles.invited]: invited })}
         >
           { invited ? 'INVITED' : 'INVITE'}
@@ -384,10 +385,10 @@ const StageFour = ({ handleTableCreation, stage }) => {
         className={styles.search}
       />
       <div className={styles.friends_container}>
-        <FriendRow invited={false} user={FAKE_USERS[0]} />
-        <FriendRow invited user={FAKE_USERS[1]} />
-        <FriendRow invited={false} user={FAKE_USERS[2]} />
-        <FriendRow invited={false} user={FAKE_USERS[3]} />
+        <FriendRow user={FAKE_USERS[0]} />
+        <FriendRow user={FAKE_USERS[1]} />
+        <FriendRow user={FAKE_USERS[2]} />
+        <FriendRow user={FAKE_USERS[3]} />
       </div>
       <Bottom
         stage={stage}
@@ -418,13 +419,14 @@ class CreateLeague extends Component {
         img: RightArrowWhite,
         text: 'SELECT REWARDS',
       },
+      unlimited: false,
       leagueName: '',
       leagueDescription: '',
       tableType: 'a',
       selectedMatches: [],
       betSize: 0,
       players: 0,
-      activeLeague: '',
+      activeLeagues: [],
     };
   }
 
@@ -436,6 +438,7 @@ class CreateLeague extends Component {
       selectedMatches,
       betSize,
       players,
+      unlimited,
     } = this.state;
     const {
       user, history, availableMatches, updateActiveTable,
@@ -443,7 +446,7 @@ class CreateLeague extends Component {
     const { matches } = availableMatches;
     const leagues = getLeaguesArray(matches);
     updateActiveTable({
-      players,
+      players: unlimited ? 10 : players,
       leagues,
       prizePool: betSize * players,
       name: leagueName,
@@ -461,6 +464,11 @@ class CreateLeague extends Component {
     } else {
       this.setState({ selectedMatches: [...selectedMatches, matchId] });
     }
+  }
+
+  toggleUnlimited() {
+    const { unlimited } = this.state;
+    this.setState({ unlimited: !unlimited });
   }
 
   changeLeagueBet(betSize) {
@@ -484,11 +492,12 @@ class CreateLeague extends Component {
   }
 
   changeActiveLeague(leagueName) {
-    const { activeLeague } = this.state;
-    if (activeLeague === leagueName) {
-      this.setState({ activeLeague: '' });
+    const { activeLeagues } = this.state;
+    if (activeLeagues.includes(leagueName)) {
+      const newActiveLeagues = [...activeLeagues].filter((league) => league !== leagueName);
+      this.setState({ activeLeagues: newActiveLeagues });
     } else {
-      this.setState({ activeLeague: leagueName });
+      this.setState({ activeLeagues: [...activeLeagues, leagueName] });
     }
   }
 
@@ -498,7 +507,7 @@ class CreateLeague extends Component {
 
 
   render() {
-    const { stage, activeLeague, selectedMatches } = this.state;
+    const { stage, activeLeagues, selectedMatches } = this.state;
     const { availableMatches } = this.props;
     const { stageNumber } = stage;
     let currentStage;
@@ -507,6 +516,7 @@ class CreateLeague extends Component {
         currentStage = (
           <StageOne
             {...this.state}
+            toggleUnlimited={() => this.toggleUnlimited()}
             changeLeagueBet={(bet) => this.changeLeagueBet(bet)}
             changeLeaguePlayers={(players) => this.changeLeaguePlayers(players)}
             changeLeagueName={(name) => this.changeLeagueName(name)}
@@ -530,7 +540,7 @@ class CreateLeague extends Component {
             toggleMatch={(matchId) => this.toggleMatch(matchId)}
             selectedMatches={selectedMatches}
             stage={stage}
-            activeLeague={activeLeague}
+            activeLeagues={activeLeagues}
             changeActiveLeague={(league) => this.changeActiveLeague(league)}
             availableMatches={availableMatches}
             updateStage={(stage) => this.updateStage(stage)}

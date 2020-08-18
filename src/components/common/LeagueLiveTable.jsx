@@ -3,12 +3,11 @@ import React from 'react';
 import styles from './LeagueLiveTable.module.scss';
 // Images
 import PremiereLeague from '../../static/images/leagues/premier.png';
-import Sevillia from '../../static/images/teams/Sevillia.png';
 import Champions from '../../static/images/leagues/champions.png';
 import LaLiga from '../../static/images/leagues/laliga.png';
 // Util
 import classnames from 'classnames';
-import { getShortDayName } from '../../common/libs';
+import { getShortDayName, getTeamImage } from '../../common/libs';
 
 // FAKE DATA
 import { LA_LIGA_TABLE, PREMIERE_LEAGUE_TABLE } from '../../common/fake-data';
@@ -24,15 +23,6 @@ const getLeagueImage = (league) => {
       return PremiereLeague;
     default:
       return PremiereLeague;
-  }
-};
-
-const getTeamImage = (team) => {
-  switch (team) {
-    case 'Barcelona':
-      return Sevillia;
-    default:
-      return Sevillia;
   }
 };
 
@@ -68,26 +58,23 @@ const TableTopRow = () => (
     <div className={styles.points}>
       Pts
     </div>
-    <div className={styles.last_six}>
-      Last 6
-    </div>
   </div>
 );
 
-const LastSix = ({ data }) => (
-  <div className={styles.last_six_wrapper}>
-    {data.map((result) => (
-      <div
-        className={classnames(styles.dot,
-          {
-            [styles.win]: result === 'win',
-            [styles.draw]: result === 'draw',
-            [styles.lose]: result === 'lose',
-          })}
-      />
-    ))}
-  </div>
-);
+// const LastSix = ({ data }) => (
+//   <div className={styles.last_six_wrapper}>
+//     {data.map((result) => (
+//       <div
+//         className={classnames(styles.dot,
+//           {
+//             [styles.win]: result === 'win',
+//             [styles.draw]: result === 'draw',
+//             [styles.lose]: result === 'lose',
+//           })}
+//       />
+//     ))}
+//   </div>
+// );
 
 const TeamRow = ({ team }) => {
   const {
@@ -95,8 +82,12 @@ const TeamRow = ({ team }) => {
   } = team;
   return (
     <div className={styles.team_row_container}>
-      <div className={styles.position}>
+      <div style={{ position: 'relative' }} className={styles.position}>
         {rank}
+        <div style={{
+          position: 'absolute', right: '0', width: '5px', height: '5px', borderRadius: '255px', backgroundColor: '#e3e3e3',
+        }}
+        />
       </div>
       <div className={styles.team}>
         <img
@@ -129,9 +120,6 @@ const TeamRow = ({ team }) => {
       </div>
       <div className={styles.points}>
         {points}
-      </div>
-      <div className={styles.last_six}>
-        <LastSix data={lastSixMatches} />
       </div>
     </div>
   );
@@ -177,6 +165,9 @@ const LeagueLiveTable = ({
   type,
   matches,
 }) => {
+  if (matches) {
+    matches.sort((a, b) => b.matchTime - a.matchTime);
+  }
   const currentLeagueTable = currentLeague === 'Premiere League' ? PREMIERE_LEAGUE_TABLE : LA_LIGA_TABLE;
   return (
     <div className={styles.table_container}>

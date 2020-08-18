@@ -8,6 +8,10 @@ import Kane from '../static/images/profiles/Kane.png';
 import Griezmann from '../static/images/profiles/Griezmann.png';
 
 const INITIAL_STATE = {
+  webSocket: {
+    connected: false,
+    isLoading: true,
+  },
   auth: {
     isLoading: false,
     hasError: false,
@@ -28,9 +32,54 @@ const INITIAL_STATE = {
         leaguesPlayed: 0,
       },
       currentScore: 0,
-      bets: [],
+      bets: [{
+        matchId: 1,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 2,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 3,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 4,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 5,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 6,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 7,
+        homeScore: 0,
+        awayScore: 0,
+      },
+      {
+        matchId: 8,
+        homeScore: 0,
+        awayScore: 0,
+      }],
     },
   },
+  // NOTE ABOUT ORDER:
+  // Match is live -> order 1
+  // Match is in HT -> order 2
+  // Match is locked but not started -> order 3
+  // Match is happening in future -> order 4
+  // Match is over (FT) -> order 5
   availableMatches: {
     updatedAt: new Date(),
     matches: [{
@@ -41,12 +90,13 @@ const INITIAL_STATE = {
       homeOdds: 190,
       awayOdds: 200,
       drawOdds: 100,
-      startDate: new Date(2020, 8, 13, 20),
+      startDate: new Date(new Date().getTime() + 15 * 60000),
       isLocked: true,
       homeScore: 0,
       awayScore: 0,
       // This could be 'HT', 'FT', or a minute in the match
       matchTime: 0,
+      order: 3,
     },
     {
       league: 'La Liga',
@@ -56,11 +106,12 @@ const INITIAL_STATE = {
       homeOdds: 55,
       awayOdds: 90,
       drawOdds: 145,
-      startDate: new Date(2020, 8, 13, 20),
-      isLocked: false,
+      startDate: new Date(),
+      isLocked: true,
       homeScore: 0,
       awayScore: 0,
-      matchTime: 2,
+      matchTime: 18,
+      order: 1,
     },
     {
       league: 'La Liga',
@@ -71,10 +122,11 @@ const INITIAL_STATE = {
       awayOdds: 140,
       drawOdds: 220,
       startDate: new Date(2020, 8, 13, 22),
-      isLocked: false,
+      isLocked: true,
       homeScore: 0,
       awayScore: 0,
       matchTime: 'FT',
+      order: 5,
     },
     {
       league: 'Premiere League',
@@ -85,10 +137,11 @@ const INITIAL_STATE = {
       awayOdds: 100,
       drawOdds: 55,
       startDate: new Date(2020, 8, 13, 22),
-      isLocked: false,
+      isLocked: true,
       homeScore: 0,
       awayScore: 0,
-      matchTime: 0,
+      matchTime: 'HT',
+      order: 2,
     },
     {
       league: 'Premiere League',
@@ -103,6 +156,7 @@ const INITIAL_STATE = {
       homeScore: 0,
       awayScore: 0,
       matchTime: 0,
+      order: 4,
     },
     {
       league: 'Premiere League',
@@ -117,6 +171,7 @@ const INITIAL_STATE = {
       homeScore: 0,
       awayScore: 0,
       matchTime: 0,
+      order: 4,
     },
     {
       league: 'Champions League',
@@ -131,6 +186,7 @@ const INITIAL_STATE = {
       homeScore: 0,
       awayScore: 0,
       matchTime: 0,
+      order: 4,
     },
     {
       league: 'Champions League',
@@ -145,6 +201,7 @@ const INITIAL_STATE = {
       homeScore: 0,
       awayScore: 0,
       matchTime: 0,
+      order: 4,
     }],
   },
   activeTable: {
@@ -207,43 +264,43 @@ const INITIAL_STATE = {
       currentScore: 0,
       bets: [{
         matchId: 1,
-        homeScore: 0,
-        awayScore: 2,
+        homeScore: 1,
+        awayScore: 4,
       },
       {
         matchId: 2,
-        homeScore: 1,
-        awayScore: 2,
-      },
-      {
-        matchId: 3,
-        homeScore: 2,
-        awayScore: 0,
-      },
-      {
-        matchId: 4,
-        homeScore: 3,
-        awayScore: 1,
-      },
-      {
-        matchId: 5,
         homeScore: 5,
         awayScore: 2,
       },
       {
-        matchId: 6,
+        matchId: 3,
+        homeScore: 5,
+        awayScore: 4,
+      },
+      {
+        matchId: 4,
+        homeScore: 2,
+        awayScore: 2,
+      },
+      {
+        matchId: 5,
         homeScore: 3,
         awayScore: 2,
       },
       {
+        matchId: 6,
+        homeScore: 2,
+        awayScore: 4,
+      },
+      {
         matchId: 7,
-        homeScore: 3,
+        homeScore: 1,
         awayScore: 3,
       },
       {
         matchId: 8,
-        homeScore: 1,
-        awayScore: 1,
+        homeScore: 2,
+        awayScore: 3,
       }],
     },
     {

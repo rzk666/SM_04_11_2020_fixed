@@ -14,6 +14,8 @@ class HomeController extends React.Component {
   }
 
   componentDidMount() {
+    const { initBets } = this.props;
+    initBets();
     _LoadImages('home');
   }
 

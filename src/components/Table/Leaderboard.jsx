@@ -8,17 +8,16 @@ import GoldTrophy from '../../static/images/leaderboard/GoldTrophy.svg';
 import SilverTrophy from '../../static/images/leaderboard/SilverTrophy.svg';
 import BronzeTrophy from '../../static/images/leaderboard/BronzeTrophy.svg';
 import PremiereLeague from '../../static/images/leagues/premier.png';
+import Lock from '../../static/images/icons/lockicon.svg';
 import Champions from '../../static/images/leagues/champions.png';
 import LaLiga from '../../static/images/leagues/laliga.png';
 import DownArrow from '../../static/images/icons/DownArrow.svg';
-import Sevillia from '../../static/images/teams/Sevillia.png';
 // Animations
 import { motion } from 'framer-motion';
 // Utils
 import classnames from 'classnames';
-import { getShortDayName } from '../../common/libs';
+import { calculateMatchScore, getShortDayName, getTeamImage } from '../../common/libs';
 
-// ----- Help Functions ----- //
 // ----- Help Functions ----- //
 const getLeagueImage = (league) => {
   switch (league) {
@@ -33,54 +32,88 @@ const getLeagueImage = (league) => {
   }
 };
 
-const getTeamImage = (team) => {
-  switch (team) {
-    case 'Barcelona':
-      return Sevillia;
-    default:
-      return Sevillia;
-  }
-};
-
-const UserBets = ({ user, matches }) => (
-  <div className={styles.bets_container}>
-    {matches.map((match) => {
-      const {
-        matchTime,
-        isLocked,
-        homeTeam,
-        awayTeam,
-        startDate,
-        homeScore,
-        awayScore,
-      } = match;
-      const isMatchLive = matchTime && Number.isInteger(matchTime);
-      return (
-        <div className={classnames(styles.match_row_container, { [styles.locked]: !isLocked })}>
-          <div className={classnames(styles.time, { [styles.has_not_started]: !matchTime, [styles.is_live]: isMatchLive })}>
-            {matchTime || ''}
-          </div>
-          <div className={styles.status_container}>
-            <p className={styles.home}>{homeTeam}</p>
-            <img src={getTeamImage(homeTeam)} alt="hometeam" />
-            <div className={classnames(styles.score, { [styles.is_live]: (matchTime !== 0 && matchTime !== 'FT'), [styles.not_started]: !matchTime })}>
-              { matchTime
-                ? <p>{`${homeScore} - ${awayScore}`}</p>
-                : (
-                  <>
-                    <p>{`${getShortDayName(startDate.getDay())}, ${startDate.getDate()}/${startDate.getMonth() + 1}`}</p>
-                    <p>{`${startDate.getHours()}:00`}</p>
-                  </>
-                )}
+const UserBets = ({ user, matches }) => {
+  const sortedMatches = [...matches].sort((a, b) => a.order - b.order);
+  const { bets } = user;
+  return (
+    <div className={styles.bets_container}>
+      {sortedMatches.map((match) => {
+        const {
+          homeTeam,
+          awayTeam,
+          homeScore,
+          awayScore,
+          matchTime,
+          isLocked,
+          homeOdds,
+          drawOdds,
+          awayOdds,
+          id,
+        } = match;
+        const currentBet = bets.find((bet) => bet.matchId === id);
+        const homeBet = currentBet.homeScore;
+        const awayBet = currentBet.awayScore;
+        let awayTeamName;
+        let homeTeamName;
+        if (homeTeam === 'Manchester United') {
+          homeTeamName = 'Man. Utd';
+        } else if (homeTeam === 'Manchester City') {
+          homeTeamName = 'Man. City';
+        } else {
+          homeTeamName = homeTeam;
+        }
+        if (awayTeam === 'Manchester United') {
+          awayTeamName = 'Man. Utd';
+        } else if (awayTeam === 'Manchester City') {
+          awayTeamName = 'Man. City';
+        } else {
+          awayTeamName = awayTeam;
+        }
+        const lockedButNotStarted = isLocked && matchTime === 0;
+        return (
+          <div className={classnames(styles.match_row, { [styles.hidden]: !isLocked })}>
+            { lockedButNotStarted
+              ? (
+                <img src={Lock} alt="Locked Match" className={styles.lock} />
+              )
+              : (
+                <div style={matchTime === 0 ? { opacity: 0 } : {}} className={classnames(styles.time, { [styles.ft_ht]: (matchTime === 'FT' || matchTime === 'HT') })}>
+                  {matchTime}
+                </div>
+              )}
+            <div className={styles.home_team}>
+              {homeTeamName}
+              <img src={getTeamImage(homeTeam)} alt="Home Team" className={styles.team_img} />
             </div>
-            <img src={getTeamImage(awayTeam)} alt="hometeam" />
-            <p className={styles.away}>{awayTeam}</p>
+            <div className={classnames(styles.score, { [styles.running]: matchTime !== 0 && matchTime !== 'FT' })}>
+              { !isLocked ? '0 : 0' : `${homeBet} : ${awayBet}`}
+            </div>
+            <div className={styles.away_team}>
+              <img src={getTeamImage(awayTeam)} alt="Home Team" className={styles.team_img} />
+              {awayTeamName}
+            </div>
+            <div className={classnames(styles.points, { [styles.running]: matchTime !== 0 && matchTime !== 'FT' })}>
+              <div className={styles.score}>
+                <p>
+                  {calculateMatchScore(
+                    homeScore,
+                    homeBet,
+                    awayScore,
+                    awayBet,
+                    homeOdds,
+                    awayOdds,
+                    drawOdds,
+                  )}
+                </p>
+                <p style={{ fontSize: '10px' }}>PTS</p>
+              </div>
+            </div>
           </div>
-        </div>
-      );
-    })}
-  </div>
-);
+        );
+      })}
+    </div>
+  );
+};
 
 const User = ({
   user, rank, prizes, type, matches,
@@ -174,8 +207,6 @@ const User = ({
   );
 };
 
-// START NEXT -> ADD USER BETS & FAKE_USER BETS AND TABLE IS D O N E(!)
-
 const Leaderboard = ({ activeTable, availableMatches }) => {
   const {
     name,
@@ -187,6 +218,7 @@ const Leaderboard = ({ activeTable, availableMatches }) => {
     matches,
     users,
   } = activeTable;
+  console.log(users);
   const filteredMatches = availableMatches.matches.filter((match) => matches.includes(match.id));
   let aPrecentage;
   if (type === 'a') {
@@ -206,6 +238,7 @@ const Leaderboard = ({ activeTable, availableMatches }) => {
   } else {
     calculatedPrizes = [Math.round(prizePool / 100 * 50), Math.round(prizePool / 100 * 30), Math.round(prizePool / 100 * 20)];
   }
+  // Wait for user bets
   return (
     <div className={styles.container}>
       <div className={styles.top_bg_container}>
