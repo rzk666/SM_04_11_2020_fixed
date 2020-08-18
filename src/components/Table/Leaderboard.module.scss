@@ -280,19 +280,23 @@
                     border-radius: 255px;
                 }
                 .name{
-                    min-width: 120px;
                     color: var(--main-solid-dark-grey);
                     margin:0;
                     font-weight: normal;
                     font-size: 9px;
+                    min-width: 90px;
                 }
                 .prize_score_container{
+                    &.not_top{
+                        padding-left: 72px;
+                    }
                     flex: 1;
                     margin-right: 15px;
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    justify-content: flex-end;
+                    padding-left: 5px;
+                    justify-content: flex-start;
                     font-size: 19px;
                     font-weight: bold;
                     color: var(--main-solid-dark-grey);

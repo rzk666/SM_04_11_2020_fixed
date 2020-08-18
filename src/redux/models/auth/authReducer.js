@@ -73,6 +73,7 @@ export const USERS = {
     notifications: 1,
     bets: [],
     currentScore: 0,
+    previousScore: 0,
     stats: {
       score: 1000,
       accuracyRate: 76.5,
@@ -95,6 +96,7 @@ export const USERS = {
     notifications: 3,
     balance: 980,
     currentScore: 0,
+    previousScore: 0,
     profilePicture: Tal,
     friends: ['lee', 'barak', 'razi'],
     stats: {
@@ -116,6 +118,7 @@ export const USERS = {
     score: 1200,
     balance: 455,
     currentScore: 0,
+    previousScore: 0,
     notifications: 4,
     achievements: [],
     bets: [],
@@ -137,6 +140,7 @@ export const USERS = {
     rank: 'pro',
     name: 'Barak Bouaniche',
     currentScore: 0,
+    previousScore: 0,
     email: 'barak@beatem.uk',
     score: 1231,
     balance: 1270,

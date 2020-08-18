@@ -90,13 +90,26 @@ export const calculateUserScore = (user, matches) => {
 };
 
 export const calculateTotalScore = (users, matches) => {
-  console.log(users);
-  console.log(matches);
   let totalScore = 0;
   users.map((user) => {
     totalScore += calculateUserScore(user, matches);
   });
   return totalScore;
+};
+
+export const calculateTotalTime = (matches) => {
+  let totalTime = 0;
+  matches.map((match) => {
+    const { matchTime } = match;
+    if (matchTime === 'HT') {
+      totalTime += 45;
+    } else if (matchTime === 'FT') {
+      totalTime += 90;
+    } else {
+      totalTime += matchTime;
+    }
+  });
+  return totalTime;
 };
 
 export const getTeamImage = (team) => {

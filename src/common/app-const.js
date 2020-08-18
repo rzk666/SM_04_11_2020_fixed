@@ -262,6 +262,7 @@ const INITIAL_STATE = {
       name: 'Lionel Messi',
       profilePicture: Messi,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 1,
@@ -307,6 +308,7 @@ const INITIAL_STATE = {
       name: 'Cristiano Ronaldo',
       profilePicture: Ronaldo,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 1,
@@ -352,6 +354,7 @@ const INITIAL_STATE = {
       name: 'Neymar Santos Junior',
       profilePicture: Neymar,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 0,
@@ -397,6 +400,7 @@ const INITIAL_STATE = {
       name: 'Gianluigi Buffon',
       profilePicture: Buffon,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 1,
@@ -442,6 +446,7 @@ const INITIAL_STATE = {
       name: 'Eden Hazard',
       profilePicture: Hazard,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 0,
@@ -487,6 +492,7 @@ const INITIAL_STATE = {
       name: 'Harry Kane',
       profilePicture: Kane,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 0,
@@ -532,6 +538,7 @@ const INITIAL_STATE = {
       name: 'Antoine Griezmann',
       profilePicture: Griezmann,
       currentScore: 0,
+      previousScore: 0,
       bets: [{
         matchId: 1,
         homeScore: 0,

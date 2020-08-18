@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// Components
+import CountUp from 'react-countup';
 // Styles
 import styles from './Leaderboard.module.scss';
 // Images
@@ -16,10 +18,12 @@ import DownArrow from '../../static/images/icons/DownArrow.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 // Utils
 import classnames from 'classnames';
+import { easeOutCubic } from 'js-easing-functions';
 import {
   calculateTotalScore,
   calculateUserScore,
   calculateMatchScore,
+  calculateTotalTime,
   getShortDayName,
   getTeamImage,
 } from '../../common/libs';
@@ -79,6 +83,9 @@ const UserBets = ({ user, matches, isPlayer }) => {
           awayTeamName = awayTeam;
         }
         const lockedButNotStarted = isLocked && matchTime === 0;
+        console.log(`I AM MATCH ${id}`);
+        console.log(` MY MATCH TIME IS ${matchTime}`);
+        console.log(`AM I SHOWING LOCK? ${lockedButNotStarted}`);
         return (
           <div className={classnames(styles.match_row, { [styles.hidden]: !isLocked && !isPlayer })}>
             { lockedButNotStarted
@@ -125,12 +132,28 @@ const UserBets = ({ user, matches, isPlayer }) => {
 };
 
 const User = ({
-  user, rank, prizes, type, matches, isPlayer, totalUsers,
+  user, rank, prizes, type, matches, isPlayer, totalUsers, isRunning, toggleActive, activeUsers,
 }) => {
   const totalDelay = 0.85 + totalUsers * 0.1;
-  const { name, profilePicture, currentScore } = user;
-  const [isActive, toggleActive] = useState(false);
-  const isTopThree = (rank === 1 || rank === 2 || rank === 3);
+  const {
+    name, profilePicture, currentScore, previousScore,
+  } = user;
+  const isActive = activeUsers.includes(name);
+  let isTop = false;
+  switch (type) {
+    case 'a':
+      if (rank === 1) {
+        isTop = true;
+      }
+    case 'b':
+      if (rank === 1 || rank === 2) {
+        isTop = true;
+      }
+    case 'c':
+      if (rank === 1 || rank === 2 || rank === 3) {
+        isTop = true;
+      }
+  }
   let shadowOne;
   let shadowTwo;
   let shadowLast;
@@ -170,7 +193,7 @@ const User = ({
       >
         <div
           style={{ boxShadow: `0 2px 3px 0 ${shadowOne || 'rgba(0,0,0,0)'}` }}
-          onClick={() => toggleActive(!isActive)}
+          onClick={() => toggleActive(name)}
           className={classnames(styles.user_row_container,
             {
               [styles.first]: rank === 1,
@@ -193,7 +216,7 @@ const User = ({
               initial={{ opacity: 0 }}
               transition={{ ease: 'easeInOut', duration: 0.5, delay: 0.2 + rank * 0.12 }}
               animate={{ opacity: 1 }}
-              className={styles.prize_score_container}
+              className={classnames(styles.prize_score_container, { [styles.not_top]: !isTop })}
             >
               { rank === 1 && <img src={GoldTrophy} alt="trophy" />}
               { rank === 1 && <div className={styles.prize}>{`€${prizes[0]}`}</div>}
@@ -202,8 +225,19 @@ const User = ({
               { (rank === 3 && (type === 'c')) && <img src={BronzeTrophy} alt="trophy" />}
               { (rank === 3 && (type === 'c')) && <div className={styles.prize}>{`€${prizes[2]}`}</div>}
               <div className={styles.score}>
-                <p>{currentScore}</p>
-                <p style={{ fontSize: '10px' }}>PTS</p>
+                <p>
+                  { isRunning ? (
+                    <CountUp
+                      easingFn={(elapsed, startPosition, endPosition, duration) => easeOutCubic(elapsed, startPosition, endPosition, duration)}
+                      style={{ color: previousScore > currentScore ? '#ff6464' : (previousScore < currentScore ? '#57bb78' : '53575a#') }}
+                      start={previousScore}
+                      end={currentScore}
+                      duration={3}
+                    />
+                  ) : currentScore}
+
+                </p>
+                <p style={{ fontSize: '10px', color: (isRunning && previousScore !== currentScore) ? (previousScore > currentScore) ? '#ff6464' : '#57bb78' : '#53575a' }}>PTS</p>
               </div>
             </motion.div>
             <motion.img
@@ -226,8 +260,12 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isRunning: false,
       filteredMatches: [],
       previousTotalScore: 0,
+      previousTotalTime: 0,
+      currentUsers: props.activeTable.users,
+      activeUsers: [],
     };
   }
 
@@ -240,24 +278,60 @@ class Leaderboard extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { previousTotalScore } = this.state;
+    const { previousTotalTime, previousTotalScore, currentUsers } = this.state;
     const { availableMatches, activeTable } = this.props;
     const { matches } = activeTable;
     // Handle filtered matches first
     const includedMatches = availableMatches.matches.filter((match) => matches.includes(match.id));
-    const filteredMatches = includedMatches.filter((match) => match.isLocked);
-    if (prevState.filteredMatches.length !== filteredMatches.length) {
-      this.setState({ filteredMatches });
+    const newFilteredMatches = includedMatches.filter((match) => match.isLocked);
+    if (prevState.filteredMatches.length !== newFilteredMatches.length) {
+      this.setState({ filteredMatches: newFilteredMatches });
     }
-    // Handle score changes
-    const currentTotalScore = calculateTotalScore(activeTable.users, filteredMatches);
+    // Handle score changes -> Will also change currentUsers in state!
+    const currentTotalScore = calculateTotalScore(activeTable.users, newFilteredMatches);
     if (currentTotalScore !== previousTotalScore) {
-      this.setState({ previousTotalScore: currentTotalScore });
+      const newUsersArray = [...currentUsers].map((user) => ({
+        ...user,
+        previousScore: user.currentScore,
+        currentScore: calculateUserScore(user, newFilteredMatches),
+      }));
+      // Handle running numbers
+      setTimeout(() => this.toggleRunning(false), 3000);
+      this.setState({
+        isRunning: true,
+        currentUsers: newUsersArray,
+        previousTotalScore: currentTotalScore,
+        filteredMatches: newFilteredMatches,
+      });
+    }
+    // Handle time change
+    const currentTotalTime = calculateTotalTime(newFilteredMatches);
+    if (currentTotalTime !== previousTotalTime) {
+      this.setState({ previousTotalTime: currentTotalTime, filteredMatches: newFilteredMatches });
     }
   }
 
+  toggleActiveUser(userName) {
+    const { activeUsers } = this.state;
+    if (!activeUsers.includes(userName)) {
+      this.setState({ activeUsers: [...activeUsers, userName] });
+    } else {
+      const newUsers = [...activeUsers].filter((user) => user !== userName);
+      this.setState({ activeUsers: newUsers });
+    }
+  }
+
+  toggleRunning(isRunning) {
+    this.setState({ isRunning });
+  }
+
   render() {
-    const { filteredMatches, previousTotalScore } = this.state;
+    const {
+      filteredMatches,
+      currentUsers,
+      isRunning,
+      activeUsers,
+    } = this.state;
     const { activeTable, user } = this.props;
     const {
       name,
@@ -266,7 +340,6 @@ class Leaderboard extends React.Component {
       prizePool,
       leagues,
       type,
-      users,
     } = activeTable;
     let aPrecentage;
     if (type === 'a') {
@@ -276,8 +349,8 @@ class Leaderboard extends React.Component {
     } else {
       aPrecentage = '50%';
     }
-    const sortedUsers = [...users];
-    sortedUsers.sort((a, b) => a.currentScore - b.currentScore);
+    const sortedUsers = [...currentUsers];
+    sortedUsers.sort((a, b) => b.currentScore - a.currentScore);
     let calculatedPrizes;
     if (type === 'a') {
       calculatedPrizes = [prizePool];
@@ -341,7 +414,9 @@ class Leaderboard extends React.Component {
             const x = 5;
             return (
               <User
-                previousTotalScore={previousTotalScore}
+                toggleActive={() => this.toggleActiveUser(currentUser.name)}
+                activeUsers={activeUsers}
+                isRunning={isRunning}
                 totalUsers={sortedUsers.length}
                 isPlayer={user.name === currentUser.name}
                 matches={filteredMatches}
