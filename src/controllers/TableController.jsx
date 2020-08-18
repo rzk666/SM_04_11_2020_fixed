@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+// Libs
+import { calculateUserScore, calculateTotalScore } from '../common/libs';
 
 class TableController extends React.Component {
   constructor(props) {

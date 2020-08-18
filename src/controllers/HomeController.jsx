@@ -15,7 +15,7 @@ class HomeController extends React.Component {
 
   componentDidMount() {
     const { initBets } = this.props;
-    initBets();
+    setTimeout(() => initBets(), 500);
     _LoadImages('home');
   }
 

@@ -11,7 +11,7 @@ const HOCS_MAP = {
   joinLeague: [withAuth, withLayout],
   weeklyMatches: [],
   table: [withAuth, withLayout, withPusher],
-  dashboard: [],
+  dashboard: [withPusher],
 };
 
 

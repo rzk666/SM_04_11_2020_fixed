@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Redux Actions
 import {
-  connectSocket, initSocket,
+  connectSocket, initSocket, triggerMatchChange,
 } from '../redux/models/webSocket/webSocketActions';
 // Hocs
 import page from '../hocs/page';
@@ -25,6 +25,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   connectSocket: () => dispatch(connectSocket()),
   initSocket: (data) => dispatch(initSocket(data)),
+  triggerMatchChange: (matchId, data) => dispatch(triggerMatchChange(matchId, data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((Dashboard), pages.DASHBOARD));

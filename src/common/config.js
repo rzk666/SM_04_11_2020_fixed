@@ -10,6 +10,7 @@ module.exports = {
     env: process.env.NODE_ENV,
     url: process.env.REACT_APP_URL,
   },
+  // PROD
   server: {
     host: SERVER_HOST,
     protocol: SERVER_PROTOCOL,

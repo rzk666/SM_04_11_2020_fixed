@@ -21,42 +21,42 @@ import {
 
 const INITIAL_BETS = [{
   matchId: 1,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 2,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 3,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 4,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 5,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 6,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 7,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 },
 {
   matchId: 8,
-  homeScore: 0,
+  homeScore: 1,
   awayScore: 0,
 }];
 

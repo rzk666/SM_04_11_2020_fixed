@@ -74,6 +74,31 @@ export const calculateMatchScore = (
   return newScore;
 };
 
+export const calculateUserScore = (user, matches) => {
+  const { bets } = user;
+  let newScore = 0;
+  matches.map((match) => {
+    const {
+      homeScore, awayScore, homeOdds, awayOdds, drawOdds,
+    } = match;
+    const currentBet = bets.find((bet) => bet.matchId === match.id);
+    const awayBet = currentBet.awayScore;
+    const homeBet = currentBet.homeScore;
+    newScore += calculateMatchScore(homeScore, homeBet, awayScore, awayBet, homeOdds, awayOdds, drawOdds);
+  });
+  return newScore;
+};
+
+export const calculateTotalScore = (users, matches) => {
+  console.log(users);
+  console.log(matches);
+  let totalScore = 0;
+  users.map((user) => {
+    totalScore += calculateUserScore(user, matches);
+  });
+  return totalScore;
+};
+
 export const getTeamImage = (team) => {
   switch (team) {
     case 'Barcelona':

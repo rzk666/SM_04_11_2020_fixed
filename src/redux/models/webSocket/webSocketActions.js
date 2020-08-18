@@ -31,3 +31,18 @@ export const connectSocket = () => (({
     loader: () => needless(),
   },
 }));
+
+export const triggerMatchChange = (matchId, data) => (({
+  type: API,
+  payload: {
+    url: {
+      base: config.api.url,
+      endpoint: `/socket/trigger/${matchId}`,
+    },
+    method: 'post',
+    data,
+    success: () => needless(),
+    failure: () => needless(),
+    loader: () => needless(),
+  },
+}));

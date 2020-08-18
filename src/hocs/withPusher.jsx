@@ -7,10 +7,8 @@ import Pusher from 'pusher-js';
 import { APP_CLUSTER, APP_KEY } from '../common/config';
 // Redux Actions
 import {
-  signOut,
-  refreshAuth,
-  resetAuthErrors,
-} from '../redux/models/auth/authActions';
+  updateAvailableMatches,
+} from '../redux/models/matches/matchesActions';
 
 Pusher.logToConsole = true;
 const pusher = new Pusher(APP_KEY, { cluster: APP_CLUSTER });
@@ -21,11 +19,13 @@ const channel = pusher.subscribe('beatem-demo-2020');
 export default (ComposedComponent) => {
   class WithPusher extends React.Component {
     componentDidMount() {
-      channel.bind('goal', () => this.handleGoal());
+      channel.bind('Trigger', (data) => this.handleMatchUpdate(data));
     }
 
-    handleGoal() {
-      alert('GOAL');
+    handleMatchUpdate(data) {
+      const { updateAvailableMatches } = this.props;
+      const { matchId, updatedMatch } = data;
+      updateAvailableMatches(matchId, updatedMatch);
     }
 
     render() {
@@ -42,9 +42,7 @@ export default (ComposedComponent) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    signOut: () => dispatch(signOut()),
-    refreshAuth: (cookie) => dispatch(refreshAuth(cookie)),
-    resetAuthErrors: () => dispatch(resetAuthErrors()),
+    updateAvailableMatches: (matchId, data) => dispatch(updateAvailableMatches(matchId, data)),
   });
 
   return connect(mapStateToProps, mapDispatchToProps)((WithPusher));
