@@ -11,10 +11,10 @@ import {
 } from '../redux/models/matches/matchesActions';
 
 // PROD -> False
-Pusher.logToConsole = true;
+Pusher.logToConsole = false;
 const pusher = new Pusher(APP_KEY, { cluster: APP_CLUSTER });
 // PROD -> False
-pusher.logToConsole = true;
+pusher.logToConsole = false;
 const channel = pusher.subscribe('beatem-demo-2020');
 
 

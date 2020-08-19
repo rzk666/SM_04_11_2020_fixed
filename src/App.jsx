@@ -26,7 +26,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       // PROD -> True
-      showSplash: false,
+      showSplash: true,
     };
   }
 
