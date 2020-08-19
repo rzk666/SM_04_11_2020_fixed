@@ -1,0 +1,174 @@
+.table_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #f7f7f7;
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.11);
+    font-family: Roboto;
+    margin-bottom: 25px;
+    .table_title{
+        background-color: white;
+        align-items: center;
+        display: flex;
+        height: 25px;
+        padding: 10px 6px;
+        font-size: 9px;
+        font-weight: bold;
+        letter-spacing: 0.45px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    // TABLE
+    .bottom{
+        height: 22px;
+        width: 100%;
+        background-color: #f7f7f7;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .top_row_container{
+        display: flex;
+        width: 100%;
+        height: 22px;
+        font-size: 9px;
+        font-weight: bold;
+        color: var(--main-solid-dark-grey);
+        background-color: #f7f7f7;
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .team_row_container{
+        display: flex;
+        margin-bottom: 1px;
+        width: 100%;
+        background-color: white;
+        height: 33px;
+        font-size: 9px;
+        font-weight: medium;
+        color: var(--main-solid-dark-grey);
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .position{
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .team{
+            font-size: 10px;
+        }
+    }
+    .position{
+        width: 10%;
+    }
+    .team{
+        padding-left: 5px;
+        flex: 1;
+        justify-content: flex-start!important;
+        min-width: 85px;
+    }
+    .games{
+        flex:1;
+    }
+    .wins{
+        flex:1;
+    }
+    .draws{
+        flex:1;
+    }
+    .loses{
+        flex:1;
+    }
+    .goals{
+        flex:1;
+    }
+    .against{
+        flex:1;
+    }
+    .goal_differance{
+        flex:1;
+    }
+    .points{
+        flex:1;
+    }
+    // Live Status
+    .match_row_container{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .time{
+            margin-left: 8px;
+            border-radius: 100px;
+            height: 15px;
+            width: 15px;
+            background-color: #e3e3e3;
+            color: var(--main-solid-dark-grey);
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 0.35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &.is_live{
+                background-color: var(--main-solid-green);
+                color: white;
+            }
+            &.has_not_started{
+                opacity: 0;
+            }
+        }
+        .status_container{
+            .home{
+                flex:1;
+                text-align: right;
+            }
+            .away{
+                flex:1;
+                text-align: left;
+            }
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #53575a;
+            p{
+                margin: 0;
+            }
+            display: flex;
+            flex:1;
+            align-items: center;
+            justify-content: center;
+            img{
+                width: 28px;
+                margin: 0 10px;
+            }
+            .score{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+                min-width: 15px;
+                height: 100%;
+                font-weight: bold;
+                color: var(--main-solid-dark-grey);
+                &.is_live{
+                    p{
+                        color: var(--main-solid-green)!important;
+                    }
+                }
+                &.not_started{
+                    p{
+                        font-size: 8px;
+                    }
+                }
+            }
+        }
+    }
+}

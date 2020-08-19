@@ -3,6 +3,7 @@ import React from 'react';
 // Utils
 import { connect } from 'react-redux';
 // Redux Actions
+import { updateActiveTable } from '../redux/models/activeTable/activeTableActions';
 // Hocs
 import page from '../hocs/page';
 // Controller & View
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // adminLogin: (data) => dispatch(adminLogin(data)),
+  updateActiveTable: (data, user) => dispatch(updateActiveTable(data, user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((JoinLeague), pages.JOIN_LEAGUE));

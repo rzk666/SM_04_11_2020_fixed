@@ -1,50 +1,71 @@
 .container{
     background-color: #ebebeb;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - var(--header-height));
+    max-height: calc(100vh - var(--header-height) - 52px);
     display: flex;
     flex-direction: column;
-    .current_stage_container{
-        height: 12px;
-        margin-bottom: 14px;
+    .gradient_block{
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: 15vh;
+        z-index: 3;
+        background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 100%);
+    }
+    .bottom_container{
         display: flex;
         align-items: center;
         justify-content: center;
-        .dot{
-            border-radius: 25px;
+        flex-direction: column;
+        background-color: transparent;
+        z-index: 5;
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        height: 75px;
+        .current_stage_container{
             height: 12px;
-            width: 12px;
-            margin-right: 6px;
-            background-color: #c9c9c9;
-            &.active{
-                background-color: #89d2a1;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .dot{
+                border-radius: 25px;
+                height: 12px;
+                width: 12px;
+                margin-right: 6px;
+                background-color: #c9c9c9;
+                &.active{
+                    background-color: #89d2a1;
+                }
             }
         }
-    }
-    .next_btn{
-        width: 90%;
-        background-image: var(--main-green-gradient);
-        box-shadow: 0 3px 6px 0 rgba(0,0,0,0.16);
-        display: flex;
-        height: 40px;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 12px;
-        letter-spacing: 2.4px;
-        border-radius: 15px;
-        position: relative;
-        img{
-            position: absolute;
-            top: 12px;
-            right: 10px;
+        .next_btn{
+            z-index: 5;
+            width: 80%;
+            background-image: var(--main-green-gradient);
+            box-shadow: 0 3px 6px 0 rgba(0,0,0,0.16);
+            display: flex;
+            min-height: 40px;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            letter-spacing: 2.4px;
+            border-radius: 15px;
+            position: relative;
+            img{
+                position: absolute;
+                top: 12px;
+                right: 10px;
+            }
         }
     }
     // ----- STAGES ----- //
     .stage_one_container{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         flex: 1;
         .top_bg{
             margin-top: 10px;
@@ -83,9 +104,14 @@
                     height: 25px;
                     margin-bottom: 8px;
                     font-family: Roboto;
-                    font-size: 9px;
+                    font-size: 11px;
                     letter-spacing: 0.32px;
                     border-bottom: 1px solid white;
+                    input{
+                        &::placeholder{
+                            color: white;
+                        }
+                    }
                 }
             }
         }
@@ -93,6 +119,7 @@
             width: 100%;
             height: 275px;
             padding: 0 35px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -156,6 +183,8 @@
                 background-color: white;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
+                padding-right: 15px;
                 font-weight: bold;
                 font-size: 10px;
                 letter-spacing: 0.5px;
@@ -222,7 +251,7 @@
             color: white;
             font-size: 25px;
             letter-spacing: 0.88px;
-            height: 60px;
+            min-height: 60px;
             margin-top: 10px;
             margin-bottom: 12px;
             background-image: var(--main-green-gradient);
@@ -237,6 +266,7 @@
         width: 100%;
         .title{
             width: 100%;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -250,20 +280,112 @@
             box-shadow: 0 3px 6px 0 rgba(0,0,0,0.16);
         }
         .search{
+            margin-bottom: 10px;
             width: 100%;
             box-shadow: 0 3px 8px 0 rgba(0,0,0,0.16);
         }
         .league_row_container{
             width: 100%;
             background-color: white;
-            height: 50px;
+            min-height: 50px;
             display: flex;
             padding: 0 15px;
             align-items: center;
+            position: relative;
+            .selected{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 12px;
+                height: 12px;
+                color: white;
+                background-color: var(--main-solid-green);
+                border-radius: 255px;
+                font-size: 7px;
+                font-weight: 500;
+                position: absolute;
+                bottom: 5px;
+                left: 25px;
+            }
             .divider{
                 height: 1px;
                 width: 100%;
                 background-color: var(--main-solid-dark-grey);
+            }
+        }
+        .matches_container{
+            z-index: 1;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.11);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .match_container{
+                &.last_match{
+                    margin-bottom: 111px!important;
+                }
+                width: 95%;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.11);
+                background-image: linear-gradient(to bottom, #fefefe 64%, #b4b4b4);
+                display: flex;
+                flex-direction: column;
+                height: 105px;
+                margin-bottom: 8px;
+                color: var(--main-solid-dark-grey);
+                position: relative;
+                .pick_btn{
+                    width: 14px;
+                    height: 14px;
+                    position: absolute;
+                    right: 10px;
+                    top: 5px;
+                    background-color: #cbcbcb;
+                    border-radius: 255px;
+                    &.is_active{
+                        background-color: #60d587;
+                    }
+                }
+                .match_top_row{
+                    display: flex;
+                    width: 100%;
+                    height: 75px;
+                    .team_container{
+                        flex:1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        img{
+                            width: 48px;
+                        }
+                        font-size: 11px;
+                    }
+                    .vs_container{
+                        flex:1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: space-between;
+                        font-weight: bold;
+                        padding: 15px 0;
+                        font-size: 28px;
+                        .date_container{
+                            margin-top: 5px;
+                            font-weight: normal;
+                            font-size: 11px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            p{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -330,6 +452,7 @@
             }
         }
         .search{
+            margin-bottom: 10px;
             width: 100%;
             box-shadow: 0 3px 8px 0 rgba(0,0,0,0.16);
         }

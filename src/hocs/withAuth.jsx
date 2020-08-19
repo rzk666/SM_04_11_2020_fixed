@@ -80,15 +80,44 @@ export default (ComposedComponent) => {
       }
       // User Signout
       if (!isLoggedIn && prevProps.auth.isLoggedIn) {
-        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+        cookies.set('auth', {
+          isLoading: false,
+          hasError: false,
+          error: '',
+          isLoggedIn: false,
+          adminToken: '',
+          hasAccess: true,
+          user: {
+            name: '',
+            email: '',
+            score: 0,
+            balance: 0,
+            achivments: [],
+            notifications: 0,
+            stats: {
+              win: 0,
+              lose: 0,
+              totalWins: 0,
+              leaguesPlayed: 0,
+            },
+            currentScore: 0,
+            bets: [],
+          },
+        }, { path: '/', expires: COOKIES_EXP_DATE });
         enforceAuth(this.props);
       }
-      if (isLoggedIn && !cookie.isLoggedIn) {
-        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
-      }
       // User Login
-      if (isLoggedIn && !cookie.isLoggedIn) {
-        cookies.set('auth', auth, { path: '/', expires: COOKIES_EXP_DATE });
+      if (isLoggedIn && !prevProps.auth.isLoggedIn) {
+        cookies.set('auth', {
+          adminToken: auth.adminToken, hasAccess: auth.hasAccess, isLoggedIn: auth.isLoggedIn, user: auth.user,
+        }, {
+          path: '/', expires: COOKIES_EXP_DATE, overwrite: true, sameSite: true,
+        });
+        // cookies.set('auth', {
+        //   isLoading: auth.isLoading, hasError: auth.hasError, error: auth.error, isLoggedIn: auth.isLoggedIn, adminToken: auth.adminToken, user: auth.user, hasAccess: auth.hasAcces,
+        // }, {
+        //   path: '/', expires: COOKIES_EXP_DATE, overwrite: true, sameSite: true, domain: 'localhost',
+        // });
       }
     }
 

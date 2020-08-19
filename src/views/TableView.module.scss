@@ -1,8 +1,85 @@
-.table_container{
+.view_container{
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 104px);
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    overflow: auto;
+    align-items: center;
+    background-color: #ebebeb;
+    .popup_container{
+        z-index: 3;
+        position: fixed;
+        width: 90%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        height: 91px;
+        border-radius: 10px;
+        border: solid 3px #b3e4c3;
+        .title{
+            width: 100%;
+            height: 30px;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #57bb78;
+            background-color: #f7f7f7;
+        }
+        .bottom_container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex:1;
+            padding: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #53575a;
+            img{
+                width: 35px;
+            }
+            .home_team{
+                flex:1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 14px;
+            }
+            .vs{
+                p{
+                    color: var(--main-solid-green);
+                    margin: 0 5px;
+                }
+                flex:1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .goals{
+                flex:1;
+                height: 100%;
+                p{
+                    font-size: 30px;
+                    margin:0;
+                }
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .winner{
+                    color: var(--main-solid-green);
+                }
+            }
+            .away_team{
+                flex:1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
 }

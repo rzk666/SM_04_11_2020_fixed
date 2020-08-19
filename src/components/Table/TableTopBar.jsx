@@ -34,7 +34,7 @@ const PriceBar = ({ currentView, changeView }) => {
           className={classnames(styles.price_container, { [styles.active]: price === currentView })}
           onClick={() => changeView(price)}
         >
-          {`${price}€`}
+          {price}
         </div>
       ))}
     </div>

@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+// Libs
+import { calculateUserScore, calculateTotalScore } from '../common/libs';
 
 class TableController extends React.Component {
   constructor(props) {
@@ -9,13 +11,28 @@ class TableController extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { activeTable, history } = this.props;
+    if (!activeTable.name) {
+      history.push('/');
+    }
+  }
+
   changeView(view) {
     this.setState({ currentView: view });
+  }
+
+  confirmBets(bets) {
+    const { confirmBets, auth } = this.props;
+    const { user } = auth;
+    const { name } = user;
+    confirmBets(bets, name);
   }
 
   callbacks() {
     return {
       changeView: this.changeView.bind(this),
+      confirmBets: this.confirmBets.bind(this),
     };
   }
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 // Images
 import PlayerIcon from '../static/images/joinleague/player.svg';
 import SoccerIcon from '../static/images/joinleague/soccer.svg';
@@ -19,9 +19,10 @@ import { useHistory } from 'react-router-dom';
 import { FAKE_TABLES } from '../common/fake-data';
 
 const JoinModalContent = ({
-  prize, close, matches, players,
+  prize, close, matches, players, joinTable,
 }) => {
   const history = useHistory();
+  const [type, setType] = useState('a');
   return (
     <div className="modal_wrapper">
       <div className="top_row">
@@ -47,12 +48,9 @@ const JoinModalContent = ({
           </div>
         </div>
       </div>
-      <LeagueRules />
+      <LeagueRules players={players} onClick={(type) => setType(type)} />
       <div
-        onClick={() => history.push({
-          pathname: '/table',
-          state: { players, matches, prize },
-        })}
+        onClick={() => joinTable(type)}
         className="bottom"
       >
         JOIN LEAGUE
@@ -68,6 +66,7 @@ const JoinLeagueView = ({
   currentLeagueMatches,
   toggleModal,
   isModalOpen,
+  joinTable,
 }) => {
   const x = 5;
   return (
@@ -75,6 +74,7 @@ const JoinLeagueView = ({
       <div className={styles.wrapper}>
         <Modal className="join_modal" open={isModalOpen}>
           <JoinModalContent
+            joinTable={(type) => joinTable(type)}
             prize={currentPrice * currentLeaguePlayers}
             matches={currentLeagueMatches}
             players={currentLeaguePlayers}

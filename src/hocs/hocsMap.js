@@ -1,5 +1,6 @@
 import withLayout from './withLayout';
 import withAuth from './withAuth';
+import withPusher from './withPusher';
 
 // HOCs
 const HOCS_MAP = {
@@ -9,7 +10,8 @@ const HOCS_MAP = {
   profile: [withAuth, withLayout],
   joinLeague: [withAuth, withLayout],
   weeklyMatches: [],
-  table: [withAuth, withLayout],
+  table: [withAuth, withLayout, withPusher],
+  dashboard: [withPusher],
 };
 
 

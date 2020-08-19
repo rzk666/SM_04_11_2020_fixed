@@ -134,6 +134,18 @@
             }
         }
     }
+    div[class*="bet"]{
+        input{
+            width: 35px;
+            // &::placeholder{
+            //     color: white;
+            //     &:focus{
+            //         color: white;
+            //     }
+            // }
+        }
+    }
+
 
     // ----- Modals ----- //
 

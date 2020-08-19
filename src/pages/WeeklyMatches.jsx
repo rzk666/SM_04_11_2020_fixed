@@ -19,6 +19,7 @@ const WeeklyMatches = (props) => <WeeklyMatchesController {...props} View={Weekl
 
 const mapStateToProps = (state) => ({
   activeLeague: state.activeLeague,
+  availableMatches: state.availableMatches,
 });
 
 const mapDispatchToProps = (dispatch) => ({

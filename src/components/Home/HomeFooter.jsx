@@ -122,19 +122,19 @@ const HomeFooter = ({ currentSport }) => {
     transiton: { duration: 0.3, ease: 'easeIn' },
   });
   return (
-    <motion.div animate={controls} className={classnames(styles.footer_container, styles[currentSport])}>
+    <motion.div animate={{ opacity: [0, 1], transiton: { duration: 0.3, ease: 'easeIn' } }} className={classnames(styles.footer_container, styles[currentSport])}>
       <div className={styles.links_container}>
         {LINKS.map((link) => {
           const { text, href } = link;
           return (
-            <a href={href} className="white_text_2">
+            <a className="white_text_2">
               {text}
             </a>
           );
         })}
       </div>
       <div className={styles.social_container}>
-        {SOCIAL_LINKS.map((link) => <a href="www.google.com"><img src={getSocialImage(link, currentSport)} alt={`${link}_icon`} /></a>)}
+        {SOCIAL_LINKS.map((link) => <img src={getSocialImage(link, currentSport)} alt={`${link}_icon`} />)}
       </div>
       <div className={styles.footer_text}>
         © 2020 BEAT'EM. ALL RIGHTS RESERVED

@@ -49,19 +49,19 @@
                 p{
                     margin: 0;
                     &.title{
-                        font-size: 9px;
+                        font-size: 12px;
                         letter-spacing: 0.45px;
                         color: #8a8d8f;
                         font-weight: bold;
                     }
                     &.sub_text{
-                        font-size: 7px;
+                        font-size: 9px;
                         letter-spacing: 0.35px;
                         color: #8a8d8f;
                         font-weight: bold;
                         margin-bottom: 3px;
                         &.reduce_size{
-                            font-size: 5px;
+                            text-align: center;
                         }
                     }
                 }
