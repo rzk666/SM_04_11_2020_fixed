@@ -12,6 +12,7 @@ import {
 
 Pusher.logToConsole = true;
 const pusher = new Pusher(APP_KEY, { cluster: APP_CLUSTER });
+// PROD -> False
 pusher.logToConsole = true;
 const channel = pusher.subscribe('beatem-demo-2020');
 

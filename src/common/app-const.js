@@ -351,7 +351,7 @@ const INITIAL_STATE = {
       }],
     },
     {
-      name: 'Neymar Santos Junior',
+      name: 'Neymar Junior',
       profilePicture: Neymar,
       currentScore: 0,
       previousScore: 0,
