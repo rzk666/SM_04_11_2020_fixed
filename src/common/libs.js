@@ -89,6 +89,19 @@ export const calculateUserScore = (user, matches) => {
   return newScore;
 };
 
+export const hasBetsChanged = (previousBets, currentBets) => {
+  let hasChanged = false;
+  for (let i = 0; (i < previousBets.length && !hasChanged); i += 1) {
+    const previousBet = previousBets[i];
+    const currentBet = currentBets[i];
+    if (previousBet.homeScore !== currentBet.homeScore
+        || previousBet.awayScore !== currentBet.awayScore) {
+      hasChanged = true;
+    }
+  }
+  return hasChanged;
+};
+
 export const calculateTotalScore = (users, matches) => {
   let totalScore = 0;
   users.map((user) => {
@@ -130,6 +143,19 @@ export const getTeamImage = (team) => {
       return Villareal;
     default:
       return Barcelona;
+  }
+};
+
+export const getShortTeamName = (team) => {
+  switch (team) {
+    case 'Manchester United':
+      return 'Man. Utd';
+    case 'Manchester City':
+      return 'Man. City';
+    case 'Leicester City':
+      return 'Lei. City';
+    default:
+      return team;
   }
 };
 

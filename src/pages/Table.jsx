@@ -11,6 +11,7 @@ import TableController from '../controllers/TableController';
 import TableView from '../views/TableView';
 // Dictioneries
 import pages from '../universal/pages';
+import { updateAvailableMatches } from '../redux/models/matches/matchesActions';
 
 
 const Table = (props) => <TableController {...props} View={TableView} />;
@@ -23,6 +24,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   confirmBets: (data, username) => dispatch(confirmBets(data, username)),
+  updateAvailableMatches: (matchId, data) => dispatch(updateAvailableMatches(matchId, data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page((Table), pages.TABLE));

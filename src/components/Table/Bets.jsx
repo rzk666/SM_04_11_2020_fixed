@@ -53,6 +53,7 @@ const MatchBetRow = ({
     id,
     isLocked,
   } = match;
+  const matchDate = !((typeof startDate) === 'string') ? startDate : new Date(startDate);
   return (
     <div className={styles.match_row_container}>
       <div className={styles.match_top_row}>
@@ -73,8 +74,8 @@ const MatchBetRow = ({
           {matchTime === 0
             ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <p className={styles.date}>{`${getShortDayName(startDate.getDay())}, ${startDate.getDate()}/${startDate.getMonth() + 1}`}</p>
-                <p className={styles.date}>{`${startDate.getHours()}:00`}</p>
+                <p className={styles.date}>{`${getShortDayName(matchDate.getDay())}, ${matchDate.getDate()}/${matchDate.getMonth() + 1}`}</p>
+                <p className={styles.date}>{`${matchDate.getHours()}:00`}</p>
               </div>
             )
             : (
@@ -168,14 +169,14 @@ class Bets extends React.Component {
     const selectedMatches = activeTable.matches;
     const { matches } = availableMatches;
     const sortedMatches = selectedMatches.sort((a, b) => {
-      const matchA = matches.find((match) => match.id === a);
-      const matchB = matches.find((match) => match.id === b);
+      const matchA = matches.find((match) => parseInt(match.id) === parseInt(a));
+      const matchB = matches.find((match) => parseInt(match.id) === parseInt(b));
       return matchA.order - matchB.order;
     });
     return (
       <div className={styles.container}>
         {sortedMatches.map((matchId, index) => {
-          const currentMatch = matches.find((match) => match.id === matchId);
+          const currentMatch = matches.find((match) => parseInt(match.id) === parseInt(matchId));
           const isLast = index === selectedMatches.length - 1;
           return (
             <>

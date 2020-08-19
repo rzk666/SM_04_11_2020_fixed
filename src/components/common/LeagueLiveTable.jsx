@@ -135,8 +135,9 @@ const MatchRow = ({ match }) => {
     awayScore,
   } = match;
   const isMatchLive = matchTime && Number.isInteger(matchTime);
+  const matchDate = !((typeof startDate) === 'string') ? startDate : new Date(startDate);
   return (
-    <div className={styles.match_row_container}>
+    <div style={{ backgroundColor: 'white', marginBottom: '1px' }} className={styles.match_row_container}>
       <div className={classnames(styles.time, { [styles.has_not_started]: !matchTime, [styles.is_live]: isMatchLive })}>
         {matchTime || ''}
       </div>
@@ -148,8 +149,8 @@ const MatchRow = ({ match }) => {
             ? <p>{`${homeScore} - ${awayScore}`}</p>
             : (
               <>
-                <p>{`${getShortDayName(startDate.getDay())}, ${startDate.getDate()}/${startDate.getMonth() + 1}`}</p>
-                <p>{`${startDate.getHours()}:00`}</p>
+                <p>{`${getShortDayName(matchDate.getDay())}, ${matchDate.getDate()}/${matchDate.getMonth() + 1}`}</p>
+                <p>{`${matchDate.getHours()}:00`}</p>
               </>
             )}
         </div>
@@ -171,7 +172,7 @@ const LeagueLiveTable = ({
   const currentLeagueTable = currentLeague === 'Premiere League' ? PREMIERE_LEAGUE_TABLE : LA_LIGA_TABLE;
   return (
     <div className={styles.table_container}>
-      <div className={styles.table_title}>
+      <div style={{ backgroundColor: type === 'live' ? '#f7f7f7' : 'white' }} className={styles.table_title}>
         <img
           src={getLeagueImage(currentLeague)}
           alt="Premiere League"

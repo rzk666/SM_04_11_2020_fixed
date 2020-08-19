@@ -1,26 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20.998" height="21.162" viewBox="0 0 20.998 21.162">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: none;
-      }
-
-      .cls-2 {
-        clip-path: url(#clip-path);
-      }
-
-      .cls-3 {
-        fill: #ddd;
-        stroke: #ddd;
-        stroke-width: 3px;
-        opacity: 0.52;
-      }
-    </style>
-    <clipPath id="clip-path">
-      <rect class="cls-1" width="20.998" height="21.162"/>
-    </clipPath>
-  </defs>
-  <g id="Exit_icon" data-name="Exit icon" class="cls-2">
-    <path id="cross" class="cls-3" d="M.225,1.319a.787.787,0,0,1,0-1.1.787.787,0,0,1,1.1,0L7.9,6.814,14.493.223a.772.772,0,0,1,1.086,1.1L9,7.9l6.58,6.591a.772.772,0,0,1-1.086,1.1L7.9,9l-6.58,6.591a.787.787,0,0,1-1.1,0,.787.787,0,0,1,0-1.1L6.8,7.9Z" transform="translate(2.69 2.679)"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="18.941" height="19.055" viewBox="0 0 18.941 19.055">
+    <defs>
+        <clipPath id="clip-path">
+            <path fill="none" d="M0 0H18.941V19.055H0z"/>
+        </clipPath>
+    </defs>
+    <g id="Exit_icon" clip-path="url(#clip-path)" data-name="Exit icon">
+        <path id="Exit_icon-2" fill="#a5a5a5" stroke="#a5a5a5" stroke-width="3px" d="M.225 1.319a.787.787 0 0 1 0-1.1.787.787 0 0 1 1.1 0L7.9 6.814 14.493.223a.772.772 0 0 1 1.086 1.1L9 7.9l6.58 6.591a.772.772 0 0 1-1.086 1.1L7.9 9l-6.58 6.591a.787.787 0 0 1-1.1 0 .787.787 0 0 1 0-1.1L6.8 7.9z" data-name="Exit icon" opacity="0.52" transform="translate(1.632 1.625)"/>
+    </g>
 </svg>

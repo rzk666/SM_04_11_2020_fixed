@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 // Styles
 import styles from './Leaderboard.module.scss';
 // Images
-import LeagueAvatar from '../../static/images/createleague/LeagueAvatar.svg';
+import FriendsBig from '../../static/images/leaderboard/FriendsBig.png';
 import Players from '../../static/images/leaderboard/WhitePlayer.svg';
 import GoldTrophy from '../../static/images/leaderboard/GoldTrophy.svg';
 import SilverTrophy from '../../static/images/leaderboard/SilverTrophy.svg';
@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import classnames from 'classnames';
 import { easeOutCubic } from 'js-easing-functions';
 import {
+  hasBetsChanged,
   calculateTotalScore,
   calculateUserScore,
   calculateMatchScore,
@@ -47,8 +48,10 @@ const UserBets = ({ user, matches, isPlayer }) => {
   const { bets } = user;
   return (
     <div className={styles.bets_container}>
-      <div className={styles.title}>
-        {!sortedMatches.length ? 'No Active Matches' : `${user.name}'s Bets`}
+      <div className={styles.title_container}>
+        <div className={styles.title}>
+          {!sortedMatches.length ? 'No Active Matches' : `${user.name}'s Bets`}
+        </div>
       </div>
       {sortedMatches.map((match) => {
         const {
@@ -63,7 +66,7 @@ const UserBets = ({ user, matches, isPlayer }) => {
           awayOdds,
           id,
         } = match;
-        const currentBet = bets.find((bet) => bet.matchId === id);
+        const currentBet = bets.find((bet) => (parseInt(bet.matchId) === id));
         const homeBet = currentBet.homeScore;
         const awayBet = currentBet.awayScore;
         let awayTeamName;
@@ -98,7 +101,7 @@ const UserBets = ({ user, matches, isPlayer }) => {
               {homeTeamName}
               <img src={getTeamImage(homeTeam)} alt="Home Team" className={styles.team_img} />
             </div>
-            <div className={classnames(styles.score, { [styles.running]: matchTime !== 0 && matchTime !== 'FT' })}>
+            <div className={classnames(styles.score)}>
               { !isLocked && !isPlayer ? '0 : 0' : `${homeBet} : ${awayBet}`}
             </div>
             <div className={styles.away_team}>
@@ -146,6 +149,7 @@ const User = ({
     name, profilePicture, currentScore, previousScore,
   } = user;
   const isActive = activeUsers.includes(name);
+  const displayUser = displayUsers.includes(name);
   let isTop = false;
   switch (type) {
     case 'a':
@@ -194,17 +198,13 @@ const User = ({
       mainColor = 0;
       break;
   }
-
   return (
     <AnimatePresence>
-      { displayUsers
-      && (
       <motion.div
         key={`User_${rank}`}
-        exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         style={{ width: '100%', height: '100%' }}
       >
         <div
@@ -226,8 +226,8 @@ const User = ({
         /> */}
           {rank}
           <motion.div initial={{ scale: 1.1, width: '86%' }} animate={{ width: '90%', scale: 1 }} transition={{ delay: 0.2 + rank * 0.12, ease: 'easeInOut', duration: 0.5 }} className={styles.user_main_container}>
-            <img src={profilePicture} alt={`${name}_img`} className={styles.profile_image} />
-            <p style={{ color: mainColor || '#53575a' }} className={styles.name}>{name}</p>
+            <motion.img animate={{ opacity: displayUser ? 1 : 0 }} src={profilePicture} alt={`${name}_img`} className={styles.profile_image} />
+            <motion.p animate={{ opacity: displayUser ? 1 : 0 }} style={{ color: mainColor || '#53575a' }} className={styles.name}>{name}</motion.p>
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ ease: 'easeInOut', duration: 0.5, delay: 0.2 + rank * 0.12 }}
@@ -240,7 +240,7 @@ const User = ({
               { (rank === 2 && ((type === 'b') || (type === 'c'))) && <div className={styles.prize}>{`€${prizes[1]}`}</div>}
               { (rank === 3 && (type === 'c')) && <img src={BronzeTrophy} alt="trophy" />}
               { (rank === 3 && (type === 'c')) && <div className={styles.prize}>{`€${prizes[2]}`}</div>}
-              <div className={styles.score}>
+              <motion.div animate={{ opacity: displayUser ? 1 : 0 }} className={styles.score}>
                 <p>
                   { isRunning ? (
                     <CountUp
@@ -254,7 +254,7 @@ const User = ({
 
                 </p>
                 <p style={{ fontSize: '10px', color: (isRunning && previousScore !== currentScore) ? (previousScore > currentScore) ? '#ff6464' : '#57bb78' : '#53575a' }}>PTS</p>
-              </div>
+              </motion.div>
             </motion.div>
             <motion.img
               initial={{ opacity: 0 }}
@@ -268,7 +268,6 @@ const User = ({
         </div>
         { isActive && <UserBets isPlayer={isPlayer} matches={matches} user={user} />}
       </motion.div>
-      ) }
     </AnimatePresence>
   );
 };
@@ -283,7 +282,7 @@ class Leaderboard extends React.Component {
       previousTotalTime: 0,
       currentUsers: props.activeTable.users,
       activeUsers: [],
-      displayUsers: true,
+      displayUsers: props.activeTable.users.map((user) => user.name),
     };
   }
 
@@ -297,7 +296,7 @@ class Leaderboard extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { previousTotalTime, previousTotalScore, currentUsers } = this.state;
-    const { availableMatches, activeTable } = this.props;
+    const { availableMatches, activeTable, user } = this.props;
     const { matches } = activeTable;
     // Handle filtered matches first
     const includedMatches = availableMatches.matches.filter((match) => matches.includes(match.id));
@@ -327,11 +326,20 @@ class Leaderboard extends React.Component {
     if (currentTotalTime !== previousTotalTime) {
       this.setState({ previousTotalTime: currentTotalTime, filteredMatches: newFilteredMatches });
     }
+    const currentUser = activeTable.users.find((tableUser) => tableUser.name === user.name);
+    const { bets } = currentUser;
+    const previousUser = prevProps.activeTable.users.find((prevUser) => prevUser.name === user.name);
+    const previousBets = previousUser.bets;
+    // Hadnle user bets change
+    if (hasBetsChanged(previousBets, bets)) {
+      console.log('BETS CHANGED');
+      this.setState({ currentUsers: activeTable.users });
+    }
   }
 
   sortUsers() {
     const { currentUsers } = this.state;
-    this.setState({ displayUsers: true, currentUsers: [...currentUsers].sort((a, b) => b.currentScore - a.currentScore) });
+    this.setState({ displayUsers: [...currentUsers].map((user) => user.name), currentUsers: [...currentUsers].sort((a, b) => b.currentScore - a.currentScore) });
   }
 
   toggleActiveUser(userName) {
@@ -345,8 +353,17 @@ class Leaderboard extends React.Component {
   }
 
   endScoreRun() {
-    setTimeout(() => this.sortUsers(), 1500);
-    this.setState({ isRunning: false, displayUsers: false });
+    const { currentUsers } = this.state;
+    setTimeout(() => this.sortUsers(), 220);
+    // const sortedUsers = [...currentUsers].sort((a, b) => b.currentScore - a.currentScore);
+    // const usersToRemove = [];
+    // sortedUsers.map((user, index) => {
+    //   if (user.name !== currentUsers[index].name) {
+    //     usersToRemove.push(user.name);
+    //   }
+    // });
+    // const displayUsers = sortedUsers.filter((user) => !usersToRemove.includes(user.name)).map((user) => user.name);
+    this.setState({ displayUsers: [], isRunning: false });
   }
 
   render() {
@@ -357,7 +374,7 @@ class Leaderboard extends React.Component {
       currentUsers,
       displayUsers,
     } = this.state;
-    const { activeTable, user } = this.props;
+    const { activeTable, user, hide } = this.props;
     const {
       name,
       description,
@@ -366,14 +383,6 @@ class Leaderboard extends React.Component {
       leagues,
       type,
     } = activeTable;
-    let aPrecentage;
-    if (type === 'a') {
-      aPrecentage = '100%';
-    } else if (type === 'b') {
-      aPrecentage = '70%';
-    } else {
-      aPrecentage = '50%';
-    }
     let calculatedPrizes;
     if (type === 'a') {
       calculatedPrizes = [prizePool];
@@ -383,10 +392,10 @@ class Leaderboard extends React.Component {
       calculatedPrizes = [Math.round(prizePool / 100 * 50), Math.round(prizePool / 100 * 30), Math.round(prizePool / 100 * 20)];
     }
     return (
-      <div className={styles.container}>
+      <div style={hide ? { display: 'none' } : {}} className={styles.container}>
         <div className={styles.top_bg_container}>
           <div className={styles.main_img}>
-            <img src={LeagueAvatar} alt="League_Avatar" />
+            <img src={FriendsBig} alt="League_Avatar" />
           </div>
           <div className={styles.info_container}>
             <div className={styles.title}>
@@ -406,21 +415,21 @@ class Leaderboard extends React.Component {
               <div className={styles.prize}>
                 {`€${prizePool}`}
               </div>
-              <div className={styles.type}>
+              <div className={classnames(styles.type, { [styles.type_c]: type === 'c' })}>
                 <div className={styles.trophy}>
                   <img src={GoldTrophy} alt="First" />
-                  {`${aPrecentage}`}
+                  {/* {`${aPrecentage}`} */}
                 </div>
                 { (type === 'b' || type === 'c') && (
                 <div className={styles.trophy}>
                   <img src={SilverTrophy} alt="Sec" />
-                  30%
+                  {/* 30% */}
                 </div>
                 ) }
                 { (type === 'c') && (
                 <div className={styles.trophy}>
                   <img src={BronzeTrophy} alt="Third" />
-                  20%
+                  {/* 20% */}
                 </div>
                 ) }
               </div>

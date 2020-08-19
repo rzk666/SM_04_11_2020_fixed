@@ -7,7 +7,7 @@ import LeagueLiveTable from '../common/LeagueLiveTable';
 const RealTable = ({ activeTable }) => {
   const { leagues } = activeTable;
   return (
-    <div className={styles.container}>
+    <div style={{ backgroundColor: '#ebebeb' }} className={styles.container}>
       {leagues.map((league) => (
         <div style={{ width: '90%' }}>
           <LeagueLiveTable currentLeague={league} />

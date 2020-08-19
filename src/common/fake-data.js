@@ -1,5 +1,5 @@
 // Images
-import Liverpool from '../static/images/teams/Sevillia.png';
+import Liverpool from '../static/images/teams/Barcelona.png';
 
 export const FAKE_TABLES = [{
   players: 3,
@@ -36,6 +36,7 @@ export const FAKE_TABLES = [{
 
 export const LA_LIGA_TABLE = [{
   name: 'Barcelona',
+  img: Liverpool,
   rank: 1,
   games: 27,
   wins: 18,
@@ -48,6 +49,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 2,
   games: 27,
   wins: 18,
@@ -60,6 +62,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 3,
   games: 27,
   wins: 18,
@@ -72,6 +75,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 4,
   games: 27,
   wins: 18,
@@ -84,6 +88,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 5,
   games: 27,
   wins: 18,
@@ -96,6 +101,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 5,
   games: 27,
   wins: 18,
@@ -108,6 +114,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 6,
   games: 27,
   wins: 18,
@@ -120,6 +127,7 @@ export const LA_LIGA_TABLE = [{
 },
 {
   name: 'Barcelona',
+  img: Liverpool,
   rank: 7,
   games: 27,
   wins: 18,

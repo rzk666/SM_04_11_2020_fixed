@@ -16,7 +16,7 @@ const DashboardView = ({
   const [activeMatch, setActive] = useState(0);
   const { connected } = webSocket;
   const { matches } = availableMatches;
-  const currentMatch = matches.find((match) => match.id === activeMatch) || {};
+  const currentMatch = matches.find((match) => parseInt(match.id) === activeMatch) || {};
   const {
     isLocked, homeScore, awayScore, matchTime,
   } = currentMatch;
