@@ -33,7 +33,7 @@ const LeagueRules = ({ creating, players, onClick }) => {
     <div className={styles.wrapper}>
       <Rule creating={creating} isActive={active === 0} onClick={() => { onClick && onClick('a'); setActive(0); }} img={FirstPlace} title="THERE CAN ONLY BE ONE" subText="First Place: 100% Winning Prize" />
       <Rule creating={creating} disabled={players < 5} isActive={active === 1} onClick={() => { if (players >= 5) { onClick && onClick('b'); setActive(1); } }} img={SecondPlace} title="SPLIT THE FORTUNE" subText="First Place: 70%, Second Place: 30%" />
-      <Rule creating={creating} disabled={players < 9} isActive={active === 2} onClick={() => { if (players >= 9) { onClick && onClick('c'); setActive(2); } }} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%, Third Place: 20%" />
+      <Rule creating={creating} disabled={players < 9} isActive={active === 2} onClick={() => { if (players >= 9) { onClick && onClick('c'); setActive(2); } }} reduceTextSize img={ThirdPlace} title="STRENGTH IN NUMBERS" subText="First Place: 50%, Second Place: 30%,        Third Place: 20%" />
     </div>
   );
 };

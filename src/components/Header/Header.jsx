@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import BeatemHomeTitle from '../../static/images/icons/beatemhometitle.png';
 import Home from '../../static/images/icons/home.svg';
 import Menu from '../../static/images/icons/menu.svg';
+import Messages from '../../static/images/icons/messages.svg';
 import Trophy from '../../static/images/icons/Trophy.svg';
 import ActiveStar from '../../static/images/icons/ActiveStar.png';
 import Star from '../../static/images/icons/Star.png';
@@ -48,6 +49,8 @@ const getMenuItemIcon = (name) => {
       return AchievementsGrey;
     case 'Create League':
       return CreateGrey;
+      case 'Messages':
+      return Messages;
     case 'Join League':
       return JoinGrey;
     case 'Specials':
@@ -227,12 +230,13 @@ const UserMenu = ({
             <MenuItem name="Home" notifications={0} onClick={() => { history.push('/'); close(); }} />
             <MenuItem name="Profile" notifications={0} onClick={() => { history.push('/profile'); close(); }} />
             <MenuItem name="My Leagues" notifications={0} />
+            <MenuItem name="Messages" notifications={0} />
             <MenuItem name="Achievements" notifications={1} />
-            <MenuItem name="Create League" notifications={0}  />
-            <MenuItem name="Join League" notifications={0}  />
-            <MenuItem name="Specials" notifications={0}  />
-            <MenuItem name="How It Works?" notifications={0}  />
-            <MenuItem name="Notifications" notifications={3}  />
+            <MenuItem name="Create League" notifications={0} />
+            <MenuItem name="Join League" notifications={0} />
+            <MenuItem name="Specials" notifications={0} />
+            <MenuItem name="How It Works?" notifications={0} />
+            <MenuItem name="Notifications" notifications={3} />
             <MenuItem name="Friends" notifications={0} onClick={() => alert('FRIENDS')} />
             <MenuItem name="Contact" notifications={0} onClick={() => alert('CONTACT')} />
             <MenuItem name="FAQ" notifications={0} onClick={() => alert('FAQ')} />
@@ -282,6 +286,7 @@ const Header = ({
         })}
       >
         <img
+          onClick={() => history.push({ pathname: '/', state: { resetHome: true } })}
           src={BeatemHomeTitle}
           alt="TITLE_HOME"
           className={styles.title_img}

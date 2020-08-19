@@ -215,7 +215,7 @@ const HomeLeagues = ({ leaguesSearch, currentSport }) => {
           : (
             <>
               {filteredLeagues.map((league, i) => (
-                <motion.div onClick={() => history.push('joinLeague')} whileTap={{ scale: 0.9 }} animate={controls} key={`${league}_${i}`} className={classnames(styles.league, styles[currentSport])}>
+                <motion.div onClick={currentSport !== 'soccer' ? () => alert('Coming Soon...') : () => history.push('joinLeague')} whileTap={{ scale: 0.9 }} animate={controls} key={`${league}_${i}`} className={classnames(styles.league, styles[currentSport])}>
                   <div className={classnames(styles.league_image_container, styles[currentSport])}>
                     <motion.img
                       animate={{ opacity: 1 }}

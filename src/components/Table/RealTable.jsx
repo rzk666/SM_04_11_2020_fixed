@@ -6,9 +6,10 @@ import LeagueLiveTable from '../common/LeagueLiveTable';
 
 const RealTable = ({ activeTable }) => {
   const { leagues } = activeTable;
+  const filteredLeagues = leagues.filter((x) => x !== 'Champions League');
   return (
     <div style={{ backgroundColor: '#ebebeb' }} className={styles.container}>
-      {leagues.map((league) => (
+      {filteredLeagues.map((league) => (
         <div style={{ width: '90%' }}>
           <LeagueLiveTable currentLeague={league} />
         </div>
