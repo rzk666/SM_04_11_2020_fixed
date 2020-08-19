@@ -1,11 +1,21 @@
 // Images
 import Barcelona from '../static/images/teams/Barcelona.png';
 import Sevillia from '../static/images/teams/Sevillia.png';
+import RealMadrid from '../static/images/teams/RealMadrid.png';
 import Getafe from '../static/images/teams/Getafe.png';
 import CeltaVigo from '../static/images/teams/CeltaVigo.png';
 import Granada from '../static/images/teams/Granada.png';
 import Valencia from '../static/images/teams/Valencia.png';
 import Villareal from '../static/images/teams/Villareal.png';
+import ManchesterCity from '../static/images/teams/ManchesterCity.png';
+import ManchesterUnited from '../static/images/teams/ManchesterUnited.png';
+import AstonVilla from '../static/images/teams/AstonVilla.png';
+import Juventus from '../static/images/teams/Juventus.png';
+import Liverpool from '../static/images/teams/Liverpool.png';
+import Arsenal from '../static/images/teams/Arsenal.png';
+import Leicester from '../static/images/teams/Leicester.png';
+import Chelsea from '../static/images/teams/Chelsea.png';
+import Tottenham from '../static/images/teams/Tottenham.png';
 
 export const calculateMatchScore = (
   homeScore,
@@ -125,6 +135,8 @@ export const calculateTotalTime = (matches) => {
   return totalTime;
 };
 
+export const getLeagueMatches = (matches, league) => matches.filter((match) => match.league === league);
+
 export const getTeamImage = (team) => {
   switch (team) {
     case 'Barcelona':
@@ -141,6 +153,26 @@ export const getTeamImage = (team) => {
       return Valencia;
     case 'Villareal':
       return Villareal;
+    case 'Leicester City':
+      return Leicester;
+    case 'Manchester City':
+      return ManchesterCity;
+    case 'Manchester United':
+      return ManchesterUnited;
+    case 'Aston Villa':
+      return AstonVilla;
+    case 'Tottenham':
+      return Tottenham;
+    case 'Chelsea':
+      return Chelsea;
+    case 'Real Madrid':
+      return RealMadrid;
+    case 'Juventus':
+      return Juventus;
+    case 'Liverpool':
+      return Liverpool;
+    case 'Arsenal':
+      return Arsenal;
     default:
       return Barcelona;
   }

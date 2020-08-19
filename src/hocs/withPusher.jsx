@@ -37,7 +37,7 @@ export default (ComposedComponent) => {
     }
 
     handleActivePopup(activePopup) {
-      setTimeout(() => this.disablePopup(), 2000);
+      setTimeout(() => this.disablePopup(), 3000);
       this.setState({ activePopup });
     }
 

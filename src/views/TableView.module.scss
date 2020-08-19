@@ -7,13 +7,13 @@
     align-items: center;
     background-color: #ebebeb;
     .popup_container{
+        z-index: 3;
         position: fixed;
         width: 90%;
         background-color: white;
         display: flex;
         flex-direction: column;
-        // bottom: -90px;
-        // opacity: 0;
+        opacity: 0;
         height: 91px;
         border-radius: 10px;
         border: solid 3px #b3e4c3;

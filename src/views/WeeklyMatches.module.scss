@@ -214,11 +214,11 @@
                     }
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: flex-end;
                     flex: 1;
                     color: var(--main-solid-dark-grey);
+                    font-weight: bold;
                     font-size: 12px;
-                    font-weight: normal;
                     letter-spacing: 0.35px;
                 }
                 .date_container{
@@ -226,7 +226,7 @@
                         margin: 0;
                     }
                     display: flex;
-                    flex: 1;
+                    margin: 0 33px;
                     align-items: center;
                     justify-content: center;
                     flex-direction: column;
@@ -240,11 +240,11 @@
                     }
                     flex: 1;
                     display: flex;
+                    font-weight: bold;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: flex-start;
                     color: var(--main-solid-dark-grey);
                     font-size: 12px;
-                    font-weight: normal;
                     letter-spacing: 0.35px;
                 }
             }

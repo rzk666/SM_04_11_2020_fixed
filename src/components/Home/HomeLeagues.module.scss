@@ -93,6 +93,36 @@
                     width: 90px;
                     height: 65px;
                 }
+                // Basketball
+                &.basketball{
+                    img{
+                        width: 75%;
+                    }
+                }
+                .lba{
+                    width: 60%!important;
+                }
+                // Football
+                &.football{
+                    img{
+                        width: 70%;
+                    }
+                }
+                .bfa{
+                    width: 50%!important;
+                }
+                // Baseball
+                &.baseball{
+                    img{
+                        width: 75%;
+                    }
+                }
+                // Hockey
+                &.hockey{
+                    img{
+                        width: 70%;
+                    }
+                }
             }
         }
     }

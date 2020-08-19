@@ -25,57 +25,55 @@ const Popup = ({ activePopup }) => {
     winner,
   } = activePopup;
   return (
-    <AnimatePresence>
-      <motion.div className={styles.popup_container}>
-        <div className={styles.title}>
-          {title}
-        </div>
-        <div className={styles.bottom_container}>
-          { type === 'info'
-            ? (
-              <>
+    <motion.div initial={{ opacity: 0, y: 625 }} animate={{ y: 525, opacity: 1 }} transition={{ duration: 0.8 }} exit={{ opacity: 0 }} className={styles.popup_container}>
+      <div className={styles.title}>
+        {title}
+      </div>
+      <div className={styles.bottom_container}>
+        { type === 'info'
+          ? (
+            <>
+              <img
+                src={getTeamImage(homeTeam)}
+                alt="Home"
+              />
+              <div className={styles.vs}>
+                {getShortTeamName(homeTeam)}
+                <p>VS</p>
+                {getShortTeamName(awayTeam)}
+              </div>
+              <img
+                src={getTeamImage(awayTeam)}
+                alt="Home"
+              />
+            </>
+          ) : (
+            <>
+              <div className={styles.home_team}>
+                {getShortTeamName(homeTeam)}
                 <img
                   src={getTeamImage(homeTeam)}
                   alt="Home"
+                  style={{ marginLeft: '5px' }}
                 />
-                <div className={styles.vs}>
-                  {getShortTeamName(homeTeam)}
-                  <p>VS</p>
-                  {getShortTeamName(awayTeam)}
-                </div>
+              </div>
+              <div className={styles.goals}>
+                <p style={winner === 'home' ? { color: '#57bb78' } : {}}>{homeScore}</p>
+                <p style={{ margin: '0 3px' }}>:</p>
+                <p style={winner === 'away' ? { color: '#57bb78' } : {}}>{awayScore}</p>
+              </div>
+              <div className={styles.away_team}>
                 <img
                   src={getTeamImage(awayTeam)}
-                  alt="Home"
+                  alt="Away"
+                  style={{ marginRight: '5px' }}
                 />
-              </>
-            ) : (
-              <>
-                <div className={styles.home_team}>
-                  {getShortTeamName(homeTeam)}
-                  <img
-                    src={getTeamImage(homeTeam)}
-                    alt="Home"
-                    style={{ marginLeft: '5px' }}
-                  />
-                </div>
-                <div className={styles.goals}>
-                  <p style={winner === 'home' ? { color: '#57bb78' } : {}}>{homeScore}</p>
-                  <p style={{ margin: '0 3px' }}>:</p>
-                  <p style={winner === 'away' ? { color: '#57bb78' } : {}}>{awayScore}</p>
-                </div>
-                <div className={styles.away_team}>
-                  <img
-                    src={getTeamImage(awayTeam)}
-                    alt="Away"
-                    style={{ marginRight: '5px' }}
-                  />
-                  {getShortTeamName(awayTeam)}
-                </div>
-              </>
-            )}
-        </div>
-      </motion.div>
-    </AnimatePresence>
+                {getShortTeamName(awayTeam)}
+              </div>
+            </>
+          )}
+      </div>
+    </motion.div>
   );
 };
 
@@ -125,7 +123,9 @@ const TableView = ({
       <div className={styles.view_container}>
         <Leaderboard hide={!(currentView === 'LEADERBOARD')} user={user} availableMatches={availableMatches} activeTable={activeTable} />
         {View}
-        { activePopup.type !== 'none' && <Popup activePopup={activePopup} />}
+        <AnimatePresence>
+          { activePopup.type !== 'none' && <Popup activePopup={activePopup} />}
+        </AnimatePresence>
       </div>
     </>
   );

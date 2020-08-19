@@ -7,7 +7,6 @@ import OddsRow from '../components/common/OddsRow';
 import PremiereLeague from '../static/images/weeklymatches/premiereLeague.png';
 import Valencia from '../static/images/weeklymatches/Valencia.png';
 import Lavante from '../static/images/weeklymatches/Lavante.png';
-import Barcelona from '../static/images/weeklymatches/Barcelona.png';
 import Star from '../static/images/weeklymatches/Star.svg';
 import WhiteStar from '../static/images/weeklymatches/WhiteStar.svg';
 import BonusStar from '../static/images/weeklymatches/BonusStar.svg';
@@ -20,6 +19,8 @@ import { motion } from 'framer-motion';
 // Utils
 import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
+import { PREMIERE_LEAGUE_TABLE } from '../common/fake-data';
+import { getShortTeamName, getShortDayName, getLeagueMatches, getTeamImage } from '../common/libs';
 
 const BonusButton = ({ onClick }) => (
   <div
@@ -114,7 +115,7 @@ const TableTopRow = () => (
 
 const TeamRow = ({ team }) => {
   const {
-    name, rank, games, wins, draws, loses, goals, against, points, lastSixMatches,
+    name, img, rank, games, wins, draws, loses, goals, against, points, lastSixMatches,
   } = team;
   return (
     <div className={styles.team_row_container}>
@@ -123,7 +124,7 @@ const TeamRow = ({ team }) => {
       </div>
       <div className={styles.team}>
         <img
-          src={Barcelona}
+          src={img}
           alt="Barcelona"
           style={{ width: '20px', marginRight: '6.5px' }}
         />
@@ -159,28 +160,29 @@ const TeamRow = ({ team }) => {
 
 export const Match = ({ match }) => {
   const {
-    homeTeam, awayTeam, dayName, time, homeOdds, awayOdds, drawOdds,
+    homeTeam, awayTeam, startDate, homeOdds, awayOdds, drawOdds,
   } = match;
+  const matchDate = !((typeof startDate) === 'string') ? startDate : new Date(startDate);
   return (
     <div className={styles.match_container}>
       <div className={styles.match_top_row}>
         <div className={styles.home_team_container}>
-          {homeTeam}
+          {getShortTeamName(homeTeam)}
           <img
-            src={Valencia}
+            src={getTeamImage(homeTeam)}
             alt="Valencia"
           />
         </div>
         <div className={styles.date_container}>
-          <p>{dayName}</p>
-          <p>{time}</p>
+          <p>{`${getShortDayName(matchDate.getDay())}, ${matchDate.getDate()}/${matchDate.getMonth() + 1}`}</p>
+          <p>{`${matchDate.getHours()}:00`}</p>
         </div>
         <div className={styles.away_team_container}>
           <img
-            src={Lavante}
+            src={getTeamImage(awayTeam)}
             alt="Valencia"
           />
-          {awayTeam}
+          {getShortTeamName(awayTeam)}
         </div>
       </div>
       <OddsRow homeOdds={homeOdds} drawOdds={drawOdds} awayOdds={awayOdds} />
@@ -252,10 +254,12 @@ const WeeklyMatchesView = ({
   activeLeague,
   isBonusOpen,
   toggleBonusModal,
+  availableMatches,
 }) => {
   const { currentLeague, currentLeagueMatches, currentLeagueTable } = activeLeague;
   const history = useHistory();
   const { location } = history;
+  const { matches } = availableMatches;
   const { state } = location;
   const { type } = state;
   const isWeekly = type === 'weekly';
@@ -296,7 +300,7 @@ const WeeklyMatchesView = ({
             isWeekly
               ? (
                 <>
-                  {currentLeagueMatches.map((match) => (
+                  {getLeagueMatches(matches, 'Premiere League').map((match) => (
                     <Match match={match} />
                   ))}
                 </>
@@ -304,7 +308,7 @@ const WeeklyMatchesView = ({
               : (
                 <>
                   <TableTopRow />
-                  {currentLeagueTable.map((team) => (
+                  {PREMIERE_LEAGUE_TABLE.map((team) => (
                     <TeamRow team={team} />
                   ))}
                   <div className={styles.bottom} />
