@@ -83,9 +83,6 @@ const UserBets = ({ user, matches, isPlayer }) => {
           awayTeamName = awayTeam;
         }
         const lockedButNotStarted = isLocked && matchTime === 0;
-        console.log(`I AM MATCH ${id}`);
-        console.log(` MY MATCH TIME IS ${matchTime}`);
-        console.log(`AM I SHOWING LOCK? ${lockedButNotStarted}`);
         return (
           <div className={classnames(styles.match_row, { [styles.hidden]: !isLocked && !isPlayer })}>
             { lockedButNotStarted
@@ -132,7 +129,17 @@ const UserBets = ({ user, matches, isPlayer }) => {
 };
 
 const User = ({
-  user, rank, prizes, type, matches, isPlayer, totalUsers, isRunning, toggleActive, activeUsers,
+  user,
+  rank,
+  prizes,
+  type,
+  matches,
+  isPlayer,
+  totalUsers,
+  isRunning,
+  toggleActive,
+  activeUsers,
+  displayUsers,
 }) => {
   const totalDelay = 0.85 + totalUsers * 0.1;
   const {
@@ -145,14 +152,19 @@ const User = ({
       if (rank === 1) {
         isTop = true;
       }
+      break;
     case 'b':
       if (rank === 1 || rank === 2) {
         isTop = true;
       }
+      break;
     case 'c':
       if (rank === 1 || rank === 2 || rank === 3) {
         isTop = true;
       }
+      break;
+    default:
+      break;
   }
   let shadowOne;
   let shadowTwo;
@@ -185,7 +197,11 @@ const User = ({
 
   return (
     <AnimatePresence>
+      { displayUsers
+      && (
       <motion.div
+        key={`User_${rank}`}
+        exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -252,6 +268,7 @@ const User = ({
         </div>
         { isActive && <UserBets isPlayer={isPlayer} matches={matches} user={user} />}
       </motion.div>
+      ) }
     </AnimatePresence>
   );
 };
@@ -266,6 +283,7 @@ class Leaderboard extends React.Component {
       previousTotalTime: 0,
       currentUsers: props.activeTable.users,
       activeUsers: [],
+      displayUsers: true,
     };
   }
 
@@ -296,7 +314,7 @@ class Leaderboard extends React.Component {
         currentScore: calculateUserScore(user, newFilteredMatches),
       }));
       // Handle running numbers
-      setTimeout(() => this.toggleRunning(false), 3000);
+      setTimeout(() => this.endScoreRun(), 3000);
       this.setState({
         isRunning: true,
         currentUsers: newUsersArray,
@@ -311,6 +329,11 @@ class Leaderboard extends React.Component {
     }
   }
 
+  sortUsers() {
+    const { currentUsers } = this.state;
+    this.setState({ displayUsers: true, currentUsers: [...currentUsers].sort((a, b) => b.currentScore - a.currentScore) });
+  }
+
   toggleActiveUser(userName) {
     const { activeUsers } = this.state;
     if (!activeUsers.includes(userName)) {
@@ -321,16 +344,18 @@ class Leaderboard extends React.Component {
     }
   }
 
-  toggleRunning(isRunning) {
-    this.setState({ isRunning });
+  endScoreRun() {
+    setTimeout(() => this.sortUsers(), 1500);
+    this.setState({ isRunning: false, displayUsers: false });
   }
 
   render() {
     const {
       filteredMatches,
-      currentUsers,
       isRunning,
       activeUsers,
+      currentUsers,
+      displayUsers,
     } = this.state;
     const { activeTable, user } = this.props;
     const {
@@ -349,8 +374,6 @@ class Leaderboard extends React.Component {
     } else {
       aPrecentage = '50%';
     }
-    const sortedUsers = [...currentUsers];
-    sortedUsers.sort((a, b) => b.currentScore - a.currentScore);
     let calculatedPrizes;
     if (type === 'a') {
       calculatedPrizes = [prizePool];
@@ -410,14 +433,15 @@ class Leaderboard extends React.Component {
           </div>
         </div>
         <div className={styles.users_container}>
-          {sortedUsers.map((currentUser, index) => {
+          {currentUsers.map((currentUser, index) => {
             const x = 5;
             return (
               <User
+                displayUsers={displayUsers}
                 toggleActive={() => this.toggleActiveUser(currentUser.name)}
                 activeUsers={activeUsers}
                 isRunning={isRunning}
-                totalUsers={sortedUsers.length}
+                totalUsers={currentUsers.length}
                 isPlayer={user.name === currentUser.name}
                 matches={filteredMatches}
                 rank={index + 1}
