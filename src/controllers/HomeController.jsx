@@ -60,6 +60,8 @@ const HomeController = (props) => {
     }
   };
 
+  // Once an employee is selected, change its relevant department to inte
+
   const handleUserSelection = (isSelected, id) => {
     // This means we clicked on a selected user, so we need to hide it
     if (isSelected) {

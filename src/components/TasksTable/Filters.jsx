@@ -21,12 +21,15 @@ const Filters = ({
       />
     </div>
     <div className={styles.departments}>
-      {DEPARTMENTS.map((department, i) => (
-        <Checkbox
-          onClick={() => toggleDepartment(i + 1)}
-          label={department}
-        />
-      ))}
+      {DEPARTMENTS.map((department) => {
+        const { title, id } = department;
+        return (
+          <Checkbox
+            onClick={() => toggleDepartment(id)}
+            label={title}
+          />
+        );
+      })}
     </div>
   </div>
 );

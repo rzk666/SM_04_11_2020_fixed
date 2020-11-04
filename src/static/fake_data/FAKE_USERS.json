@@ -1,7 +1,8 @@
 [{
-    "id": 1,
-    "department_id": 1,
-    "name": "Razi Elbaz",
+    "id": 5125,
+    "department_id": 25,
+    "name": "Kady Vazquez",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "task": { 
         "id": 21,
         "title": "home task",
@@ -9,38 +10,195 @@
     }
 },
 {
-    "id": 2,
-    "department_id": 1,
-    "name": "Razi Elbaz",
+    "id": 7454,
+    "department_id": 25,
+    "name": "Sherri Ahmed",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "task": {
         "id": 0
     }
 },
 {
-    "id": 3,
-    "department_id": 1,
-    "name": "Razi Elbaz",
+    "id": 999,
+    "department_id": 25,
+    "name": "Rayyan Carney",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "task": {
         "id": 0
     }
 },
 {
-    "id": 4,
-    "department_id": 2,
-    "name": "Razi Elbaz",
+    "id": 525,
+    "department_id": 96,
+    "name": "Arman Riley",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 579,
+    "department_id": 96,
+    "name": "Sherri Ahmed",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "task": {
         "id": 0
     }
 },
 {
-    "id": 5,
-    "department_id": 2,
-    "name": "Razi Elbaz",
-    "task": {}
+    "id": 331,
+    "department_id": 96,
+    "name": "Rayyan Carney",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
 },
 {
-    "id": 6,
-    "department_id": 2,
-    "name": "Razi Elbaz",
-    "task": {}
-}]
+    "id": 5747,
+    "department_id": 64,
+    "name": "Gareth Baird",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 9565,
+    "department_id": 64,
+    "name": "Maksim Easton",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 8654,
+    "department_id": 64,
+    "name": "Elliot Walmsley",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 3609,
+    "department_id":17,
+    "name": "Poppy-Mae Skinner",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 4432,
+    "department_id": 17,
+    "name": "Camilla Cope",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 1112,
+    "department_id": 17,
+    "name": "Aine Boyce",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 7732,
+    "department_id": 19,
+    "name": "Whitney Hulme",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 4432,
+    "department_id": 19,
+    "name": "Atlas Humphries",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 1199,
+    "department_id": 19,
+    "name": "Grant Mcdougall",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 1198,
+    "department_id":22,
+    "name": "Oisin Rubio",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 9986,
+    "department_id": 22,
+    "name": "Beverly Hull",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 4476,
+    "department_id": 22,
+    "name": "Cindy Thornton",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 77,
+    "department_id": 64,
+    "name": "Carly Coates",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": { 
+        "id": 21,
+        "title": "home task",
+        "color": "#4FAC42"
+    }
+},
+{
+    "id": 643,
+    "department_id": 88,
+    "name": "Tamia Combs",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+},
+{
+    "id": 7234,
+    "department_id": 88,
+    "name": "Bibi Cooke",
+"avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "task": {
+        "id": 0
+    }
+}
+]

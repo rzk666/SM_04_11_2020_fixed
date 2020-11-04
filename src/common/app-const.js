@@ -11,5 +11,34 @@ export const INITIAL_STATE = {
   },
 };
 
-export const DEPARTMENTS = ['Sales', 'Marketing', 'CC', 'Product', 'HR', 'R&D', 'Research'];
+export const DEPARTMENTS = [
+  {
+    id: 25,
+    title: 'Sales',
+  },
+  {
+    id: 96,
+    title: 'Marketing',
+  },
+  {
+    id: 64,
+    title: 'Sales',
+  },
+  {
+    id: 17,
+    title: 'Product',
+  },
+  {
+    id: 19,
+    title: 'HR',
+  },
+  {
+    id: 22,
+    title: 'R&D',
+  },
+  {
+    id: 88,
+    title: 'Research',
+  }];
+
 export const MAX_USERS = 10;
