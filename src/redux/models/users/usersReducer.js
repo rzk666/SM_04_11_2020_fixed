@@ -16,9 +16,11 @@ const users = (state = INITIAL_STATE.users, action) => {
     }
     case USERS_GET_DATA: {
       const { data } = state;
+      const { selected } = action;
+      const selectedUsers = action.data.map((user) => ({ ...user, selected }));
       return {
         ...state,
-        data: [...data, ...action.data],
+        data: [...data, ...selectedUsers],
         hasError: false,
         errorCode: -1,
       };

@@ -20,9 +20,10 @@ export const hideDepartment = (id) => ({
   id,
 });
 
-export const usersGetData = (data) => ({
+export const usersGetData = (data, selected) => ({
   type: USERS_GET_DATA,
   data,
+  selected,
 });
 
 export const usersHasError = (data) => ({
@@ -39,7 +40,7 @@ export const fetchUsers = (firstIndex = 0, endIndex = 10, orderBy = 'department'
       endpoint: '',
     },
     method: 'get',
-    success: (data) => usersGetData(data),
+    success: (data) => usersGetData(data, false),
     failure: (data) => usersHasError(data),
     loader: (data) => usersIsLoading(data),
   },
@@ -56,7 +57,7 @@ export const fetchUsersByDepartment = (
       endpoint: '',
     },
     method: 'get',
-    success: (data) => usersGetData(data),
+    success: (data) => usersGetData(data, true),
     failure: (data) => usersHasError(data),
     loader: (data) => usersIsLoading(data),
   },

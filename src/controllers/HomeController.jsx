@@ -2,14 +2,49 @@ import React, { useEffect, useState } from 'react';
 // Custom Hooks
 import usePrevious from '../hooks/usePrevioues';
 
+// ----- Consts & Dicts ----- //
+const MAX_USERS = 10;
+
 const HomeController = (props) => {
-  const { hideDepartment, fetchUsers, fetchUsersByDepartment } = props;
+  const {
+    hideDepartment,
+    fetchUsers,
+    fetchUsersByDepartment,
+    hideUnselectedUsers,
+    users,
+  } = props;
+  const { data } = users;
+
   // State
   const [state, setState] = useState({
     selectedDepartments: [],
+    selectedUsers: [],
     filterByEmployee: false,
   });
   // const prevState = usePrevious(state) || state;
+
+  // ----- useEffects ----- //
+
+  // React to filterByEmployee changes
+  useEffect(() => {
+    const { filterByEmployee } = state;
+    if (!filterByEmployee) {
+      // hideUnselectedUsers();
+    } else if (MAX_USERS > data.length) {
+      // We'll only fetch relevant chuncks of users and only when needed.
+      // We'll also fetch the users without having the server actually populating
+      // the tasks to make this request as cheap as possible
+      const reqParams = {
+        firstIndex: data.length,
+        endIndex: MAX_USERS - data.length,
+        orderBy: 'department',
+        withTasks: false,
+      };
+      fetchUsers(data.length);
+    }
+  }, [state.filterByEmployee]);
+
+  // ----- Callbacks ----- //
 
   const toggleFilterByEmployee = () => {
     const { filterByEmployee } = state;
