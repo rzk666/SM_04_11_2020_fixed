@@ -4,6 +4,7 @@ import { INITIAL_STATE } from '../../../common/app-const';
 import {
   USERS_HAS_ERROR,
   USERS_IS_LOADING,
+  USER_IS_LOADING,
   USERS_GET_DATA,
   HIDE_DEPARTMENT,
   HIDE_UNSELECTED,
@@ -33,7 +34,23 @@ const users = (state = INITIAL_STATE.users, action) => {
       const { id } = action;
       const newUsers = data.map((user) => {
         if (user.id === id) {
-          return { ...user, selected: true, task: data };
+          return { ...user, selected: true, task: action.data };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        data: newUsers,
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case USER_IS_LOADING: {
+      const { data } = state;
+      const { id, isLoading } = action;
+      const newUsers = data.map((user) => {
+        if (user.id === id) {
+          return { ...user, isLoading };
         }
         return user;
       });

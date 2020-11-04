@@ -5,6 +5,10 @@
     color: white;
     margin-bottom: 5px;
     position: relative;
+    transition: opacity 0.25s ease-in;
+    &.loading{
+        opacity: 0.5;
+    }
     .user{
         font-size: 12px;
         width: 150px;
@@ -13,6 +17,7 @@
         background-color: #28518F;
         margin-right: 20px;
         .avatar{
+            border-radius: 256px;
             height: 20px;
             width: 20px;
             margin: 0 10px;

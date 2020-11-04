@@ -7,6 +7,7 @@ import {
   HIDE_UNSELECTED,
   USER_GET_TASKS,
   HIDE_USER_TASKS,
+  USER_IS_LOADING,
 } from './usersTypes';
 // API
 import { API, api } from '../../api';
@@ -21,6 +22,12 @@ export const usersIsLoading = (isLoading) => ({
 export const userGetTasks = (id, data) => ({
   type: USER_GET_TASKS,
   data,
+  id,
+});
+
+export const userIsLoading = (id, isLoading) => ({
+  type: USER_IS_LOADING,
+  isLoading,
   id,
 });
 
@@ -60,7 +67,7 @@ export const fetchUserTasks = (id) => (api({
     method: 'get',
     success: (data) => userGetTasks(id, data),
     failure: (data) => usersHasError(data),
-    loader: (data) => usersIsLoading(data),
+    loader: (data) => userIsLoading(id, data),
   },
 }));
 

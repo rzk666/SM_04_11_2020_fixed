@@ -1,6 +1,8 @@
 import React from 'react';
 // styles
 import styles from './UserRow.module.scss';
+// Utils
+import classnames from 'classnames';
 // Components
 import { Checkbox } from 'semantic-ui-react';
 
@@ -49,11 +51,16 @@ const Selected = ({ selected, toggleSelection }) => {
 
 const UsersRow = ({ user, filterByEmployee, handleUserSelection }) => {
   const {
-    task, name, avatar, selected, id,
+    task, name, avatar, selected, id, isLoading,
   } = user;
   return (
-    <div className={styles.row_container}>
-      {filterByEmployee && <Selected toggleSelection={() => handleUserSelection(selected, id)} selected={selected} />}
+    <div className={classnames(styles.row_container, { [styles.loading]: isLoading })}>
+      {filterByEmployee && (
+      <Selected
+        toggleSelection={() => handleUserSelection(selected, id)}
+        selected={selected}
+      />
+      )}
       <User avatar={avatar} name={name} />
       <Task task={task} />
     </div>
