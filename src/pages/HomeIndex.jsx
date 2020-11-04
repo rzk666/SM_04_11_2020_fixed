@@ -1,7 +1,12 @@
 import React from 'react';
 // Redux
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUsersByDepartment, hideDepartment } from '../redux/models/users/usersActions';
+import {
+  fetchUsers,
+  fetchUsersByDepartment,
+  hideDepartment,
+  hideUnselectedUsers,
+} from '../redux/models/users/usersActions';
 // Components
 import HomeController from '../controllers/HomeController';
 import HomeView from '../views/HomeView';
@@ -22,6 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
     orderBy,
     withTasks) => dispatch(fetchUsersByDepartment(firstIndex, endIndex, orderBy, withTasks)),
   hideDepartment: (id) => dispatch(hideDepartment(id)),
+  hideUnselectedUsers: () => dispatch(hideUnselectedUsers()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

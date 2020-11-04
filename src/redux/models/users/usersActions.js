@@ -4,6 +4,7 @@ import {
   USERS_HAS_ERROR,
   USERS_GET_DATA,
   HIDE_DEPARTMENT,
+  HIDE_UNSELECTED
 } from './usersTypes';
 // API
 import { API, api } from '../../api';
@@ -13,6 +14,10 @@ import config from '../../../common/config';
 export const usersIsLoading = (isLoading) => ({
   type: USERS_IS_LOADING,
   isLoading,
+});
+
+export const hideUnselectedUsers = () => ({
+  type: HIDE_UNSELECTED,
 });
 
 export const hideDepartment = (id) => ({

@@ -6,6 +6,7 @@ import {
   USERS_IS_LOADING,
   USERS_GET_DATA,
   HIDE_DEPARTMENT,
+  HIDE_UNSELECTED,
 } from './usersTypes';
 
 // This is temp and will change soon
@@ -21,6 +22,16 @@ const users = (state = INITIAL_STATE.users, action) => {
       return {
         ...state,
         data: [...data, ...selectedUsers],
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case HIDE_UNSELECTED: {
+      const { data } = state;
+      const filteredUsers = data.filter((user) => user.selected);
+      return {
+        ...state,
+        data: filteredUsers,
         hasError: false,
         errorCode: -1,
       };

@@ -18,7 +18,6 @@ const HomeController = (props) => {
   // State
   const [state, setState] = useState({
     selectedDepartments: [],
-    selectedUsers: [],
     filterByEmployee: false,
   });
   // const prevState = usePrevious(state) || state;
@@ -29,7 +28,7 @@ const HomeController = (props) => {
   useEffect(() => {
     const { filterByEmployee } = state;
     if (!filterByEmployee) {
-      // hideUnselectedUsers();
+      hideUnselectedUsers();
     } else if (MAX_USERS > data.length) {
       // We'll only fetch relevant chuncks of users and only when needed.
       // We'll also fetch the users without having the server actually populating
@@ -40,7 +39,7 @@ const HomeController = (props) => {
         orderBy: 'department',
         withTasks: false,
       };
-      fetchUsers(data.length);
+      fetchUsers(reqParams);
     }
   }, [state.filterByEmployee]);
 
