@@ -11,6 +11,8 @@ const HomeController = (props) => {
     fetchUsers,
     fetchUsersByDepartment,
     hideUnselectedUsers,
+    fetchUserTasks,
+    hideUserTasks,
     users,
   } = props;
   const { data } = users;

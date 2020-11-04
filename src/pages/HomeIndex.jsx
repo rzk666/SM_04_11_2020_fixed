@@ -6,6 +6,8 @@ import {
   fetchUsersByDepartment,
   hideDepartment,
   hideUnselectedUsers,
+  fetchUserTasks,
+  hideUserTasks,
 } from '../redux/models/users/usersActions';
 // Components
 import HomeController from '../controllers/HomeController';
@@ -28,6 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
     withTasks) => dispatch(fetchUsersByDepartment(firstIndex, endIndex, orderBy, withTasks)),
   hideDepartment: (id) => dispatch(hideDepartment(id)),
   hideUnselectedUsers: () => dispatch(hideUnselectedUsers()),
+  fetchUserTasks: (id) => dispatch(fetchUserTasks(id)),
+  hideUserTasks: (id) => dispatch(hideUserTasks(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

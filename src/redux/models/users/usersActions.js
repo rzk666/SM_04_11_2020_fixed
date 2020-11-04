@@ -6,6 +6,7 @@ import {
   HIDE_DEPARTMENT,
   HIDE_UNSELECTED,
   USER_GET_TASKS,
+  HIDE_USER_TASKS,
 } from './usersTypes';
 // API
 import { API, api } from '../../api';
@@ -41,6 +42,11 @@ export const usersGetData = (data, selected) => ({
 export const usersHasError = (data) => ({
   type: USERS_HAS_ERROR,
   data,
+});
+
+export const hideUserTasks = (id) => ({
+  type: HIDE_USER_TASKS,
+  id,
 });
 
 export const fetchUserTasks = (id) => (api({
