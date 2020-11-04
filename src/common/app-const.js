@@ -12,3 +12,4 @@ export const INITIAL_STATE = {
 };
 
 export const DEPARTMENTS = ['Sales', 'Marketing', 'CC', 'Product', 'HR', 'R&D', 'Research'];
+export const MAX_USERS = 10;

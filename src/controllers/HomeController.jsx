@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// Custom Hooks
-import usePrevious from '../hooks/usePrevioues';
-
-// ----- Consts & Dicts ----- //
-const MAX_USERS = 10;
+// Common
+import { MAX_USERS } from '../common/app-const';
 
 const HomeController = (props) => {
   const {
@@ -22,7 +19,6 @@ const HomeController = (props) => {
     selectedDepartments: [],
     filterByEmployee: false,
   });
-  // const prevState = usePrevious(state) || state;
 
   // ----- useEffects ----- //
 
