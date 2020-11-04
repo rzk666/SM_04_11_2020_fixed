@@ -1,6 +1,6 @@
 import React from 'react';
 // styles
-import styles from './Table.module.scss';
+import styles from './UserRow.module.scss';
 
 // ----- Help Components ----- //
 const User = ({ avatar, name }) => {
