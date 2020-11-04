@@ -28,8 +28,9 @@ export const fetchUsers = (firstIndex = 0, endIndex = 10, orderBy = 'department'
   type: API,
   payload: {
     url: {
-      base: config.api.url,
-      endpoint: `/users/?orderBy=${orderBy}&firstIndex=${firstIndex}&endIndex=${endIndex}&withTasks=${withTasks}`, // TEMP
+      base: 'https://testsh.free.beeceptor.com/getusers',
+      // endpoint: `/users/?orderBy=${orderBy}&firstIndex=${firstIndex}&endIndex=${endIndex}&withTasks=${withTasks}`, // TEMP
+      endpoint: '',
     },
     method: 'get',
     success: (data) => usersGetData(data),

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 const HomeController = (props) => {
+  const { fetchUsers } = props;
+  useEffect(() => {
+    fetchUsers();
+  }, []);
   const [state, setState] = useState({
-    test: 1,
+    selectedDepartments: [],
   });
-  // Add relevant state
-  // Add relevent useEffects
-  // Add callbacks
-  // Get view component
   const callbacks = {
     foo: () => console.log('test'),
   };
