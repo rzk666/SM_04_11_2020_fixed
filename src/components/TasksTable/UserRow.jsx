@@ -53,7 +53,7 @@ const UsersRow = ({ user, filterByEmployee, handleUserSelection }) => {
   } = user;
   return (
     <div className={styles.row_container}>
-      {filterByEmployee && <Selected toggleSelected={handleUserSelection(!selected, id)} selected={selected} />}
+      {filterByEmployee && <Selected toggleSelection={() => handleUserSelection(selected, id)} selected={selected} />}
       <User avatar={avatar} name={name} />
       <Task task={task} />
     </div>
