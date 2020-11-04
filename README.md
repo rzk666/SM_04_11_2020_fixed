@@ -1,17 +1,18 @@
-# Razi's Home Task (Will be updated at the end of the project)
-* This project is using React(17.0.01) & Redux /w redux-thunk for api's
+# Razi's Home Task v1.0
+* This project is using React & Redux /w redux-thunk for api's
 * This project is structured based on the MVC approach, seperating each page to page(model) / view / controller
 * Linting: ESlint abnb with some minor personal adjustments
-- Libs used:
-    * Semantic UI React
-    * 
+* This project assumes that the server is using a NoSQL DB such as MongoDB, so fetching a user without actually populating its tasks is a possible cheap action
 
 ## Misc. Notes
-* I ejected the project to edit the ESLint plugin in webpack, for some reason ESLint was failing the project compilation due to warnings, and this is a quick fix I found.
+* This version (v1.0) is roughly working in a very naive way
+* I know this task is far from perfect, but I atleast can explain every single choice I made, and know atleast some of its pros \ cons
 
-* This project assumes we would communicate with our server using a token of some sort
+## TODOS
+* Presist data on client inside of removing it to prevent unnecessary fetches(!)
 
 ## Run Locally
-Rename .env.local -> .env
 npm install
 npm start
+
+## Thanks for your time!
