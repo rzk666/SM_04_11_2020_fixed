@@ -1,12 +1,32 @@
 import React from 'react';
+// Components
+import UserRow from './UserRow';
 // styles
 import styles from './Table.module.scss';
 
-const Table = (props) => {
-  const x = 5;
+// ----- Help Components ----- //
+const TableHeader = () => (
+  <div className={styles.table_header}>
+    <div className={styles.employees}>Employees</div>
+    <div className={styles.days}>{(new Date()).toDateString()}</div>
+  </div>
+);
+
+const Table = ({ users }) => {
+  const { data } = users;
   return (
     <div className={styles.table_container}>
-      table
+      <TableHeader />
+      {!data.length
+        ? <div className={styles.no_users}> No users selected </div>
+        : (
+          <>
+            {data.map((user) => {
+              const x = 5;
+              return <UserRow user={user} />;
+            })}
+          </>
+        )}
     </div>
   );
 };

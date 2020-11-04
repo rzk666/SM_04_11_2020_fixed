@@ -5,11 +5,11 @@ import styles from './HomeView.module.scss';
 import Filters from '../components/TasksTable/Filters';
 import Table from '../components/TasksTable/Table';
 
-const HomeView = (props) => (
+const HomeView = ({ users }) => (
   <div className={styles.wrapper}>
     <div className={styles.tasks_manager_container}>
       <Filters />
-      <Table />
+      <Table users={users} />
     </div>
   </div>
 );

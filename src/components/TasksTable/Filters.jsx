@@ -11,9 +11,10 @@ const Filters = (props) => {
   return (
     <div className={styles.filters_container}>
       <div className={styles.filter_by_employee}>
-        <Checkbox toggle label="Filter By Employee" />
+        <p> Filter By Employee </p>
+        <Checkbox toggle />
       </div>
-      <div className={styles.departments_container}>
+      <div className={styles.departments}>
         {DEPARTMENTS.map((department) => <Checkbox label={department} />)}
       </div>
     </div>

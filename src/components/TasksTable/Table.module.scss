@@ -1,0 +1,35 @@
+.table_container{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .table_header{
+        height: 35px;
+        width: 100%;
+        display: flex;
+        margin-bottom: 10px;
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #656565;
+            color: white;
+        }
+        .employees{
+            width: 150px;
+            margin-right: 20px;
+        }
+        .days{
+            flex:1;
+        }
+    }
+    .no_users{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: black;
+    }
+}

@@ -1,0 +1,24 @@
+.row_container{
+    display: flex;
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-size: 14px;
+    .user{
+        display: flex;
+        align-items: center;
+        background-color: #28518F;
+        margin-right: 20px;
+        .avatar{
+            height: 20px;
+            width: 20px;
+            margin: 0 10px;
+        }
+    }
+    .task{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
