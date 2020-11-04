@@ -7,6 +7,7 @@ import {
   USERS_GET_DATA,
   HIDE_DEPARTMENT,
   HIDE_UNSELECTED,
+  USER_GET_TASKS,
 } from './usersTypes';
 
 // This is temp and will change soon
@@ -22,6 +23,22 @@ const users = (state = INITIAL_STATE.users, action) => {
       return {
         ...state,
         data: [...data, ...selectedUsers],
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case USER_GET_TASKS: {
+      const { data } = state;
+      const { id } = action;
+      const newUsers = data.map((user) => {
+        if (user.id === id) {
+          return { ...user, task: data };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        data: newUsers,
         hasError: false,
         errorCode: -1,
       };
