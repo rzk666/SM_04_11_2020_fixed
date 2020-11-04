@@ -1,4 +1,9 @@
-// user
+// users
 export const USERS_GET_DATA = 'USERS_GET_DATA';
+export const HIDE_DEPARTMENT = 'HIDE_DEPARTMENT';
 export const USERS_IS_LOADING = 'USERS_IS_LOADING';
 export const USERS_HAS_ERROR = 'USERS_HAS_ERROR';
+export const HIDE_UNSELECTED = 'HIDE_UNSELECTED';
+export const USER_GET_TASKS = 'USER_GET_TASKS';
+export const HIDE_USER_TASKS = 'HIDE_USER_TASKS';
+export const USER_IS_LOADING = 'USER_IS_LOADING';

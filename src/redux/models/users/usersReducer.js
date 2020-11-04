@@ -4,7 +4,12 @@ import { INITIAL_STATE } from '../../../common/app-const';
 import {
   USERS_HAS_ERROR,
   USERS_IS_LOADING,
+  USER_IS_LOADING,
   USERS_GET_DATA,
+  HIDE_DEPARTMENT,
+  HIDE_UNSELECTED,
+  USER_GET_TASKS,
+  HIDE_USER_TASKS,
 } from './usersTypes';
 
 // This is temp and will change soon
@@ -14,9 +19,81 @@ const users = (state = INITIAL_STATE.users, action) => {
       return { ...state, isLoading: action.isLoading };
     }
     case USERS_GET_DATA: {
+      const { data } = state;
+      const { selected } = action;
+      const selectedUsers = action.data.map((user) => ({ ...user, selected }));
       return {
         ...state,
-        data: action.data,
+        data: [...data, ...selectedUsers],
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case USER_GET_TASKS: {
+      const { data } = state;
+      const { id } = action;
+      const newUsers = data.map((user) => {
+        if (user.id === id) {
+          return { ...user, selected: true, task: action.data };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        data: newUsers,
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case USER_IS_LOADING: {
+      const { data } = state;
+      const { id, isLoading } = action;
+      const newUsers = data.map((user) => {
+        if (user.id === id) {
+          return { ...user, isLoading };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        data: newUsers,
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case HIDE_USER_TASKS: {
+      const { data } = state;
+      const { id } = action;
+      const newUsers = data.map((user) => {
+        if (user.id === id) {
+          return { ...user, selected: false, task: {} };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        data: newUsers,
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case HIDE_UNSELECTED: {
+      const { data } = state;
+      const filteredUsers = data.filter((user) => user.selected);
+      return {
+        ...state,
+        data: filteredUsers,
+        hasError: false,
+        errorCode: -1,
+      };
+    }
+    case HIDE_DEPARTMENT: {
+      const { data } = state;
+      const { id } = action;
+      const filteredUsers = [...data].filter((user) => user.department_id !== id);
+      return {
+        ...state,
+        data: filteredUsers,
         hasError: false,
         errorCode: -1,
       };

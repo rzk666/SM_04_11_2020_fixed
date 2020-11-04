@@ -1,0 +1,42 @@
+.row_container{
+    display: flex;
+    width: 100%;
+    height: 35px;
+    color: white;
+    margin-bottom: 5px;
+    position: relative;
+    transition: opacity 0.25s ease-in;
+    &.loading{
+        opacity: 0.5;
+    }
+    .user{
+        font-size: 12px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        background-color: #28518F;
+        margin-right: 20px;
+        .avatar{
+            border-radius: 256px;
+            height: 20px;
+            width: 20px;
+            margin: 0 10px;
+        }
+    }
+    .task{
+        font-size: 12px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .selected_container{
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        left: -50px;
+        position: absolute;
+    }
+}
