@@ -7,22 +7,14 @@ const HomeController = (props) => {
   // State
   const [state, setState] = useState({
     selectedDepartments: [],
-    test: 1,
+    filterByEmployee: false,
   });
-  const prevState = usePrevious(state) || state;
-  // Mount effect TEMP
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
-  // Handle Department Change
-  // useEffect(() => {
-  //   const { selectedDepartments } = state;
-  //   // If we just added
-  //   if ((selectedDepartments.length > prevState.selectedDepartments.length)) {
-  //   } else {
-  //     console.log('REMOVED');
-  //   }
-  // }, [state.selectedDepartments]);
+  // const prevState = usePrevious(state) || state;
+
+  const toggleFilterByEmployee = () => {
+    const { filterByEmployee } = state;
+    setState({ ...state, filterByEmployee: !filterByEmployee });
+  };
 
   const toggleDepartment = (id) => {
     const { selectedDepartments } = state;
@@ -38,6 +30,7 @@ const HomeController = (props) => {
 
   const callbacks = {
     toggleDepartment: (id) => toggleDepartment(id),
+    toggleFilterByEmployee: () => toggleFilterByEmployee(),
   };
 
   const { View } = props;

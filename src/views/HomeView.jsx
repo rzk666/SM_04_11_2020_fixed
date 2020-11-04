@@ -5,10 +5,19 @@ import styles from './HomeView.module.scss';
 import Filters from '../components/TasksTable/Filters';
 import Table from '../components/TasksTable/Table';
 
-const HomeView = ({ users, toggleDepartment }) => (
+const HomeView = ({
+  users,
+  toggleDepartment,
+  toggleFilterByEmployee,
+  filterByEmployee,
+}) => (
   <div className={styles.wrapper}>
     <div className={styles.tasks_manager_container}>
-      <Filters toggleDepartment={toggleDepartment} />
+      <Filters
+        toggleFilterByEmployee={toggleFilterByEmployee}
+        filterByEmployee={filterByEmployee}
+        toggleDepartment={toggleDepartment}
+      />
       <Table users={users} />
     </div>
   </div>

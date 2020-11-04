@@ -12,19 +12,25 @@
     "id": 2,
     "department_id": 1,
     "name": "Razi Elbaz",
-    "task": {}
+    "task": {
+        "id": 0
+    }
 },
 {
     "id": 3,
     "department_id": 1,
     "name": "Razi Elbaz",
-    "task": {}
+    "task": {
+        "id": 0
+    }
 },
 {
     "id": 4,
     "department_id": 2,
     "name": "Razi Elbaz",
-    "task": {}
+    "task": {
+        "id": 0
+    }
 },
 {
     "id": 5,
