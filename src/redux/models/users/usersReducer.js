@@ -33,7 +33,7 @@ const users = (state = INITIAL_STATE.users, action) => {
       const { id } = action;
       const newUsers = data.map((user) => {
         if (user.id === id) {
-          return { ...user, task: data };
+          return { ...user, selected: true, task: data };
         }
         return user;
       });
@@ -49,7 +49,7 @@ const users = (state = INITIAL_STATE.users, action) => {
       const { id } = action;
       const newUsers = data.map((user) => {
         if (user.id === id) {
-          return { ...user, task: {} };
+          return { ...user, selected: false, task: {} };
         }
         return user;
       });

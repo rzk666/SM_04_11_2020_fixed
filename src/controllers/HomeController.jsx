@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // Custom Hooks
 import usePrevious from '../hooks/usePrevioues';
+import { fetchUserTasks, hideUserTasks } from '../redux/models/users/usersActions';
 
 // ----- Consts & Dicts ----- //
 const MAX_USERS = 10;
@@ -11,8 +12,6 @@ const HomeController = (props) => {
     fetchUsers,
     fetchUsersByDepartment,
     hideUnselectedUsers,
-    fetchUserTasks,
-    hideUserTasks,
     users,
   } = props;
   const { data } = users;
@@ -41,7 +40,7 @@ const HomeController = (props) => {
         orderBy: 'department',
         withTasks: false,
       };
-      fetchUsers(reqParams);
+      fetchUsers(...reqParams);
     }
   }, [state.filterByEmployee]);
 
@@ -64,9 +63,18 @@ const HomeController = (props) => {
     }
   };
 
+  const handleUserSelection = (isSelected, id) => {
+    if (isSelected) {
+      fetchUserTasks(id);
+    } else {
+      hideUserTasks(id);
+    }
+  };
+
   const callbacks = {
     toggleDepartment: (id) => toggleDepartment(id),
     toggleFilterByEmployee: () => toggleFilterByEmployee(),
+    handleUserSelection: (isSelected, id) => handleUserSelection(isSelected, id),
   };
 
   const { View } = props;

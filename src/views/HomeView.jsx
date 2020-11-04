@@ -10,6 +10,7 @@ const HomeView = ({
   toggleDepartment,
   toggleFilterByEmployee,
   filterByEmployee,
+  handleUserSelection,
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.tasks_manager_container}>
@@ -19,6 +20,7 @@ const HomeView = ({
         toggleDepartment={toggleDepartment}
       />
       <Table
+        handleUserSelection={handleUserSelection}
         filterByEmployee={filterByEmployee}
         users={users}
       />

@@ -13,7 +13,11 @@ const TableHeader = () => (
   </div>
 );
 
-const Table = ({ users, filterByEmployee }) => {
+const Table = ({
+  users,
+  filterByEmployee,
+  handleUserSelection,
+}) => {
   const { data, isLoading } = users;
   return (
     <div className={styles.table_container}>
@@ -27,7 +31,13 @@ const Table = ({ users, filterByEmployee }) => {
                 <>
                   {data.map((user) => {
                     const x = 5;
-                    return <UserRow filterByEmployee={filterByEmployee} user={user} />;
+                    return (
+                      <UserRow
+                        handleUserSelection={handleUserSelection}
+                        filterByEmployee={filterByEmployee}
+                        user={user}
+                      />
+                    );
                   })}
                 </>
               )}

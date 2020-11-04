@@ -47,13 +47,13 @@ const Selected = ({ selected, toggleSelection }) => {
   );
 };
 
-const UsersRow = ({ user, filterByEmployee }) => {
+const UsersRow = ({ user, filterByEmployee, handleUserSelection }) => {
   const {
     task, name, avatar, selected, id,
   } = user;
   return (
     <div className={styles.row_container}>
-      {filterByEmployee && <Selected toggleSelected={() => console.log('TEST')} selected={selected} />}
+      {filterByEmployee && <Selected toggleSelected={handleUserSelection(!selected, id)} selected={selected} />}
       <User avatar={avatar} name={name} />
       <Task task={task} />
     </div>
