@@ -18,7 +18,10 @@ const HomeView = ({
         filterByEmployee={filterByEmployee}
         toggleDepartment={toggleDepartment}
       />
-      <Table users={users} />
+      <Table
+        filterByEmployee={filterByEmployee}
+        users={users}
+      />
     </div>
   </div>
 );
