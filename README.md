@@ -10,6 +10,7 @@
 
 ## TODOS
 * Presist data on client inside of removing it to prevent unnecessary fetches(!)
+* Add inifinite scroll \ pagination to the table so we don't overflow it with users(!)
 
 ## Run Locally
 npm install
