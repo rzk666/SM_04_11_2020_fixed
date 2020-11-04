@@ -3,9 +3,9 @@
     width: 100%;
     height: 35px;
     color: white;
-    font-size: 14px;
     margin-bottom: 5px;
     .user{
+        font-size: 12px;
         width: 150px;
         display: flex;
         align-items: center;
@@ -18,6 +18,7 @@
         }
     }
     .task{
+        font-size: 12px;
         flex: 1;
         display: flex;
         align-items: center;

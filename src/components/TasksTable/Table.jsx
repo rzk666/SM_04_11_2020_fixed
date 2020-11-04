@@ -1,6 +1,7 @@
 import React from 'react';
 // Components
 import UserRow from './UserRow';
+import Loader from '../common/Loader';
 // styles
 import styles from './Table.module.scss';
 
@@ -13,18 +14,23 @@ const TableHeader = () => (
 );
 
 const Table = ({ users }) => {
-  const { data } = users;
+  const { data, isLoading } = users;
   return (
     <div className={styles.table_container}>
       <TableHeader />
-      {!data.length
-        ? <div className={styles.no_users}> No users selected </div>
+      { isLoading ? <Loader />
         : (
           <>
-            {data.map((user) => {
-              const x = 5;
-              return <UserRow user={user} />;
-            })}
+            {!data.length
+              ? <div className={styles.no_users}> No users selected </div>
+              : (
+                <>
+                  {data.map((user) => {
+                    const x = 5;
+                    return <UserRow user={user} />;
+                  })}
+                </>
+              )}
           </>
         )}
     </div>

@@ -3,6 +3,7 @@ import {
   USERS_IS_LOADING,
   USERS_HAS_ERROR,
   USERS_GET_DATA,
+  HIDE_DEPARTMENT,
 } from './usersTypes';
 // API
 import { API, api } from '../../api';
@@ -12,6 +13,11 @@ import config from '../../../common/config';
 export const usersIsLoading = (isLoading) => ({
   type: USERS_IS_LOADING,
   isLoading,
+});
+
+export const hideDepartment = (id) => ({
+  type: HIDE_DEPARTMENT,
+  id,
 });
 
 export const usersGetData = (data) => ({
@@ -29,6 +35,23 @@ export const fetchUsers = (firstIndex = 0, endIndex = 10, orderBy = 'department'
   payload: {
     url: {
       base: 'https://testsh.free.beeceptor.com/getusers',
+      // endpoint: `/users/?orderBy=${orderBy}&firstIndex=${firstIndex}&endIndex=${endIndex}&withTasks=${withTasks}`, // TEMP
+      endpoint: '',
+    },
+    method: 'get',
+    success: (data) => usersGetData(data),
+    failure: (data) => usersHasError(data),
+    loader: (data) => usersIsLoading(data),
+  },
+}));
+
+export const fetchUsersByDepartment = (
+  departmentId = 1,
+) => (api({
+  type: API,
+  payload: {
+    url: {
+      base: `https://testsh.free.beeceptor.com/users/department/${departmentId}`,
       // endpoint: `/users/?orderBy=${orderBy}&firstIndex=${firstIndex}&endIndex=${endIndex}&withTasks=${withTasks}`, // TEMP
       endpoint: '',
     },
