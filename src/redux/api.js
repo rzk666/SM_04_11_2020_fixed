@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-expressions */
 // imports
-import HttpRequest from '../util/HttpRequest';
+import HttpRequest from '../utils/HttpRequest';
 
 // TYPE
 export const API = 'API';
 
 // ACTION
-export const httpRequestAction = (action, dispatch, token) => {
+export const httpRequestAction = async (action, dispatch, token) => {
   const {
     url,
     method = 'get',
@@ -25,8 +25,14 @@ export const httpRequestAction = (action, dispatch, token) => {
   };
   if (Object.keys(data).length) { options.data = data; }
   if (Object.keys(params).length) { options.params = params; }
-  return new HttpRequest(token)(options)
-    .then((response) => dispatch(success(response.data)))
-    .then(() => !loader || dispatch(loader(false)))
-    .catch((e) => dispatch(failure(e)));
+  try {
+    const res = await HttpRequest(token)(options);
+    dispatch(success(res.data));
+    !loader || dispatch(loader(false));
+  } catch (e) {
+    dispatch(failure(e.message || ''));
+  }
 };
+
+// Thunk
+export const api = (action) => (dispatch, getState) => httpRequestAction(action, dispatch, getState().auth.token);

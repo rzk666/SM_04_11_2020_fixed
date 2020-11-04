@@ -1,0 +1,94 @@
+:root{
+    // Backgrounds & Colors
+    // TOOD -> below are some colors and properties from a differant project of mine, these should work ok, remove unused ones later
+    --main-solid-dark-grey: #53575a;
+    --main-solid-yellow: #ffea64;
+    --main-solid-green: #57bb78;
+    --main-solid-lightgreen: #6cc98b;
+    --main-solid-orange: #ff9000;
+    --main-solid-blue: #2970be; 
+    --main-solid-grey: #b2c4c3;
+    --main-solid-cyan: #3ddde1;
+    --main-solid-red: #ff4a4a;
+    --alt-solid-yellow: #f6da65;
+    --alt-solid-red: #ff6464;
+    --alt-solid-green: #6cc98b;
+    --alt-solid-orange: #ffad43;
+    --alt-solid-grey: #6a8f8d;
+    --alt-solid-cyan: #3ddde1;
+    --error-box: #d1435b;
+    // Gradients
+    --main-green-gradient: linear-gradient(to top, #57bb78, #3d9b5c);
+    --main-cyan-gradient: linear-gradient(to top, #3ddce0, #23a4b3);
+    --main-orange-gradient: linear-gradient(to top, #ffad50, #ff9613);
+    --main-grey-gradient: linear-gradient(to top, #b2c4c3, #95a09f);
+    --main-blue-gradient: linear-gradient(to top, #2970be, #0a427e);
+    // Typography
+    div, a[class*="white_text_1"]{
+        font-family: Roboto;
+        font-size: 17px;
+        font-weight: 400;
+        font-stretch: condensed;
+        font-style: normal;
+        line-height: 1.35;
+        letter-spacing: 0.6px;
+        text-align: center;
+        color: #ffffff;
+    }
+    div, a[class*="grey_text_1"]{
+        font-family: Roboto;
+        font-size: 11px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.36;
+        letter-spacing: 0.55px;
+        text-align: center;
+        color: #919191;
+    }
+    div, a[class*="white_text_2"]{
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: 0.6px;
+        text-align: center;
+        color: #ffffff;
+    }
+    div, a[class*="white_text_3"]{
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        font-family: Roboto;
+        font-size: 8px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    // Shadows
+    --card-shadow: 0 0 2rem 0 rgba(0,0,0,.15);
+    #root{
+        position: fixed;
+        width: 100vw!important;
+        height: 100vh!important;
+    }
+    body,html {
+        font-family: Roboto;
+        margin: 0;
+        padding: 0;
+        width: 100vw!important;
+        height: 100vh!important;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    img{
+        object-fit: contain;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900,200,100,600,800,bold,medium,normal,light,lighter,700&display=swap');

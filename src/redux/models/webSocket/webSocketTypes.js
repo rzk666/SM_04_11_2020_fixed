@@ -1,3 +1,0 @@
-export const WEB_SOCKET_IS_LOADING = 'WEB_SOCKET_IS_LOADING';
-export const INIT_WEB_SOCKET = 'INIT_WEB_SOCKET';
-export const NEEDLESS = 'NEEDLESS';
