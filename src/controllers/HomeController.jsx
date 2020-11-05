@@ -11,14 +11,17 @@ const HomeController = (props) => {
     hideUserTasks,
     fetchUserTasks,
     users,
+    globals,
   } = props;
   const { data } = users;
+  const { departments } = globals;
 
   // State
   const [state, setState] = useState({
     selectedDepartments: [],
     indeterminateDepartments: [],
     filterByEmployee: false,
+    usersByDeparments: {},
   });
 
   // ----- useEffects ----- //
@@ -50,7 +53,12 @@ const HomeController = (props) => {
   };
 
   const toggleDepartment = (id) => {
-    const { selectedDepartments, indeterminateDepartments } = state;
+    const {
+      selectedDepartments,
+      indeterminateDepartments,
+      usersByDeparments,
+    } = state;
+    const { title, length } = departments.find((department) => department.id === id);
     const currentDepartment = selectedDepartments.find((x) => x === id);
     const isIndeterminated = indeterminateDepartments.find((x) => x === id);
     // This means the department was unselected or indeteminated
@@ -61,34 +69,61 @@ const HomeController = (props) => {
       const filteredDepartments = (indeterminateDepartments.filter((x) => x !== id));
       setState({
         ...state,
+        usersByDeparments: { ...usersByDeparments, [title]: length },
         selectedDepartments: [...selectedDepartments, id],
         indeterminateDepartments: filteredDepartments,
       });
     } else {
       hideDepartment(id);
-      setState({ ...state, selectedDepartments: selectedDepartments.filter((x) => x !== id) });
+      setState({
+        ...state,
+        selectedDepartments: selectedDepartments.filter((x) => x !== id),
+        usersByDeparments: { ...usersByDeparments, [title]: 0 },
+      });
     }
   };
 
   const handleUserSelection = (isSelected, id, departmentId) => {
-    const { indeterminateDepartments, selectedDepartments } = state;
+    const { usersByDeparments, indeterminateDepartments, selectedDepartments } = state;
+    const { title, length } = departments.find((department) => department.id === departmentId);
+    let usersInCurrentDepartment;
     // This means we clicked on a selected user, so we need to hide it.
     if (isSelected) {
       hideUserTasks(id);
+      usersInCurrentDepartment = usersByDeparments[title] - 1;
     } else {
+      usersInCurrentDepartment = usersByDeparments[title] + 1;
       fetchUserTasks(id);
     }
+    // If we emptied this department we simply need to filter it out of both
+    // indeterminated & selected
+    if (!usersInCurrentDepartment) {
+      setState({
+        ...state,
+        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
+        indeterminateDepartments: indeterminateDepartments.filter((x) => x !== departmentId),
+        selectedDepartments: selectedDepartments.filter((x) => x !== departmentId),
+      });
+      // If this department is full, we need to set it to selected and filter it out of
+      // indeterminated
+    } else if (usersInCurrentDepartment === length) {
+      setState({
+        ...state,
+        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
+        indeterminateDepartments: indeterminateDepartments.filter((x) => x !== departmentId),
+        selectedDepartments: [...selectedDepartments, departmentId],
+      });
+    } else {
     // Once an employee is selected, change its relevant department to indeteminated
     // Also make sure we don't add the same departments twice
-    const updateIndeterminate = (indeterminateDepartments.find((x) => x === departmentId));
-    setState({
-      ...state,
-      indeterminateDepartments:
-       updateIndeterminate
-         ? indeterminateDepartments
-         : [...indeterminateDepartments, departmentId],
-      selectedDepartments: selectedDepartments.filter((department) => departmentId !== department),
-    });
+      // const updateIndeterminate = (indeterminateDepartments.find((x) => x === departmentId));
+      setState({
+        ...state,
+        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
+        indeterminateDepartments: [...new Set([...indeterminateDepartments, departmentId])],
+        selectedDepartments: selectedDepartments.filter((department) => departmentId !== department),
+      });
+    }
   };
 
   const callbacks = {
