@@ -51,13 +51,13 @@ const Selected = ({ selected, toggleSelection }) => {
 
 const UsersRow = ({ user, filterByEmployee, handleUserSelection }) => {
   const {
-    task, name, avatar, selected, id, isLoading,
+    task, name, avatar, selected, id, isLoading, department_id,
   } = user;
   return (
     <div className={classnames(styles.row_container, { [styles.loading]: isLoading })}>
       {filterByEmployee && (
       <Selected
-        toggleSelection={() => handleUserSelection(selected, id)}
+        toggleSelection={() => handleUserSelection(selected, id, department_id)}
         selected={selected}
       />
       )}

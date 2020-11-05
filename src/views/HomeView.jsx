@@ -11,10 +11,14 @@ const HomeView = ({
   toggleFilterByEmployee,
   filterByEmployee,
   handleUserSelection,
+  indeterminateDepartments,
+  selectedDepartments,
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.tasks_manager_container}>
       <Filters
+        selectedDepartments={selectedDepartments}
+        indeterminateDepartments={indeterminateDepartments}
         toggleFilterByEmployee={toggleFilterByEmployee}
         filterByEmployee={filterByEmployee}
         toggleDepartment={toggleDepartment}

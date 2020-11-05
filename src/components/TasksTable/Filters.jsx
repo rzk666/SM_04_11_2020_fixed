@@ -10,6 +10,8 @@ const Filters = ({
   toggleDepartment,
   toggleFilterByEmployee,
   filterByEmployee,
+  indeterminateDepartments,
+  selectedDepartments,
 }) => (
   <div className={styles.filters_container}>
     <div className={styles.filter_by_employee}>
@@ -23,8 +25,12 @@ const Filters = ({
     <div className={styles.departments}>
       {DEPARTMENTS.map((department) => {
         const { title, id } = department;
+        const isIndeterminate = indeterminateDepartments.find((x) => x === id);
+        const isSelected = selectedDepartments.find((x) => x === id);
         return (
           <Checkbox
+            indeterminate={isIndeterminate}
+            checked={isSelected}
             onClick={() => toggleDepartment(id)}
             label={title}
           />

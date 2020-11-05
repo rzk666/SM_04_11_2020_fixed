@@ -17,6 +17,7 @@ const HomeController = (props) => {
   // State
   const [state, setState] = useState({
     selectedDepartments: [],
+    indeterminateDepartments: [],
     filterByEmployee: false,
   });
 
@@ -60,21 +61,26 @@ const HomeController = (props) => {
     }
   };
 
-  // Once an employee is selected, change its relevant department to inte
-
-  const handleUserSelection = (isSelected, id) => {
-    // This means we clicked on a selected user, so we need to hide it
+  const handleUserSelection = (isSelected, id, departmentId) => {
+    const { indeterminateDepartments, selectedDepartments } = state;
+    // This means we clicked on a selected user, so we need to hide it.
     if (isSelected) {
       hideUserTasks(id);
     } else {
       fetchUserTasks(id);
     }
+    // Once an employee is selected, change its relevant department to indeteminated
+    setState({
+      ...state,
+      indeterminateDepartments: [...indeterminateDepartments, departmentId],
+      selectedDepartments: [...selectedDepartments].filter((department) => departmentId !== department),
+    });
   };
-
+  
   const callbacks = {
     toggleDepartment: (id) => toggleDepartment(id),
     toggleFilterByEmployee: () => toggleFilterByEmployee(),
-    handleUserSelection: (isSelected, id) => handleUserSelection(isSelected, id),
+    handleUserSelection: (isSelected, id, departmentId) => handleUserSelection(isSelected, id, departmentId),
   };
 
   const { View } = props;
