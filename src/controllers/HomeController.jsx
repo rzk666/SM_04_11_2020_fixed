@@ -42,6 +42,11 @@ const HomeController = (props) => {
     }
   }, [state.filterByEmployee]);
 
+  useEffect(() => {
+    console.log(state.indeterminateDepartments);
+    console.log(state.selectedDepartments);
+  }, [state.selectedDepartments, state.indeterminateDepartments]);
+
   // ----- Callbacks ----- //
 
   const toggleFilterByEmployee = () => {
@@ -50,11 +55,20 @@ const HomeController = (props) => {
   };
 
   const toggleDepartment = (id) => {
-    const { selectedDepartments } = state;
+    const { selectedDepartments, indeterminateDepartments } = state;
     const currentDepartment = selectedDepartments.find((x) => x === id);
-    if (!currentDepartment) {
+    const isIndeterminated = indeterminateDepartments.find((x) => x === id);
+    // This means the department was unselected or indeteminated
+    if (!currentDepartment || isIndeterminated) {
+      // TODO -> If its indeterminated we need to find a smart way
+      // to only fetch the users we don't currently have on client
       fetchUsersByDepartment(id);
-      setState({ ...state, selectedDepartments: [...selectedDepartments, id] });
+      const filteredDepartments = (indeterminateDepartments.filter((x) => x !== id));
+      setState({
+        ...state,
+        selectedDepartments: [...selectedDepartments, id],
+        indeterminateDepartments: filteredDepartments,
+      });
     } else {
       hideDepartment(id);
       setState({ ...state, selectedDepartments: selectedDepartments.filter((x) => x !== id) });
@@ -70,13 +84,18 @@ const HomeController = (props) => {
       fetchUserTasks(id);
     }
     // Once an employee is selected, change its relevant department to indeteminated
+    // Also make sure we don't add the same departments twice
+    const updateIndeterminate = indeterminateDepartments.find((x) => x === departmentId);
     setState({
       ...state,
-      indeterminateDepartments: [...indeterminateDepartments, departmentId],
+      indeterminateDepartments:
+       updateIndeterminate
+         ? indeterminateDepartments
+         : [...indeterminateDepartments, departmentId],
       selectedDepartments: [...selectedDepartments].filter((department) => departmentId !== department),
     });
   };
-  
+
   const callbacks = {
     toggleDepartment: (id) => toggleDepartment(id),
     toggleFilterByEmployee: () => toggleFilterByEmployee(),

@@ -15,30 +15,44 @@ export const DEPARTMENTS = [
   {
     id: 25,
     title: 'Sales',
+    color: '#22D2A0',
+    length: '3',
   },
   {
     id: 96,
     title: 'Marketing',
+    color: '#192824',
+    length: '3',
   },
   {
     id: 64,
     title: 'Sales',
+    color: '#1FC11B',
+    length: '3',
   },
   {
     id: 17,
     title: 'Product',
+    color: '#FFD913',
+    length: '3',
   },
   {
     id: 19,
     title: 'HR',
+    color: '#FF9C55',
+    length: '3',
   },
   {
     id: 22,
     title: 'R&D',
+    color: '#FF5555',
+    length: '3',
   },
   {
     id: 88,
     title: 'Research',
+    color: '#2970be',
+    length: '3',
   }];
 
 export const MAX_USERS = 10;
