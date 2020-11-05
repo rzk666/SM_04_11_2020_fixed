@@ -27,15 +27,10 @@ const Filters = ({
         const { title, id } = department;
         const isIndeterminate = indeterminateDepartments.find((x) => x === id);
         const isSelected = selectedDepartments.find((x) => x === id);
-        if (id === 25) {
-          console.log(` Department ${department.title} is `);
-          console.log(`${isSelected ? 'SELECTED' : 'NOT SELECTED'}`);
-          console.log(`${isIndeterminate ? 'INDETERMINATE' : 'NOT INDETERMINATE'}`);
-        }
         return (
           <Checkbox
-            indeterminate={isIndeterminate}
-            checked={isSelected}
+            indeterminate={!!isIndeterminate}
+            checked={!!isSelected}
             onClick={() => toggleDepartment(id)}
             label={title}
           />

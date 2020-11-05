@@ -16,10 +16,9 @@ const HomeController = (props) => {
 
   // State
   const [state, setState] = useState({
-    selectedDepartments: [1, 14, 7],
-    indeterminateDepartments: [1, 4, 10],
+    selectedDepartments: [],
+    indeterminateDepartments: [],
     filterByEmployee: false,
-    count: 0,
   });
 
   // ----- useEffects ----- //
@@ -42,9 +41,6 @@ const HomeController = (props) => {
       fetchUsers({ ...reqParams });
     }
   }, [state.filterByEmployee]);
-
-  useEffect(() => {
-  }, [state.selectedDepartments, state.indeterminateDepartments]);
 
   // ----- Callbacks ----- //
 
@@ -84,14 +80,14 @@ const HomeController = (props) => {
     }
     // Once an employee is selected, change its relevant department to indeteminated
     // Also make sure we don't add the same departments twice
-    const updateIndeterminate = indeterminateDepartments.find((x) => x === departmentId);
+    const updateIndeterminate = (indeterminateDepartments.find((x) => x === departmentId));
     setState({
       ...state,
       indeterminateDepartments:
        updateIndeterminate
          ? indeterminateDepartments
          : [...indeterminateDepartments, departmentId],
-      selectedDepartments: [...selectedDepartments].filter((department) => departmentId !== department),
+      selectedDepartments: selectedDepartments.filter((department) => departmentId !== department),
     });
   };
 

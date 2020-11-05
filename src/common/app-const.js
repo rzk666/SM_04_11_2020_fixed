@@ -26,7 +26,7 @@ export const DEPARTMENTS = [
   },
   {
     id: 64,
-    title: 'Sales',
+    title: 'CC',
     color: '#1FC11B',
     length: '3',
   },
