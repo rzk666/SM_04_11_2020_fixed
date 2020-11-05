@@ -92,39 +92,36 @@ const HomeController = (props) => {
       hideUserTasks(id);
       usersInCurrentDepartment = usersByDeparments[title] - 1;
     } else {
-      usersInCurrentDepartment = usersByDeparments[title] + 1;
+      usersInCurrentDepartment = usersByDeparments[title] + 1 || 1;
       fetchUserTasks(id);
     }
+    const updatedUsersByDepartments = { ...usersByDeparments, [title]: usersInCurrentDepartment };
+    let updatedIndeterminatedDepartments;
+    let updatedSelectedDepartments;
     // If we emptied this department we simply need to filter it out of both
     // indeterminated & selected
     if (!usersInCurrentDepartment) {
-      setState({
-        ...state,
-        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
-        indeterminateDepartments: indeterminateDepartments.filter((x) => x !== departmentId),
-        selectedDepartments: selectedDepartments.filter((x) => x !== departmentId),
-      });
+      updatedIndeterminatedDepartments = indeterminateDepartments.filter((x) => x !== departmentId);
+      updatedSelectedDepartments = selectedDepartments.filter((x) => x !== departmentId);
       // If this department is full, we need to set it to selected and filter it out of
       // indeterminated
     } else if (usersInCurrentDepartment === length) {
-      setState({
-        ...state,
-        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
-        indeterminateDepartments: indeterminateDepartments.filter((x) => x !== departmentId),
-        selectedDepartments: [...selectedDepartments, departmentId],
-      });
+      updatedIndeterminatedDepartments = indeterminateDepartments.filter((x) => x !== departmentId);
+      updatedSelectedDepartments = [...selectedDepartments, departmentId];
     } else {
-    // Once an employee is selected, change its relevant department to indeteminated
-    // Also make sure we don't add the same departments twice
-      // const updateIndeterminate = (indeterminateDepartments.find((x) => x === departmentId));
-      setState({
-        ...state,
-        usersByDeparments: { ...usersByDeparments, [title]: usersInCurrentDepartment },
-        indeterminateDepartments: [...new Set([...indeterminateDepartments, departmentId])],
-        selectedDepartments: selectedDepartments.filter((department) => departmentId !== department),
-      });
+      // Once an employee is selected, change its relevant department to indeteminated
+      // Also make sure we don't add the same departments twice
+      updatedIndeterminatedDepartments = [...new Set([...indeterminateDepartments, departmentId])];
+      updatedSelectedDepartments = selectedDepartments.filter((department) => departmentId !== department);
     }
+    setState({
+      ...state,
+      usersByDeparments: updatedUsersByDepartments,
+      indeterminateDepartments: updatedIndeterminatedDepartments,
+      selectedDepartments: updatedSelectedDepartments,
+    });
   };
+
 
   const callbacks = {
     toggleDepartment: (id) => toggleDepartment(id),
