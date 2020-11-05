@@ -28,9 +28,8 @@ export const fetchDepartments = () => (api({
   type: API,
   payload: {
     url: {
-      base: 'https://testsh.free.beeceptor.com/globals/getdepartments',
-      // endpoint: `/users/?orderBy=${orderBy}&firstIndex=${firstIndex}&endIndex=${endIndex}&withTasks=${withTasks}`, // TEMP
-      endpoint: '',
+      base: config.api.url,
+      endpoint: 'globals/getdepartments',
     },
     method: 'get',
     success: (data) => getDepartments(data),

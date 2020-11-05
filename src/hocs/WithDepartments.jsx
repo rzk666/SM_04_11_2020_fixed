@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-// Redux Actions
-import fetchDeparments from '../redux/models/global';
 // Components
+import Loader from '../components/common/Loader';
+// Redux Actions
+import { fetchDepartments } from '../redux/models/globals/globalsActions';
 
 const WithDepartmentsHOC = (ComposedComponent) => {
-  const WithLayout = (props) => {
+  const WithDepartments = (props) => {
     useEffect(() => {
+      const { fetchDepartments } = props;
       fetchDepartments();
     }, []);
+    const { globals } = props;
+    const { isLoading } = globals;
     return (
       <>
-        <ComposedComponent {...props} />
+        { isLoading ? <Loader /> : <ComposedComponent {...props} />}
       </>
     );
   };
@@ -21,10 +25,10 @@ const WithDepartmentsHOC = (ComposedComponent) => {
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    fetchDeparments: () => dispatch(fetchDeparments()),
+    fetchDepartments: () => dispatch(fetchDepartments()),
   });
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithLayout);
+  return connect(mapStateToProps, mapDispatchToProps)(WithDepartments);
 };
 
 export default WithDepartmentsHOC;

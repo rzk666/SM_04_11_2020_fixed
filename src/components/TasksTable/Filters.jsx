@@ -3,10 +3,9 @@ import React from 'react';
 import styles from './Filters.module.scss';
 // Components
 import { Checkbox } from 'semantic-ui-react';
-// Common
-import { DEPARTMENTS } from '../../common/app-const';
 
 const Filters = ({
+  departments,
   toggleDepartment,
   toggleFilterByEmployee,
   filterByEmployee,
@@ -23,7 +22,7 @@ const Filters = ({
       />
     </div>
     <div className={styles.departments}>
-      {DEPARTMENTS.map((department) => {
+      {departments.map((department) => {
         const { title, id } = department;
         const isIndeterminate = indeterminateDepartments.find((x) => x === id);
         const isSelected = selectedDepartments.find((x) => x === id);

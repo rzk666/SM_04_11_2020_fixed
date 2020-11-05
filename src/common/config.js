@@ -1,7 +1,6 @@
 // This is a mock of a config file for this project
 const SERVER_PROTOCOL = process.env.REACT_APP_SERVER_PROTOCOL;
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const config = {
   app: {
@@ -13,8 +12,7 @@ const config = {
     protocol: SERVER_PROTOCOL,
   },
   api: {
-    endpoint: API_ENDPOINT,
-    url: `${SERVER_PROTOCOL}://${SERVER_HOST}/${API_ENDPOINT}`,
+    url: `${SERVER_PROTOCOL}://${SERVER_HOST}/`,
   },
 };
 

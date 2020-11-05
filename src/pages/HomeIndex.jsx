@@ -1,4 +1,8 @@
 import React from 'react';
+// Utils
+import page from '../hocs/page';
+// Universal
+import { HOME } from '../universal/pages';
 // Redux
 import { connect } from 'react-redux';
 import {
@@ -34,4 +38,4 @@ const mapDispatchToProps = (dispatch) => ({
   hideUserTasks: (id) => dispatch(hideUserTasks(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(page(Home, HOME));

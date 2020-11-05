@@ -8,7 +8,7 @@ import {
 } from './globalsTypes';
 
 // This is temp and will change soon
-const users = (state = INITIAL_STATE.users, action) => {
+const globals = (state = INITIAL_STATE.users, action) => {
   switch (action.type) {
     case GLOBALS_IS_LOADING: {
       return { ...state, isLoading: action.isLoading };
@@ -44,4 +44,4 @@ const users = (state = INITIAL_STATE.users, action) => {
   }
 };
 
-export default users;
+export default globals;

@@ -7,6 +7,7 @@ import Table from '../components/TasksTable/Table';
 
 const HomeView = ({
   users,
+  globals,
   toggleDepartment,
   toggleFilterByEmployee,
   filterByEmployee,
@@ -17,6 +18,7 @@ const HomeView = ({
   <div className={styles.wrapper}>
     <div className={styles.tasks_manager_container}>
       <Filters
+        departments={globals.departments}
         selectedDepartments={selectedDepartments}
         indeterminateDepartments={indeterminateDepartments}
         toggleFilterByEmployee={toggleFilterByEmployee}
