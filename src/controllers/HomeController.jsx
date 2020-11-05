@@ -24,15 +24,8 @@ const HomeController = (props) => {
 
   // ----- useEffects ----- //
 
-  useEffect(() => {
-    console.log("IM RUNNING");
-    const { count } = state;
-    setInterval(() => setState({ ...state, count: count + 1 }), 1000);
-  }, []);
-
   // React to filterByEmployee changes
   useEffect(() => {
-    console.log("IM RUNNING");
     const { filterByEmployee } = state;
     if (!filterByEmployee) {
       hideUnselectedUsers();
@@ -51,21 +44,16 @@ const HomeController = (props) => {
   }, [state.filterByEmployee]);
 
   useEffect(() => {
-    console.log("IM RUNNING");
-    console.log(state.indeterminateDepartments);
-    console.log(state.selectedDepartments);
   }, [state.selectedDepartments, state.indeterminateDepartments]);
 
   // ----- Callbacks ----- //
 
   const toggleFilterByEmployee = () => {
-    console.log("IM RUNNING");
     const { filterByEmployee } = state;
     setState({ ...state, filterByEmployee: !filterByEmployee });
   };
 
   const toggleDepartment = (id) => {
-    console.log("IM RUNNING");
     const { selectedDepartments, indeterminateDepartments } = state;
     const currentDepartment = selectedDepartments.find((x) => x === id);
     const isIndeterminated = indeterminateDepartments.find((x) => x === id);
@@ -87,7 +75,6 @@ const HomeController = (props) => {
   };
 
   const handleUserSelection = (isSelected, id, departmentId) => {
-    console.log("IM RUNNING");
     const { indeterminateDepartments, selectedDepartments } = state;
     // This means we clicked on a selected user, so we need to hide it.
     if (isSelected) {
